@@ -1,0 +1,49 @@
+.button {
+    position: relative;
+    font-family: 'Gotham Bold';
+    font-size: 16px;
+    padding: 10px 30px 10px 30px;
+    border-radius: 50px;
+    color: var(--text-color);
+    cursor: pointer;
+    overflow: hidden;
+    background-color: transparent;
+    z-index: 1;
+    border: none;
+    min-width: 225px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
+}
+
+.button::before, .button::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 50px;
+    z-index: -1;
+    transition: opacity 2s;
+}
+
+.button::before {
+    background-image: linear-gradient(to bottom, var(--main-color), var(--second-color));
+    opacity: 1;
+}
+
+.button::after {
+    background-image: linear-gradient(to bottom, var(--second-color), var(--main-color));
+    opacity: 0;
+}
+
+.button:hover::before {
+    opacity: 0;
+}
+
+.button:hover::after {
+    opacity: 1;
+}
+
+.button:active {
+    transform: scale(0.98);
+}

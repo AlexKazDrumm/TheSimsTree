@@ -1,0 +1,19 @@
+.item {
+    width: 45%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    text-align: start;
+    color: #285471;
+    font-family: 'Gotham Medium';
+    margin-bottom: 15px;
+}
+
+.imgBlock {
+    width: 20%;
+}
+
+.descriptionBlock {
+    width: 75%;
+}

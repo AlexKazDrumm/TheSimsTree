@@ -1,0 +1,15 @@
+.round {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 3px;
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+}
+
+.round img {
+    width: 50px;
+}

@@ -1,0 +1,26 @@
+.formPair {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: flex-start;
+	text-align: left;
+	width: 100%;
+	margin-bottom: 20px;
+}
+
+.label {
+	font-size: 15px;
+	font-family: 'Gotham Medium';
+	color: #182d38;
+	margin-bottom: 10px;
+}
+
+.errorBlock {
+	height: 15px;
+	padding: 5px;
+}
+
+.error {
+	font-family: 'Gotham Regular';
+	color: #e96044;
+}

@@ -1,0 +1,40 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 40px 20% 40px 20%;
+    background-color: #efefef;
+}
+
+.advantages {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+}
+
+.titleBlock {
+    margin-bottom: 15px;
+}
+
+.title {
+    font-family: 'Gotham Bold';
+    font-size: 37px;
+    color: #285471;
+}
+
+.listBlock {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border: 5px solid #285471;
+    border-radius: 15px;
+    width: 100%;
+    padding: 15px 15px 0px 15px;
+    background-color: #efefef;
+    flex-wrap: wrap;
+}

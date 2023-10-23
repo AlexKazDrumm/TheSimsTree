@@ -1,0 +1,21 @@
+.closeBtn {
+	cursor: pointer;
+    border: 1px solid #BDC0B6;
+    border-radius: 50%;
+    padding: 2px;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #1500B5;
+    font-family: 'Gotham Bold';
+    background-color: transparent;
+    background-image: linear-gradient(to bottom, #FAFAFA, #F4F3F0);
+}
+
+.closeBtn img {
+    width: 13px;
+}

@@ -1,0 +1,32 @@
+.link {
+    font-size: 16px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #285471;
+    font-family: 'Gotham Bold';
+    cursor: pointer;
+    height: 40px;
+    border: 2px solid #d1d4d2;
+    border-bottom: none;
+    width: 200px;
+    border-radius: 10px 10px 0px 0px;
+    /* border-top: 5px solid #d1d4d2;
+    border-bottom: 5px solid #d1d4d2; */
+    transition: border-bottom 1s;
+    background-color: #f6efe5;
+
+}
+
+.link:hover {
+    color: white;
+    /* border-bottom: 5px solid #EFF6FC; */
+    background-color: #9cb047;
+}
+
+.link.active {
+    color: white;
+    background-color: #9cb047;
+}

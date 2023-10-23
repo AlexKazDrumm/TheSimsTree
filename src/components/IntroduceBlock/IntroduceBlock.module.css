@@ -1,0 +1,49 @@
+.component {
+    background-color: aqua;
+    background-image: url('/images/wfdq.jpg');
+    background-position: center;
+    background-size: 100%;
+    padding: 120px 20% 70px 20%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    color: white;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+}
+
+.titleBlock {
+    margin-bottom: 40px;
+}
+
+.title {
+    color: #285471;
+    font-family: 'Gotham Bold';
+    font-size: 37px;
+    font-weight: 600;
+    line-height: 42px;
+    text-shadow: 11px 0px 14px rgba(103.99999999999997, 101.99999999999999, 117.99999999999999, 0.67);
+}
+
+.subtitleBlock {
+    margin-bottom: 25px;
+    display: flex;
+    flex-direction: column;
+}
+
+.subtitle {
+    color: #285471;
+    font-family: 'Gotham Bold';
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
