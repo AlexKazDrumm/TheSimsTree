@@ -51,7 +51,7 @@ function MainPage() {
                 />
             }
             <Notifier alerts={alerts} />
-            <Header isAuth={isAuth} setIsAuth={setIsAuth} setAuthModalVisible={setAuthModalVisible} setSelectedBlock={setSelectedBlock}/>
+            <Header isAuth={isAuth} setIsAuth={setIsAuth} setAuthModalVisible={setAuthModalVisible}/>
             <NavbarTop setSupportModalVisible={setSupportModalVisible} selectedBlock={selectedBlock} setSelectedBlock={setSelectedBlock}/>
             { renderSelectedBlock() }
             <Footer />

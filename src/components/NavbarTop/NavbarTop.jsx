@@ -8,6 +8,13 @@ const NavbarTop = ({ setSupportModalVisible, selectedBlock, setSelectedBlock }) 
         <div className={styles.container}>
             <div className={styles.links}>
                 <NavLink 
+                    label="Главная" 
+                    iconWhite='/svg/gem_white.svg' 
+                    iconBlue='/svg/gem_blue.svg' 
+                    isActive={selectedBlock == 1}
+                    onClick={() => setSelectedBlock(1)}
+                />
+                <NavLink 
                     label="Инструкции" 
                     iconWhite='/svg/service-worker-white.svg' 
                     iconBlue='/svg/service-worker-blue.svg' 

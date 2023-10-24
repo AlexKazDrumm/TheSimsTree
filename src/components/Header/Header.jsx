@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import styles from './Header.module.css'
 import RegularButton from '../UI/RegularButton/RegularButton';
 
-const Header = ({isAuth, setIsAuth, setAuthModalVisible, setSelectedBlock}) => {
+const Header = ({isAuth, setIsAuth, setAuthModalVisible}) => {
     
     const [isDropdownVisible, setIsDropdownVisible] = useState(false);
     const dropdownRef = useRef(null);
@@ -21,7 +21,7 @@ const Header = ({isAuth, setIsAuth, setAuthModalVisible, setSelectedBlock}) => {
     };
 
     return (
-        <div className={styles.component} onClick={() => setSelectedBlock(1)}>    
+        <div className={styles.component}>    
             <div className={styles.imageWrapper}>
                 {isAuth 
                     ? 
