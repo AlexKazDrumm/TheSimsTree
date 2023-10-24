@@ -30,7 +30,7 @@ const DonatesBlock = () => {
                         <span className={styles.subtitleRight}>
                             Ну а чтобы наш сайт работал и развивался - вы можете помочь небольшим донатом (или большим) &#128522;
                         </span>
-                        <img src='/images/4.png' />
+                        <img src='/images/5.png' />
                     </div>
                     
                 </div>
