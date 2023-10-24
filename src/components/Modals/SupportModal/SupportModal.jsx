@@ -3,7 +3,6 @@ import styles from './SupportModal.module.css';
 import CloseButton from "../../UI/CloseButton/CloseButton";
 import FormPair from "../../FormPair/FormPair";
 import RegularButton from "../../UI/RegularButton/RegularButton";
-import { addAlert } from "../../../utils/utils";
 
 const SupportModal = ({supportModalVisible, setSupportModalVisible, alerts, setAlerts}) => {
     const modalRef = useRef(null);
@@ -25,19 +24,17 @@ const SupportModal = ({supportModalVisible, setSupportModalVisible, alerts, setA
         }
     };
 
-    const showAlert = (message, type) => addAlert(message, type, alerts, setAlerts);
-
     const handleSend = () => {
         if (!name) {
-            showAlert('Имя не введено', 'error')
+
             return
         }
         if (!email) {
-            showAlert('E-mail не введен', 'error')
+
             return
         }
         if (!message) {
-            showAlert('Сообщение не может быть пустым', 'error')
+
             return
         }
 

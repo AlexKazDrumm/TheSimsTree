@@ -3,9 +3,8 @@ import styles from './AuthModal.module.css';
 import CloseButton from "../../UI/CloseButton/CloseButton";
 import FormPair from "../../FormPair/FormPair";
 import RegularButton from "../../UI/RegularButton/RegularButton";
-import { addAlert } from "../../../utils/utils";
 
-const AuthModal = ({authModalVisible, setAuthModalVisible, alerts, setAlerts, setIsAuth}) => {
+const AuthModal = ({authModalVisible, setAuthModalVisible, setIsAuth}) => {
     const verificationCode = '1234'
     const userData = {login: 'Agarey', password: 'Robsalvatore13'}
     
@@ -38,7 +37,6 @@ const AuthModal = ({authModalVisible, setAuthModalVisible, alerts, setAlerts, se
 
     const showAlert = (message, type) => {
         setErrors(true)
-        addAlert(message, type, alerts, setAlerts);
     }
 
     const handleCheckCode = (code) => {
