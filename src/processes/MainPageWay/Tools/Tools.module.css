@@ -1,0 +1,84 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin-left: 10%;
+    min-height: 70vh;
+    background-color: #f4ede6;
+    padding-top: 20px;
+}
+
+.titleRow {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.title {
+    color: #285471;
+    font-size: 40px;
+    font-family: 'Gotham Medium';
+}
+
+.themesRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.theme {
+    width: 18%;
+    aspect-ratio: 1/1;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
+    background-color: white;
+    cursor: pointer;
+}
+
+.imgBlock {
+    background-color: #d9dddb;
+    width: 100%;
+    border-radius: 10px 10px 0px 0px;
+}
+
+.spanBlock {
+    height: inherit;
+    padding: 10px;
+}
+
+.theme img {
+    width: 150px;
+    margin-bottom: 15px;
+}
+
+.theme span {
+    color: #285471;
+    font-size: 16px;
+    font-family: 'Gotham Bold';
+}
+
+.instructionsBlock {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-bottom: 20px;
+}
+
+.instruction {
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
+    margin-bottom: 15px;
+    color: #285471;
+    font-size: 16px;
+    font-family: 'Gotham Bold';
+}
