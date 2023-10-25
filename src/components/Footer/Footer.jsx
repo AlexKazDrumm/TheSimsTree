@@ -31,10 +31,12 @@ const Footer = () => {
                 <div className={styles.messengers}>
                     <div className={styles.images}>
                         <img src='./svg/vk.svg'/>
-                        <img src='./svg/telegram.svg'/>
+                        <a href="https://t.me/dynastytree" target="_blank" rel="noopener noreferrer">
+                            <img src='./svg/telegram.svg' alt="Telegram Icon"/>
+                        </a>
                         <img src='./svg/youtube.svg'/>
-                        <img src='./svg/facebook.svg'/>
-                        <img src='./svg/inst.svg'/>
+                        {/* <img src='./svg/facebook.svg'/>
+                        <img src='./svg/inst.svg'/> */}
                     </div>
                     <div className={styles.privacy}>
                         <span>
