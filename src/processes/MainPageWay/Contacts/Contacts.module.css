@@ -22,3 +22,46 @@
     font-size: 40px;
     font-family: 'Gotham Medium';
 }
+
+.contactsRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.contact {
+    border: 10px solid;
+    width: 20%;
+    aspect-ratio: 511/838;
+    padding: 10px;
+    border-radius: 20px;
+    cursor: pointer;
+    background-size: cover;
+    background-position: center;
+    transition: background-image 1.5s ease-in-out;
+}
+
+.yout {
+    background-image: url('/images/yout.png');
+}
+
+.yout:hover {
+    background-image: url('/images/yout2.jpg');
+}
+
+.telegram {
+    background-image: url('/images/telegram.png');
+}
+
+.telegram:hover {
+    background-image: url('/images/telegram2.png');
+}
+
+.vk {
+    background-image: url('/images/vk.jpg');
+}
+
+.vk:hover {
+    background-image: url('/images/vk2.png');
+}
