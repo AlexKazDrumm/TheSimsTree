@@ -1,23 +1,17 @@
 import React, { useState } from "react";
 import styles from './Tools.module.css'
+import { Instructions } from "../../../entities/lists/Instructions";
 
 const Tools = () => {
-    const [selectedTheme, setSelectedTheme] = useState(null);  // 1. State для выбранной темы
+    const [selectedTheme, setSelectedTheme] = useState(null); 
+    const [openedInstruction, setOpenedInstruction] = useState(null);
 
-    const instructions = {
-        "Регистрация и авторизация": ["Шаг 1", "Шаг 2", "Шаг 3"],
-        "Создание древа": ["Шаг A", "Шаг B"],
-        "Выгрузка и загрузка": ["ауцаа", "уцкпцука"],
-        "Общение и коммьюнити": ["фауц", "йцукп"],
-        "FAQ": ["1324A", "Ша1234"],
-    };
-
-    const themeIcons = {
-        "Регистрация и авторизация": '/svg/tools_settings.svg',
-        "Создание древа": '/svg/tools_plum_tree.svg',
-        "Выгрузка и загрузка": '/svg/tools_download.svg',
-        "Общение и коммьюнити": '/svg/tools_chat.svg',
-        "FAQ": '/svg/tools_faq.svg',
+    const toggleInstruction = (instructionTitle) => {
+        if (openedInstruction === instructionTitle) {
+            setOpenedInstruction(null);
+        } else {
+            setOpenedInstruction(instructionTitle);
+        }
     };
 
     return (
@@ -26,10 +20,10 @@ const Tools = () => {
                 <span className={styles.title}>Инструкции</span>
             </div>
             <div className={styles.themesRow}>
-                {["Регистрация и авторизация", "Создание древа", "Выгрузка и загрузка", "Общение и коммьюнити", "FAQ"].map(theme => (
-                    <div className={styles.theme} key={theme} style={theme == selectedTheme ? {border: '3px solid green'} : {border: 'none'}} onClick={() => setSelectedTheme(theme)}>  
+                {Object.entries(Instructions).map(([theme, {icon}]) => (
+                    <div className={styles.theme} key={theme} style={theme === selectedTheme ? {border: '3px solid green'} : {border: 'none'}} onClick={() => setSelectedTheme(theme)}>  
                         <div className={styles.imgBlock}>
-                            <img className={styles.logo} src={themeIcons[theme]} />
+                            <img className={styles.logo} src={icon} />
                         </div>
                         <div className={styles.spanBlock}>
                             <span>{theme}</span>
@@ -38,10 +32,20 @@ const Tools = () => {
                 ))}
             </div>
             <div className={styles.instructionsBlock}>
-                {selectedTheme && instructions[selectedTheme]?.map(instruction => 
-                    <div className={styles.instruction} key={instruction}>
-                        {instruction}
-                    </div>
+                {selectedTheme && Instructions[selectedTheme]?.instructions.map(instruction => 
+                    <>
+                        <div className={styles.dropdownRow} key={instruction.title} onClick={() => toggleInstruction(instruction.title)}>
+                            <span>{instruction.title}</span>
+                            <div>
+                                <img src={openedInstruction === instruction.title ? '/svg/dropdown_up.svg' : '/svg/dropdown_down.svg'} />
+                            </div>
+                        </div>
+                        {openedInstruction === instruction.title && (
+                            <div className={styles.instruction}>
+                                <span>{instruction.text}</span>
+                            </div>
+                        )}
+                    </>
                 )}  
             </div>
         </div>
