@@ -36,7 +36,7 @@ const Tools = () => {
                     <>
                         <div className={styles.dropdownRow} key={instruction.title} onClick={() => toggleInstruction(instruction.title)}>
                             <span>{instruction.title}</span>
-                            <div>
+                            <div className={styles.dropdownButton}>
                                 <img src={openedInstruction === instruction.title ? '/svg/dropdown_up.svg' : '/svg/dropdown_down.svg'} />
                             </div>
                         </div>
