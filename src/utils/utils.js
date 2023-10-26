@@ -34,3 +34,31 @@ export const addAlert = (text, type, alerts, setAlerts) => {
       setAlerts(prevAlerts => prevAlerts.filter(alert => alert.id !== id));
     }, 10000);
 };
+
+export const sortTrees = (sortType, trees) => {
+    switch (sortType) {
+        case "likes":
+            return [...trees].sort((a, b) => b.likes - a.likes);
+        case "title":
+            return [...trees].sort((a, b) => a.treeTitle.toLowerCase().localeCompare(b.treeTitle.toLowerCase()));
+        case "author":
+            return [...trees].sort((a, b) => a.userName.toLowerCase().localeCompare(b.userName.toLowerCase()));
+        default:
+            return trees;
+    }
+};
+
+export const filterTrees = (filter, searchText, trees) => {
+    const lowerSearchText = searchText.toLowerCase();
+
+    return trees.filter(tree => {
+        switch (filter) {
+            case "category1":
+                return tree.hashtags.toLowerCase().includes(lowerSearchText);
+            case "category2":
+                return tree.userName.toLowerCase().includes(lowerSearchText);
+            default:
+                return tree.treeTitle.toLowerCase().includes(lowerSearchText);
+        }
+    });
+};

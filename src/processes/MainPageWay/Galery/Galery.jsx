@@ -1,16 +1,42 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from './Galery.module.css'
 import CloseButton from "../../../components/UI/CloseButton/CloseButton";
 import { PublishedTrees } from "../../../entities/lists/PublishedTrees";
+import { filterTrees, sortTrees } from "../../../utils/utils";
 
 const Galery = () => {
+    const [filter, setFilter] = useState("");
+    const [searchText, setSearchText] = useState("");
+    const [sortType, setSortType] = useState("");
+    const [likedTrees, setLikedTrees] = useState({}); // Для отслеживания лайков
+
+    const handleFilterChange = (e) => {
+        setFilter(e.target.value);
+    };
+
+    const handleSearchChange = (e) => {
+        setSearchText(e.target.value);
+    };
+
+    const handleSortChange = (e) => {
+        setSortType(e.target.value);
+    };
+
+    const handleLike = (userName) => {
+        setLikedTrees(prev => ({
+            ...prev,
+            [userName]: !prev[userName],
+        }));
+    };
+
+    const filteredAndSortedTrees = sortTrees(sortType, filterTrees(filter, searchText, PublishedTrees));
 
     return (
         <div className={styles.container}>
             <div className={styles.searchRow}>
                 <div className={styles.topText}>Просматривайте деревья, созданные другими игроками!</div>
                 <div className={styles.search}>
-                    <select className={styles.customSelect}>
+                    <select className={styles.customSelect} onChange={handleFilterChange}>
                         <option value="">Название</option>
                         <option value="category1">Хэштег</option>
                         <option value="category2">Юзер</option>
@@ -18,6 +44,7 @@ const Galery = () => {
                     <input
                         placeholder='Поиск по слову'
                         className={styles.customInput}
+                        onChange={handleSearchChange}
                     />
                 </div>
                 <div className={styles.hashtagsRow}>
@@ -30,20 +57,24 @@ const Galery = () => {
                         Сортировка:
                     </span>
                     <div className={styles.radioRow}>
-                        <input type="radio" id="radio1" name="radio" />
-                        <label for="radio1">Популярно сейчас</label>
+                        <input type="radio" id="radio1" name="radio" value="" onChange={handleSortChange} />
+                        <label htmlFor="radio1">По умолчанию</label>
                     </div>
                     <div className={styles.radioRow}>
-                        <input type="radio" id="radio2" name="radio" />
-                        <label for="radio2">Самое популярное</label>
+                        <input type="radio" id="radio2" name="radio" value="likes" onChange={handleSortChange} />
+                        <label htmlFor="radio2">Самое популярное</label>
                     </div>
                     <div className={styles.radioRow}>
-                        <input type="radio" id="radio3" name="radio" />
-                        <label for="radio3">Новинки</label>
+                        <input type="radio" id="radio3" name="radio" value="title" onChange={handleSortChange} />
+                        <label htmlFor="radio3">По названию</label>
+                    </div>
+                    <div className={styles.radioRow}>
+                        <input type="radio" id="radio4" name="radio" value="author" onChange={handleSortChange} />
+                        <label htmlFor="radio4">По имени автора</label>
                     </div>
                 </div>
                 <div className={styles.miniatures}>
-                    {PublishedTrees.map(tree => (
+                    {filteredAndSortedTrees.length ? filteredAndSortedTrees.map(tree => (
                         <div className={styles.miniature} key={tree.userName}>
                             <div className={styles.userRow}>
                                 <img className={styles.logo} src='/svg/user.svg' />
@@ -56,9 +87,9 @@ const Galery = () => {
                                     <span className={styles.hashtags}>{tree.hashtags}</span>
                                 </div>
                                 <div className={styles.buttonsBlock}>
-                                    <div className={styles.button}>
-                                        <CloseButton img={'/svg/heart.svg'} />
-                                        <span className={styles.counter}>{tree.likes}</span>
+                                    <div className={styles.button} onClick={() => handleLike(tree.userName)}>
+                                        <CloseButton img={likedTrees[tree.userName] ? '/svg/heart_selected.svg' : '/svg/heart.svg'} />
+                                        <span className={styles.counter}>{likedTrees[tree.userName] ? tree.likes + 1 : tree.likes}</span>
                                     </div>
                                     {/* <div className={styles.button}>
                                         <CloseButton img={'/svg/download.svg'} />
@@ -67,10 +98,9 @@ const Galery = () => {
                                 </div>
                             </div>
                         </div>
-                    ))}
+                    )) : <div className={styles.noResults}>Деревья по вашему запросу не найдены.</div>}
                 </div>
             </div>
-            
         </div>
     )
 }
