@@ -65,11 +65,16 @@ const SupportModal = ({supportModalVisible, setSupportModalVisible, alerts, setA
                     </div>
                     <div className={styles.formBlock}>
                         <span className={styles.title}>
-                            Обратная связь
+                            Напиши нам
                         </span>
                         <FormPair label={'Имя'} type={'text'} event={(e) => {setName(e.target.value)}} value={name} element={'input'}/>
                         <FormPair label={'E-mail'} type={'text'} event={(e) => {setEmail(e.target.value)}} value={email} element={'input'} />
                         <FormPair label={'Сообщение'} type={'text'} event={(e) => {setMessage(e.target.value)}} value={message} element={'textarea'} />
+                        <div className={styles.sendImageBlock}>
+                            <span>
+                                <a>Загрузить фото</a>
+                            </span>
+                        </div>
                     </div>
                 </div>
                 <div className={styles.greyBlock}>
@@ -77,7 +82,7 @@ const SupportModal = ({supportModalVisible, setSupportModalVisible, alerts, setA
                         <RegularButton 
                             text={'Отправить'}
                             type={'grey'}
-                                event={() => {
+                            event={() => {
                                 handleSend()
                             }}
                         />  

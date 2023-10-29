@@ -5,7 +5,7 @@ export const PublishedTrees = [
         hashtags: "#HarringtonHeritage, #HistoryOfHarringtons",
         likes: 134,
         downloads: 12,
-        coverImage: "/images/ex1.png"
+        coverImage: "/images/tt1.png"
     },
     {
         userName: "CosmicCrest",
@@ -13,7 +13,7 @@ export const PublishedTrees = [
         hashtags: "#ThompsonsTimeline, #ThroughTimeWithThompsons",
         likes: 1,
         downloads: 0,
-        coverImage: "/images/ex2.jpg"
+        coverImage: "/images/tt2.png"
     },
     {
         userName: "Starshade",
@@ -21,7 +21,7 @@ export const PublishedTrees = [
         hashtags: "#BennettBranches, #BloodlineOfBennetts",
         likes: 32,
         downloads: 7,
-        coverImage: "/images/ex3.jpg"
+        coverImage: "/images/tt3.png"
     },
     {
         userName: "NeonPulse",

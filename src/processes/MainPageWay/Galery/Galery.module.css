@@ -3,7 +3,7 @@
     flex-direction: column;
     /* border: 1px solid black; */
     min-height: 70vh;
-    background-color: #f4ede6;
+    background-color: #efefef;
     padding: 20px 0px 0px 0px;
 }
 
@@ -17,11 +17,11 @@
 }
 
 .topText {
-    color: white;
-    text-shadow: 0px 4px 6px #285471;
+    color:#285471;
+    /* text-shadow: 0px 4px 6px #285471; */
     font-family: 'Gotham Bold';
     margin-bottom: 20px;
-    font-size: 18px;
+    font-size: 20px;
 }
 
 .search {
@@ -41,7 +41,7 @@
     border-radius: 5px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
     border: none;
-    min-width: 150px;
+    min-width: 170px;
 }
 
 .customInput {
@@ -132,7 +132,8 @@
     justify-content: space-between;
     flex-wrap: wrap;
     padding-top: 20px;
-    width: 100%;
+    width: 80%;
+    margin-left: 10%;
 }
 
 .miniature {
@@ -196,12 +197,22 @@
     font-size: 12px;
 }
 
+.hashtag {
+    cursor: pointer;
+}
+
+.hashtag:hover {
+    color: #285471;
+}
+
 .buttonsBlock {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
+    align-items: flex-start;
     width: 30%;
     padding-right: 20px;
+    padding-top: 15px;
 }
 
 .button {

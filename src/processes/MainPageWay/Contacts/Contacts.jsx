@@ -8,7 +8,7 @@ const Contacts = () => {
                 <span className={styles.title}>С нами всегда просто связаться!</span>
             </div>
             <div className={styles.contactsRow}>
-                <div className={`${styles.contact} ${styles.yout}`} style={{ borderColor: '#FF4B4B' }}></div>
+                <a href="https://www.youtube.com/@SLASTIgames" target="_blank" rel="noopener noreferrer" className={`${styles.contact} ${styles.yout}`} style={{ borderColor: '#FF4B4B' }}></a>
 
                 <a href="https://t.me/dynastytree" target="_blank" rel="noopener noreferrer" className={`${styles.contact} ${styles.telegram}`} style={{ borderColor: '#37BBFE' }}></a>
 

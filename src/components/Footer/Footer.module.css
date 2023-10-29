@@ -68,6 +68,11 @@
     cursor: pointer;
 }
 
-.privacy:hover {
+.privacy a {
+    text-decoration: none;
+    color: #1500b5;
+}
+
+.privacy a:hover {
     color: #059fdc;
 }

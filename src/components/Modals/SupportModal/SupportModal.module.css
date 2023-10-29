@@ -61,6 +61,25 @@
 	margin-bottom: 20px;
 }
 
+.sendImageBlock {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+    font-family: 'Gotham Medium';
+    cursor: pointer;
+}
+
+.sendImageBlock a {
+    text-decoration: none;
+    color: #1500b5;
+	border-bottom: 1px dashed #1500b5;
+}
+
+.sendImageBlock a:hover {
+    color: #059fdc;
+}
+
 .greyBlock {
 	display: flex;
 	flex-direction: column;

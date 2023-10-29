@@ -9,15 +9,18 @@ const IntroduceBlock = ({setSupportModalVisible}) => {
             <div className={styles.content}>
                 <div className={styles.titleBlock}>
                     <span className={styles.title}>
-                        Добро пожаловать! Сул-Сул!
+                        Сул-сул! — и добро пожаловать!
                     </span>
                 </div>
                 <div className={styles.subtitleBlock}>
                     <span className={styles.subtitle}>
-                        В связи с закрытием сайта PlumTree мы создали более удобную версию для создания родословных наших SIMов
+                        В связи с закрытием сайта PlumTreeApp мы сделали более современную и удобную версию для создания родословных наших любимых SIMов.
                     </span>
                     <span className={styles.subtitle}>
-                        Тестируйте, рассказывайте друзьям и знакомым, пишите пожелания по работе сервиса - будем рады любой обратной связи!
+                        Тестируйте функции, создавайте свой дизайн, рассказывайте друзьям — и обязательно делитесь впечатлениями! Мы сделали этот сайт специально для фанатов The Sims, поэтому внимательно относимся к вашим мнениям и предложениям.
+                    </span>
+                    <span className={styles.subtitle}>
+                        Давайте развиваться вместе!
                     </span>
                 </div>
                 <div className={styles.buttonBlock}>

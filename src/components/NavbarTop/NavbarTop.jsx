@@ -49,7 +49,6 @@ const NavbarTop = ({ setSupportModalVisible, selectedBlock, setSelectedBlock }) 
                     isActive={selectedBlock == 6}
                     onClick={() => {
                         setSelectedBlock(6)
-                        setSupportModalVisible(true)
                     }}
                 />
             </div>

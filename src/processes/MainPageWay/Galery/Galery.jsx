@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import styles from './Galery.module.css'
 import CloseButton from "../../../components/UI/CloseButton/CloseButton";
 import { PublishedTrees } from "../../../entities/lists/PublishedTrees";
+import { PopularHashtags } from "../../../entities/lists/PopularHashtags";
 import { filterTrees, sortTrees } from "../../../utils/utils";
 
 const Galery = () => {
     const [filter, setFilter] = useState("");
     const [searchText, setSearchText] = useState("");
     const [sortType, setSortType] = useState("");
-    const [likedTrees, setLikedTrees] = useState({}); // Для отслеживания лайков
+    const [likedTrees, setLikedTrees] = useState({});
 
     const handleFilterChange = (e) => {
         setFilter(e.target.value);
@@ -37,9 +38,9 @@ const Galery = () => {
                 <div className={styles.topText}>Просматривайте деревья, созданные другими игроками!</div>
                 <div className={styles.search}>
                     <select className={styles.customSelect} onChange={handleFilterChange}>
-                        <option value="">Название</option>
+                        <option value="">Название династии</option>
                         <option value="category1">Хэштег</option>
-                        <option value="category2">Юзер</option>
+                        <option value="category2">Никнейм</option>
                     </select>
                     <input
                         placeholder='Поиск по слову'
@@ -48,11 +49,18 @@ const Galery = () => {
                     />
                 </div>
                 <div className={styles.hashtagsRow}>
-                    Популярные хэштеги: #ThompsonsTimeline, #ThroughTimeWithThompsons, #WebOfWinters, #WintersFamilyTales, #PattersonsPastPresent, #PattersonFamilyTies
+                    Популярные хэштеги: {PopularHashtags?.map((hashtag, id) => 
+                        <span className={styles.hashtag} onClick={() => {
+                            setFilter("category1")
+                            setSearchText(hashtag.text)
+                        }}>
+                            #{hashtag.text}{PopularHashtags.length == id + 1 ? null : ','}{' '}
+                        </span>
+                    )}
                 </div>
             </div>
             <div className={styles.miniaturesRow}>
-                <div className={styles.filtersRow}>
+                {/* <div className={styles.filtersRow}>
                     <span className={styles.radioTitle}>
                         Сортировка:
                     </span>
@@ -72,12 +80,16 @@ const Galery = () => {
                         <input type="radio" id="radio4" name="radio" value="author" onChange={handleSortChange} />
                         <label htmlFor="radio4">По имени автора</label>
                     </div>
-                </div>
+                </div> */}
                 <div className={styles.miniatures}>
                     {filteredAndSortedTrees.length ? filteredAndSortedTrees.map(tree => (
                         <div className={styles.miniature} key={tree.userName}>
                             <div className={styles.userRow}>
-                                <img className={styles.logo} src='/svg/user.svg' />
+                                {tree.userName == 'CosmicCrest' ?
+                                    <img className={styles.logo} style={{width: '24px', marginLeft: '3px', marginTop: '3px'}} src='/images/user.png' />
+                                :
+                                    <img className={styles.logo} src='/svg/user.svg' />
+                                }
                                 <span className={styles.userName}>{tree.userName}</span>
                             </div>
                             <img className={styles.miniatureCover} src={tree.coverImage} />

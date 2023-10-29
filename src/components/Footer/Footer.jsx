@@ -30,17 +30,22 @@ const Footer = () => {
                 </div>
                 <div className={styles.messengers}>
                     <div className={styles.images}>
+                        <a href="mailto:info@simsdynastytree.com" target="_blank" rel="noopener noreferrer">
+                            <img src='./svg/google_green.svg'/>
+                        </a>
                         <img src='./svg/vk.svg'/>
                         <a href="https://t.me/dynastytree" target="_blank" rel="noopener noreferrer">
                             <img src='./svg/telegram.svg' alt="Telegram Icon"/>
                         </a>
-                        <img src='./svg/youtube.svg'/>
+                        <a href="https://www.youtube.com/@SLASTIgames" target="_blank" rel="noopener noreferrer">
+                            <img src='./svg/youtube.svg'/>
+                        </a>
                         {/* <img src='./svg/facebook.svg'/>
                         <img src='./svg/inst.svg'/> */}
                     </div>
                     <div className={styles.privacy}>
                         <span>
-                            Политика конфидециальности
+                            <a href="https://disk.yandex.ru/d/pJ-4xbAei0zagQ" target="_blank" rel="noopener noreferrer">Политика конфидециальности</a>
                         </span>
                     </div>
                 </div>
