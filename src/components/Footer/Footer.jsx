@@ -7,14 +7,14 @@ const Footer = () => {
         <div className={styles.container}>
             <div className={styles.links}>
                 <div className={styles.contacts}>
-                    <div className={styles.contact}>
+                    {/* <div className={styles.contact}>
                         <img 
                             src='./svg/phone.svg'
                         />
                         <span>
                             +7 (991) 020-03-42
                         </span>
-                    </div>
+                    </div> */}
                     <div className={styles.contact}>
                         <img 
                             src='./svg/mail.svg'
@@ -47,7 +47,7 @@ const Footer = () => {
                     </div>
                     <div className={styles.privacy}>
                         <span>
-                            <a href="https://disk.yandex.ru/d/pJ-4xbAei0zagQ" target="_blank" rel="noopener noreferrer">Политика конфидециальности</a>
+                            <a href="https://disk.yandex.ru/d/pJ-4xbAei0zagQ" target="_blank" rel="noopener noreferrer">Политика конфиденциальности</a>
                         </span>
                     </div>
                 </div>

@@ -43,7 +43,7 @@ function MainPage() {
             case 3: return <Galery />;
             case 4: return <Contacts />;
             case 5: return <Donates />;
-            case 6: return <Help />;
+            // case 6: return <Help />;
             default: return <Lending setSupportModalVisible={setSupportModalVisible} />;
         }
     };

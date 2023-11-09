@@ -31,6 +31,7 @@
 }
 
 .contact {
+    border: 10px solid;
     width: 20%;
     aspect-ratio: 511/838;
     padding: 10px;
@@ -39,14 +40,6 @@
     background-size: cover;
     background-position: center;
     transition: background-image 1.5s ease-in-out;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.contact img {
-    width: 100%;
-    margin-bottom: 20px;
 }
 
 .yout {

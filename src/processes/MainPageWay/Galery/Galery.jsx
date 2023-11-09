@@ -45,8 +45,18 @@ const Galery = () => {
                     <input
                         placeholder='Поиск по слову'
                         className={styles.customInput}
+                        value={searchText}
                         onChange={handleSearchChange}
                     />
+                    {(searchText || filter) && <span 
+                        onClick={() => {
+                            setSearchText('')
+                            setFilter('')
+                        }}
+                        style={{marginLeft: '10px'}}
+                    >
+                        X
+                    </span>}
                 </div>
                 <div className={styles.hashtagsRow}>
                     Популярные хэштеги: {PopularHashtags?.map((hashtag, id) => 

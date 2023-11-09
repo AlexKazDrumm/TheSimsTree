@@ -48,7 +48,8 @@ const NavbarTop = ({ setSupportModalVisible, selectedBlock, setSelectedBlock }) 
                     iconBlue='/svg/help_blue.svg' 
                     isActive={selectedBlock == 6}
                     onClick={() => {
-                        setSelectedBlock(6)
+                        // setSelectedBlock(6)
+                        setSupportModalVisible(true)
                     }}
                 />
             </div>
