@@ -34,7 +34,7 @@ const Header = ({isAuth, setIsAuth, setAuthModalVisible, user}) => {
                                 src='./assets/user_default3.png'
                                 onClick={() => setIsDropdownVisible(!isDropdownVisible)} 
                             />
-                            <span style={{color: 'white'}}>{user.name} <i>{user.login}</i> {user.surname}</span>
+                            <span style={{color: 'white'}}>{user?.name} <i>{user?.login}</i> {user?.surname}</span>
                             </div>
                             
                             {isDropdownVisible && (
