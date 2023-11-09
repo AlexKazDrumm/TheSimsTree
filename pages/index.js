@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "../src/components/Header/Header";
 import Notifier from "../src/components/Notifier/Notifier";
 import NavbarTop from "../src/components/NavbarTop/NavbarTop";
@@ -11,6 +11,7 @@ import Galery from "../src/processes/MainPageWay/Galery/Galery"
 import Contacts from "../src/processes/MainPageWay/Contacts/Contacts"
 import Donates from "../src/processes/MainPageWay/Donates/Donates"
 import Help from "../src/processes/MainPageWay/Help/Help"
+import { fetchUserData } from "../src/entities/User";
 
 function MainPage() {
     const [isAuth, setIsAuth] = useState(false)
@@ -18,6 +19,22 @@ function MainPage() {
     const [authModalVisible, setAuthModalVisible] = useState(false);
     const [supportModalVisible, setSupportModalVisible] = useState(false)
     const [selectedBlock, setSelectedBlock] = useState(1)
+    const [user, setUser] = useState()
+
+    const fetchData = async () => {
+        const userData = await fetchUserData(localStorage.getItem('authToken'));
+        setUser(userData);
+      
+        if (userData) {
+          setIsAuth(true);
+        } else {
+          setIsAuth(false);
+        }
+      };
+      
+      useEffect(() => {
+        fetchData();
+      }, []);
 
     const renderSelectedBlock = () => {
         switch (selectedBlock) {
@@ -40,6 +57,7 @@ function MainPage() {
                     alerts={alerts} 
                     setAlerts={setAlerts} 
                     setIsAuth={setIsAuth}
+                    setUser={setUser}
                 />
             }
             {supportModalVisible && 
@@ -51,7 +69,7 @@ function MainPage() {
                 />
             }
             <Notifier alerts={alerts} />
-            <Header isAuth={isAuth} setIsAuth={setIsAuth} setAuthModalVisible={setAuthModalVisible}/>
+            <Header setUser={setUser} isAuth={isAuth} setIsAuth={setIsAuth} setAuthModalVisible={setAuthModalVisible} user={user}/>
             <NavbarTop setSupportModalVisible={setSupportModalVisible} selectedBlock={selectedBlock} setSelectedBlock={setSelectedBlock}/>
             { renderSelectedBlock() }
             <Footer />

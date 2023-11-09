@@ -10,6 +10,7 @@
   "proxy": "wss://realibi.kz:3031",
   "dependencies": {
     "@mui/base": "^5.0.0-beta.18",
+    "axios": "^1.6.0",
     "babel": "^6.23.0",
     "install": "^0.13.0",
     "mobx-react": "^9.0.1",

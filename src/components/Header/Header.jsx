@@ -2,7 +2,9 @@ import { useState, useRef, useEffect } from 'react';
 import styles from './Header.module.css'
 import RegularButton from '../UI/RegularButton/RegularButton';
 
-const Header = ({isAuth, setIsAuth, setAuthModalVisible}) => {
+const Header = ({isAuth, setIsAuth, setAuthModalVisible, user}) => {
+
+    console.log({isAuth, user})
     
     const [isDropdownVisible, setIsDropdownVisible] = useState(false);
     const dropdownRef = useRef(null);
@@ -26,11 +28,15 @@ const Header = ({isAuth, setIsAuth, setAuthModalVisible}) => {
                 {isAuth 
                     ? 
                         <>
-                            <img 
+                            <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+                                <img 
                                 className={styles.userIco}
                                 src='./assets/user_default3.png'
                                 onClick={() => setIsDropdownVisible(!isDropdownVisible)} 
                             />
+                            <span style={{color: 'white'}}>{user.name} <i>{user.login}</i> {user.surname}</span>
+                            </div>
+                            
                             {isDropdownVisible && (
                                 <div ref={dropdownRef} className={styles.dropdownMenu}>
                                     <div className={styles.arrow}></div>
@@ -43,7 +49,11 @@ const Header = ({isAuth, setIsAuth, setAuthModalVisible}) => {
                                                 Профиль
                                             </span>
                                         </div>
-                                        <div className={styles.link} onClick={() => setIsAuth(false)}>
+                                        <div className={styles.link} onClick={() => 
+                                            {
+                                                setIsAuth(false)
+                                                localStorage.removeItem('authToken'); 
+                                            }}>
                                             <img 
                                                 src='./svg/door.svg'
                                             />
