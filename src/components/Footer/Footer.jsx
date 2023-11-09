@@ -20,7 +20,7 @@ const Footer = () => {
                             src='./svg/mail.svg'
                         />
                         <span>
-                            alexdrumm13@gmail.com
+                            info@simsdynastytree.com
                         </span>
                     </div>
                 </div>
@@ -31,9 +31,11 @@ const Footer = () => {
                 <div className={styles.messengers}>
                     <div className={styles.images}>
                         <a href="mailto:info@simsdynastytree.com" target="_blank" rel="noopener noreferrer">
-                            <img src='./svg/google_green.svg'/>
+                            <img src='./svg/greenvelope.svg'/>
                         </a>
-                        <img src='./svg/vk.svg'/>
+                        <a href="https://vk.com/thedynastytree" target="_blank" rel="noopener noreferrer">
+                            <img src='./svg/vk.svg'/>
+                        </a>
                         <a href="https://t.me/dynastytree" target="_blank" rel="noopener noreferrer">
                             <img src='./svg/telegram.svg' alt="Telegram Icon"/>
                         </a>

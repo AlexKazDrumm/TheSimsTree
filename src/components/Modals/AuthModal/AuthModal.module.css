@@ -80,3 +80,10 @@
 	
 	margin-bottom: 20px;
 }
+
+.rememberPassword {
+	font-size: 15px;
+	font-family: 'Gotham Medium';
+	color: #182d38;
+	cursor: pointer;
+}

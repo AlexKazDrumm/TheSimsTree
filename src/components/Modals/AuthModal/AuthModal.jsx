@@ -177,6 +177,7 @@ const AuthModal = ({authModalVisible, setAuthModalVisible, setIsAuth, setUser}) 
                                 </span>
                                 <FormPair label={'Логин или E-mail'} type={'text'} event={(e) => {setLogin(e.target.value)}} value={login} element={'input'} error={errors && !login && !email?'Введите логин или E-mail':null}/>
                                 <FormPair label={'Пароль'} type={'password'} event={(e) => {setPassword(e.target.value)}} value={password} element={'input'} error={errors && !password?'Введите пароль!':null} />
+                                <span className={styles.rememberPassword}>Забыли пароль?</span>
                             </div>
                         </>
                     }
