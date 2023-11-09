@@ -1,11 +1,13 @@
 .container {
     display: flex;
     flex-direction: column;
-    width: 80%;
-    margin-left: 10%;
+    width: 60%;
+    margin-left: 20%;
     min-height: 70vh;
     background-color: #efefef;
     padding-top: 20px;
+    justify-content: center;
+    align-items: center;
 }
 
 .titleRow {
