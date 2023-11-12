@@ -1,0 +1,27 @@
+.selectPoint {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+	padding: 16px 24px 16px 16px;
+	cursor: pointer;
+}
+
+.selectPointSelected {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+	padding: 16px 24px 16px 16px;
+	cursor: pointer;
+	border-radius: 16px;
+	background-color: #DBEAFE
+}
+
+.selectPoint img {
+	margin-right: 12px;
+}
+
+.selectPointSelected img {
+	margin-right: 12px;
+}

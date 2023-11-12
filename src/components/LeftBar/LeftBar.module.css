@@ -1,0 +1,83 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	width: 20%;
+	min-height: 85vh;
+	height: auto;
+	background: var(--palette-gray-50, #F9FAFB);
+	padding: 32px 32px 16px 32px
+}
+
+.wrapper {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+}
+
+.topBlock {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	border-bottom: 1px solid #E2E8F0;
+}
+
+.equipmentBlock {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	border-bottom: 1px solid #E2E8F0;
+}
+
+.accountBlock {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+}
+
+.ownerMData {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	margin-bottom: 24px;
+}
+
+.avatar{
+	display: flex;
+	margin-right: 12px
+}
+
+.name {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.avatar img {
+	width: 48px;
+	height: 48px;
+}
+
+.title {
+	padding: 16px 16px 12px 16px;
+}
+
+.user {
+	color: var(--palette-slate-900, #0F172A);
+	font-family: 'SF Medium';
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 510;
+	line-height: 24px; 
+	letter-spacing: 0.1px;
+}
+
+.role {
+	color: var(--palette-slate-600, #475569);
+	font-family: 'SF Regular';
+	font-size: 12px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 16px; /* 133.333% */
+	letter-spacing: 0.4px;
+}
