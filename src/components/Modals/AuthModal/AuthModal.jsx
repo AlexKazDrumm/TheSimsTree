@@ -188,8 +188,8 @@ const AuthModal = ({authModalVisible, setAuthModalVisible, setIsAuth, setUser}) 
                                     Регистрация
                                 </span>
                                 <FormPair label={'Никнейм'} type={'text'} event={(e) => {setLogin(e.target.value)}} value={login} element={'input'} error={errors && !login?'Введите никнейм!':error == 'Такой логин уже существует.'?error:null} />
-                                <FormPair label={'Имя'} type={'text'} element={'input'} event={(e) => {setName(e.target.value)}} value={name} />
-                                <FormPair label={'Фамилия'} type={'text'} element={'input'} event={(e) => {setSurname(e.target.value)}} value={surname}  />
+                                {/* <FormPair label={'Имя'} type={'text'} element={'input'} event={(e) => {setName(e.target.value)}} value={name} />
+                                <FormPair label={'Фамилия'} type={'text'} element={'input'} event={(e) => {setSurname(e.target.value)}} value={surname}  /> */}
                                 <FormPair label={'E-mail'} type={'text'} event={(e) => {setEmail(e.target.value)}} value={email} element={'input'} error={errors && !email?'Введите E-mail!!':error == 'Такая почта уже существует.'?error:null} />
                                 <FormPair label={'Пароль'} type={'password'} event={(e) => {setPassword(e.target.value)}} value={password} element={'input'} error={errors && !password?'Введите пароль':null} />
                                 <FormPair label={'Повторите пароль'} type={'password'} event={(e) => {setCheckPassword(e.target.value)}} value={checkPassword} element={'input'} error={errors && !checkPassword?'Повторите пароль':null} />

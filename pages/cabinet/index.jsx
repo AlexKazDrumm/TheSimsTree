@@ -7,7 +7,7 @@ import MyTrees from '../../src/processes/CabinetPageWay/MyTrees/MyTrees';
 import CreateTree from '../../src/processes/CabinetPageWay/CreateTree/CreateTree'
 import Profile from '../../src/processes/CabinetPageWay/Profile/Profile'
 import { useRouter } from 'next/router';
-import Tools from '../../src/processes/MainPageWay/Tools/Tools'
+import Tools from '../../src/processes/CabinetPageWay/Tools/Tools'
 import { fetchUserData } from '../../src/entities/User';
 
 const Cabinet = () => {

@@ -14,8 +14,9 @@
   	overflow-y: auto;
   	font-family: 'Gotham Regular';
     border: 2px solid #BDC0B6;
-	width: 40%;
+	width: 30%;
 	background-color: white;
+	overflow-x: hidden;
 }
 
 .modalBackground {

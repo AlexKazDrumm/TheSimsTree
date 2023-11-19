@@ -3,6 +3,7 @@ import styles from './SupportModal.module.css';
 import CloseButton from "../../UI/CloseButton/CloseButton";
 import FormPair from "../../FormPair/FormPair";
 import RegularButton from "../../UI/RegularButton/RegularButton";
+import { sendFeedback } from "../../../features/features";
 
 const SupportModal = ({supportModalVisible, setSupportModalVisible, alerts, setAlerts}) => {
     const modalRef = useRef(null);
@@ -10,6 +11,10 @@ const SupportModal = ({supportModalVisible, setSupportModalVisible, alerts, setA
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [message, setMessage] = useState('')
+    const [imageFile, setImageFile] = useState(null);
+    const [imageInfo, setImageInfo] = useState('');
+
+    const fileInputRef = useRef()
 
     useEffect(() => {
         document.addEventListener("mousedown", handleClickOutside);
@@ -18,13 +23,21 @@ const SupportModal = ({supportModalVisible, setSupportModalVisible, alerts, setA
         };
     }, []);
 
+    const handleImageChange = (event) => {
+        if (event.target.files && event.target.files[0]) {
+            const file = event.target.files[0];
+            setImageFile(file);
+            setImageInfo(`${file.name}`); // Сохраняем название и тип файла
+        }
+    };
+
     const handleClickOutside = (event) => {
         if (modalRef.current && !modalRef.current.contains(event.target)) {
             setSupportModalVisible(false);
         }
     };
 
-    const handleSend = () => {
+    const handleSend = async () => {
         if (!name) {
 
             return
@@ -38,8 +51,12 @@ const SupportModal = ({supportModalVisible, setSupportModalVisible, alerts, setA
             return
         }
 
-        setSupportModalVisible(false)
-        showAlert('Ваш отзыв успешно отправлен)', 'accepted')
+        const feedbackSent = await sendFeedback(name, email, message, imageFile);
+        if (feedbackSent) {
+            // Обработка успешной отправки
+        }
+
+        setSupportModalVisible(false);
     }
 
     return (
@@ -71,9 +88,16 @@ const SupportModal = ({supportModalVisible, setSupportModalVisible, alerts, setA
                         <FormPair label={'E-mail'} type={'text'} event={(e) => {setEmail(e.target.value)}} value={email} element={'input'} />
                         <FormPair label={'Сообщение'} type={'text'} event={(e) => {setMessage(e.target.value)}} value={message} element={'textarea'} />
                         <div className={styles.sendImageBlock}>
-                            <span>
-                                <a>Загрузить фото</a>
+                            <input type="file" onChange={handleImageChange} style={{ display: 'none' }} ref={fileInputRef} />
+                            <span className={styles.linkButton} onClick={() => fileInputRef.current && fileInputRef.current.click()}>
+                                Загрузить фото
                             </span>
+                            <span className={styles.fileName}>{imageInfo}</span>
+                            {imageInfo && <span onClick={() => {
+                                setImageFile(null)
+                                setImageInfo('')
+                            }}
+                            style={{color: 'red'}}>X</span>}
                         </div>
                     </div>
                 </div>
