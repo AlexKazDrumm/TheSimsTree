@@ -54,6 +54,7 @@
     font-family: 'Gotham Bold';
     color:#285471;
     min-width: 300px;
+    border-radius: 5px;
 }
 
 .customInput:focus, .customSelect:focus {

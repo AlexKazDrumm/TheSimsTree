@@ -3,7 +3,6 @@ import styles from './RegularButton.module.css';
 import { choosePalette } from '../../../utils/utils';
 
 const RegularButton = ({event, text, type}) => {
-    console.log({text, type})
     const palette = choosePalette(type);
 
     const buttonStyles = {
