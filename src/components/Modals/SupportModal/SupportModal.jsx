@@ -4,7 +4,6 @@ import CloseButton from "../../UI/CloseButton/CloseButton";
 import FormPair from "../../FormPair/FormPair";
 import RegularButton from "../../UI/RegularButton/RegularButton";
 import { sendFeedback } from "../../../features/features";
-import ReCAPTCHA from "react-google-recaptcha";
 
 const SupportModal = ({supportModalVisible, setSupportModalVisible, alerts, setAlerts}) => {
     const modalRef = useRef(null);
@@ -15,13 +14,9 @@ const SupportModal = ({supportModalVisible, setSupportModalVisible, alerts, setA
     const [imageFile, setImageFile] = useState(null);
     const [imageInfo, setImageInfo] = useState('');
 
-    const [captchaValue, setCaptchaValue] = useState(null);
+    const [files, setFiles] = useState([]);
 
     const fileInputRef = useRef()
-
-    const onCaptchaChange = (value) => {
-        setCaptchaValue(value);
-    };
 
     useEffect(() => {
         document.addEventListener("mousedown", handleClickOutside);
@@ -31,11 +26,17 @@ const SupportModal = ({supportModalVisible, setSupportModalVisible, alerts, setA
     }, []);
 
     const handleImageChange = (event) => {
-        if (event.target.files && event.target.files[0]) {
-            const file = event.target.files[0];
-            setImageFile(file);
-            setImageInfo(`${file.name}`); // Сохраняем название и тип файла
+        if (event.target.files) {
+            const newFiles = Array.from(event.target.files).map(file => ({
+                file,
+                name: file.name
+            }));
+            setFiles(prev => [...prev, ...newFiles]); // Добавляем новые файлы в массив
         }
+    };
+
+    const handleRemoveFile = (fileName) => {
+        setFiles(files.filter(file => file.name !== fileName)); // Удаляем файл из массива
     };
 
     const handleClickOutside = (event) => {
@@ -45,12 +46,6 @@ const SupportModal = ({supportModalVisible, setSupportModalVisible, alerts, setA
     };
 
     const handleSend = async () => {
-
-        if (!captchaValue) {
-            alert('Пожалуйста, подтвердите, что вы не робот.');
-            return;
-        }
-
         if (!name) {
 
             return
@@ -64,9 +59,9 @@ const SupportModal = ({supportModalVisible, setSupportModalVisible, alerts, setA
             return
         }
 
-        const feedbackSent = await sendFeedback(name, email, message, imageFile);
+        const feedbackSent = await sendFeedback(name, email, message, files);
         if (feedbackSent) {
-            // Обработка успешной отправки
+                // Обработка успешной отправки
         }
 
         setSupportModalVisible(false);
@@ -101,29 +96,29 @@ const SupportModal = ({supportModalVisible, setSupportModalVisible, alerts, setA
                         <FormPair label={'E-mail'} type={'text'} event={(e) => {setEmail(e.target.value)}} value={email} element={'input'} />
                         <FormPair label={'Сообщение'} type={'text'} event={(e) => {setMessage(e.target.value)}} value={message} element={'textarea'} />
                         <div className={styles.sendImageBlock}>
-                            <input type="file" onChange={handleImageChange} style={{ display: 'none' }} ref={fileInputRef} />
+                            <input type="file" multiple onChange={handleImageChange} style={{ display: 'none' }} ref={fileInputRef} />
                             <span className={styles.linkButton} onClick={() => fileInputRef.current && fileInputRef.current.click()}>
                                 Загрузить фото
                             </span>
-                            <span className={styles.fileName}>{imageInfo}</span>
-                            {imageInfo && <span onClick={() => {
-                                setImageFile(null)
-                                setImageInfo('')
-                            }}
-                            style={{color: 'red'}}>X</span>}
+                            <div style={{display: 'flex', flexDirection: 'column'}}>
+                            {files.map((file, index) => (
+                                <div key={index}>
+                                    <span>{file.name}</span>
+                                    <span onClick={() => handleRemoveFile(file.name)} style={{color: 'red'}}>X</span>
+                                </div>
+                            ))}
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div className={styles.greyBlock}>
-                    <ReCAPTCHA
-                        sitekey="6LcnDBYpAAAAAM6LNErbSqHbni4oJV63UfvP7837"
-                        onChange={onCaptchaChange}
-                    />
                     <div className={styles.buttonWrapper}>
                         <RegularButton 
                             text={'Отправить'}
                             type={'grey'}
-                            event={handleSend}
+                            event={() => {
+                                handleSend()
+                            }}
                         />  
                     </div>
                 </div>

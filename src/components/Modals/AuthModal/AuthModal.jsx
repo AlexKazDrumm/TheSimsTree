@@ -5,11 +5,9 @@ import FormPair from "../../FormPair/FormPair";
 import RegularButton from "../../UI/RegularButton/RegularButton";
 import globals from '../../../globals'
 import axios from 'axios'
-import { fetchUserData } from "../../../entities/User";
+import User from "../../../entities/User";
 
-const AuthModal = ({authModalVisible, setAuthModalVisible, setIsAuth, setUser}) => {
-    const verificationCode = '1234'
-    const userData = {login: 'Agarey', password: 'Robsalvatore13'}
+const AuthModal = ({authModalVisible, setAuthModalVisible, setIsAuth, setUser, setInfoModalVisible, setInfoImg, setInfoTitle, setInfoText}) => {
     
     const [authSteps, setAuthSteps] = useState(true)
     const [regSteps, setRegSteps] = useState(false)
@@ -60,9 +58,14 @@ const AuthModal = ({authModalVisible, setAuthModalVisible, setIsAuth, setUser}) 
                 setWaitCodeMode(false);
                 showAlert('Успешная верификация!', 'accepted');
                 setAuthModalVisible(false);
+                setInfoImg('./svg/congrats.svg')
+                setInfoTitle('Поздравляем!')
+                setInfoText('Вы успешно зарегистрировались на платформе The Dynasty Tree!!!')
+                setInfoModalVisible(true)
                 const token = response.data.token;
                 localStorage.setItem('authToken', token);
-                await fetchUserData(token);
+                await User.fetchUserData(token);
+                setUser(User.userData);
             }
         } catch (error) {
             serError(error?.response?.data);
@@ -86,23 +89,23 @@ const AuthModal = ({authModalVisible, setAuthModalVisible, setIsAuth, setUser}) 
       
         // Проверка логина и пароля на сервере
         try {
-          const response = await axios.post(`${globals.productionServerDomain}/login`, {
-            login,
-            password,
-          });
-      
-          if (response.data) {
-            // Успешный вход
-            setIsAuth(true)
-            setAuthModalVisible(false)
-            const token = response.data.token;
-            localStorage.setItem('authToken', token);
-            const newUser = await fetchUserData(token);
-            setUser(newUser)
-          } else {
-            // Неуспешный вход
-            showAlert(response.data.message || 'Неверный логин или пароль!', 'error');
-          }
+            const response = await axios.post(`${globals.productionServerDomain}/login`, {
+                login,
+                password,
+            });
+    
+            if (response.data) {
+                // Успешный вход
+                setIsAuth(true);
+                setAuthModalVisible(false);
+                const token = response.data.token;
+                localStorage.setItem('authToken', token);
+                await User.fetchUserData(token);
+                setUser(User.userData); // обновляем пользователя в состоянии компонента
+            } else {
+                // Неуспешный вход
+                showAlert(response.data.message || 'Неверный логин или пароль!', 'error');
+            }
         } catch (error) {
           if (error.response && error.response.status === 401) {
             showAlert('Неверный логин или пароль!', 'error');

@@ -3,9 +3,11 @@ import styles from './LeftBar.module.css'
 import LeftSelecter from '../../components/UI/LeftSelecter/LeftSelecter'
 import { useRouter } from 'next/router';
 import globals from '../../globals';
+import SupportModal from '../Modals/SupportModal/SupportModal';
 
 const LeftBar = ({ selectedComponent, setSelectedComponent, setLeftMenuClick, user }) => {
   const [slimMode, setSlimMode] = useState(false)
+  const [supportModalVisible, setSupportModalVisible] = useState(false)
   
   const formStyle = {
     width: `${slimMode ? 'auto' : '20%'}`
@@ -15,11 +17,17 @@ const LeftBar = ({ selectedComponent, setSelectedComponent, setLeftMenuClick, us
 
   return (
     <div className={styles.bar} style={formStyle}>
+      {supportModalVisible && 
+        <SupportModal 
+          supportModalVisible={supportModalVisible} 
+          setSupportModalVisible={setSupportModalVisible} 
+        />
+      }
       <div className={styles.container} style={slimMode ? {padding: '32px 12px 16px 12px'} : {padding: '32px 32px 16px 32px'}}>
         <div className={styles.wrapper}>
           <div className={styles.topBlock}>
-            <div className={styles.ownerMData}>
-              <div className={styles.avatar}>
+            <div className={styles.ownerMData} style={slimMode?{justifyContent: 'center'}:{justifyContent: 'flex-start'}}> 
+              <div className={styles.avatar} style={slimMode?{marginRight:'0px'}:{marginRight:'12px'}}>
                 {user?.avatar ? 
                   <img src={`${globals.productionServerDomain}/file/${user.avatar}`} />:
                   <img src='./svg/user_master_avatar.svg' />
@@ -77,7 +85,7 @@ const LeftBar = ({ selectedComponent, setSelectedComponent, setLeftMenuClick, us
                 setLeftMenuClick(true)
                 router.push('/cabinet?option=4')
               }} 
-              icon={'/svg/create_tree_v2.svg'} 
+              icon={'/svg/create_tree_v3.svg'} 
               alt={'Create Tree'} 
               text={'Создать древо'}  
               order={4}
@@ -90,7 +98,7 @@ const LeftBar = ({ selectedComponent, setSelectedComponent, setLeftMenuClick, us
                 setLeftMenuClick(true)
                 router.push('/cabinet?option=5')
               }} 
-              icon={'/svg/plumtreeapp_tree.svg'} 
+              icon={'/svg/plumtreeapp_tree_v2.svg'} 
               alt={'Upload Tree'} 
               text={'Загрузить с PlumTree'}  
               order={5}
@@ -126,13 +134,13 @@ const LeftBar = ({ selectedComponent, setSelectedComponent, setLeftMenuClick, us
         </div>
         <div className={styles.wrapper} style={slimMode ? {padding: '0px 12px 0px 12px'} : {padding: '0px 32px 0px 32px'}}>
           <div className={styles.equipmentBlock}>
-            {!slimMode &&
+            {/* {!slimMode &&
               <div className={styles.title}>Поддержка</div>
-            }
+            } */}
             
                 <div className={styles.images}  style={slimMode ? {flexDirection: 'column'} : {flexDirection: 'row'}}>
-                  <a href="mailto:info@simsdynastytree.com" target="_blank" rel="noopener noreferrer">
-                    <img src='./svg/bluevelope.svg'/>
+                  <a style={{cursor: 'pointer'}} onClick={() => {setSupportModalVisible(true)}}>
+                    <img src='./svg/help_blue.svg'/>
                   </a>
                   <a href="https://vk.com/thedynastytree" target="_blank" rel="noopener noreferrer">
                     <img src='./svg/vk_blue.svg'/>

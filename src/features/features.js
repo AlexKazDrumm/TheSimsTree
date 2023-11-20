@@ -1,5 +1,6 @@
 import axios from "axios";
 import globals from "../globals";
+import User from "../entities/User";
 
 export const updateAvatar = async (token, file) => {
     const formData = new FormData();
@@ -15,7 +16,8 @@ export const updateAvatar = async (token, file) => {
 
         if (response.data && response.data.success) {
             console.log('Аватар успешно обновлен:', response.data);
-            return response.data.data;
+            User.setUserData(response.data.userData); // Обновляем данные пользователя в хранилище
+            return response.data.userData;
         }
     } catch (error) {
         console.error('Ошибка при обновлении аватара:', error);
@@ -33,6 +35,7 @@ export const deleteAvatar = async (token) => {
 
         if (response.data && response.data.success) {
             console.log('Аватар успешно удален:', response.data);
+            User.setUserData(response.data.userData); // Обновляем данные пользователя в хранилище
             return true;
         }
     } catch (error) {
@@ -52,7 +55,8 @@ export const updateUserData = async (token, userData) => {
 
         if (response.data && response.data.success) {
             console.log('Данные пользователя успешно обновлены:', response.data);
-            return response.data;
+            User.setUserData(response.data.userData); // Обновляем данные пользователя в хранилище
+            return response.data.userData;
         }
     } catch (error) {
         console.error('Ошибка при обновлении данных пользователя:', error);
@@ -99,12 +103,14 @@ export const deleteUserAccount = async (token) => {
     }
 };
 
-export const sendFeedback = async (name, email, message, imageFile) => {
+export const sendFeedback = async (name, email, message, files) => {
     const formData = new FormData();
     formData.append('name', name);
     formData.append('email', email);
     formData.append('message', message);
-    formData.append('image', imageFile);
+    files.forEach(file => {
+        formData.append('images', file.file); // 'images' - это ключ для массива файлов
+    });
 
     try {
         const response = await axios.post(`${globals.productionServerDomain}/feedback`, formData, {

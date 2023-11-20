@@ -1,40 +1,47 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { inject, observer } from 'mobx-react';
 import Header from "../src/components/Header/Header";
 import Notifier from "../src/components/Notifier/Notifier";
 import NavbarTop from "../src/components/NavbarTop/NavbarTop";
 import AuthModal from "../src/components/Modals/AuthModal/AuthModal";
 import SupportModal from "../src/components/Modals/SupportModal/SupportModal";
+import InfoModal from "../src/components/Modals/InfoModal/InfoModal";
 import Footer from "../src/components/Footer/Footer";
 import Lending from "../src/processes/MainPageWay/Lending/Lending"
 import Tools from "../src/processes/MainPageWay/Tools/Tools"
 import Galery from "../src/processes/MainPageWay/Galery/Galery"
 import Contacts from "../src/processes/MainPageWay/Contacts/Contacts"
 import Donates from "../src/processes/MainPageWay/Donates/Donates"
-import Help from "../src/processes/MainPageWay/Help/Help"
-import { fetchUserData } from "../src/entities/User";
+import Privacy from "../src/processes/MainPageWay/Privacy/Privacy"
 
-function MainPage() {
+function MainPage({ User }) {
     const [isAuth, setIsAuth] = useState(false)
     const [alerts, setAlerts] = useState([])
     const [authModalVisible, setAuthModalVisible] = useState(false);
     const [supportModalVisible, setSupportModalVisible] = useState(false)
+    const [infoModalVisible, setInfoModalVisible] = useState(false)
     const [selectedBlock, setSelectedBlock] = useState(1)
     const [user, setUser] = useState()
 
+    const [infoImg, setInfoImg] = useState('')
+    const [infoTitle, setInfoTitle] = useState('')
+    const [infoText, setInfoText] = useState('')
+
     const fetchData = async () => {
-        const userData = await fetchUserData(localStorage.getItem('authToken'));
-        setUser(userData);
-      
-        if (userData) {
-          setIsAuth(true);
+        await User.fetchUserData(localStorage.getItem('authToken'));
+        if (User.userData) {
+            setIsAuth(true);
+            setUser(User.userData);
         } else {
-          setIsAuth(false);
+            setIsAuth(false);
+            setUser(null);
         }
-      };
-      
-      useEffect(() => {
+    };
+
+    useEffect(() => {
         fetchData();
-      }, []);
+        console.log({User})
+    }, [User]);
 
     const renderSelectedBlock = () => {
         switch (selectedBlock) {
@@ -43,7 +50,7 @@ function MainPage() {
             case 3: return <Galery />;
             case 4: return <Contacts />;
             case 5: return <Donates />;
-            // case 6: return <Help />;
+            case 6: return <Privacy />;
             default: return <Lending setSupportModalVisible={setSupportModalVisible} />;
         }
     };
@@ -58,6 +65,10 @@ function MainPage() {
                     setAlerts={setAlerts} 
                     setIsAuth={setIsAuth}
                     setUser={setUser}
+                    setInfoModalVisible={setInfoModalVisible}
+                    setInfoImg={setInfoImg}
+                    setInfoTitle={setInfoTitle}
+                    setInfoText={setInfoText}
                 />
             }
             {supportModalVisible && 
@@ -68,13 +79,22 @@ function MainPage() {
                     setAlerts={setAlerts} 
                 />
             }
+            {infoModalVisible &&
+                <InfoModal
+                    infoModalVisible={infoModalVisible}
+                    setInfoModalVisible={setInfoModalVisible}
+                    img={infoImg}
+                    title={infoTitle}
+                    text={infoText}
+                />
+            }
             <Notifier alerts={alerts} />
             <Header setUser={setUser} isAuth={isAuth} setIsAuth={setIsAuth} setAuthModalVisible={setAuthModalVisible} user={user}/>
             <NavbarTop setSupportModalVisible={setSupportModalVisible} selectedBlock={selectedBlock} setSelectedBlock={setSelectedBlock}/>
             { renderSelectedBlock() }
-            <Footer />
+            <Footer selectedBlock={selectedBlock} setSelectedBlock={setSelectedBlock}/>
         </div>
     );
 }
 
-export default MainPage;
+export default inject('User')(observer(MainPage));

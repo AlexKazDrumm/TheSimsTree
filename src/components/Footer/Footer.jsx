@@ -1,7 +1,7 @@
 import React from "react";
 import styles from './Footer.module.css'
 
-const Footer = () => {
+const Footer = ({selectedBlock, setSelectedBlock}) => {
 
     return (
         <div className={styles.container}>
@@ -47,7 +47,7 @@ const Footer = () => {
                     </div>
                     <div className={styles.privacy}>
                         <span>
-                            <a href="https://disk.yandex.ru/d/pJ-4xbAei0zagQ" target="_blank" rel="noopener noreferrer">Политика конфиденциальности</a>
+                            <a onClick={() => setSelectedBlock(6)} >Политика конфиденциальности</a>
                         </span>
                     </div>
                 </div>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styles from './Tools.module.css'
-import { Instructions } from "../../../entities/lists/Instructions";
+import { Instructions } from "../../../entities/lists/InstructionsLK";
 
 const Tools = () => {
     const [selectedTheme, setSelectedTheme] = useState(null); 

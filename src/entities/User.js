@@ -1,20 +1,38 @@
-import axios from "axios";
-import globals from "../globals";
+import axios from 'axios';
+import { makeAutoObservable } from 'mobx';
+import globals from '../globals';
 
-export const fetchUserData = async (token) => {
+class User {
+  userData = null;
+  isUserDataLoaded = false;
+
+  constructor() {
+    makeAutoObservable(this);
+  }
+
+  async fetchUserData(token) {
     try {
       const response = await axios.get(`${globals.productionServerDomain}/getUserData`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
       });
-      console.log({response})
+      console.log({ response });
+
       if (response.data && response.data.userData) {
-        // Теперь у вас есть данные пользователя, и вы можете их использовать.
-        return response.data.userData
+        this.userData = response.data.userData;
+        this.isUserDataLoaded = true;
       }
     } catch (error) {
       console.error('Ошибка при получении данных пользователя:', error);
-      // обработка ошибок
     }
-};
+  }
+
+  setUserData(newUserData) {
+    this.userData = newUserData;
+    this.isUserDataLoaded = true;
+  }
+  
+}
+
+export default new User();

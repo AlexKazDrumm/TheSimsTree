@@ -1,0 +1,9 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    /* border: 1px solid black; */
+    min-height: 70vh;
+    background-color: #efefef;
+    padding: 20px 10% 0px 10%;
+    font-family: 'Gotham Regular';
+}

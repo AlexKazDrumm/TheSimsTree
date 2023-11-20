@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import AvatarEditor from 'react-avatar-editor';
 import styles from './Profile.module.css'
 import RegularButton from '../../../components/UI/RegularButton/RegularButton'
 import TitleBlock from '../../../components/UI/TitleBlock/TitleBlock'
@@ -16,6 +17,31 @@ const Profile = ({user}) => {
     const [changePasswordModalVisible, setChangePasswordModalVisible] = useState(false)
     const [deleteProfileModalVisible, setDeleteProfileModalVisible] = useState(false)
 
+    const [image, setImage] = useState(null);
+    const [editor, setEditor] = useState(null);
+    const [showEditorModal, setShowEditorModal] = useState(true);
+    const [scale, setScale] = useState(1);
+    const [borderRadius, setBorderRadius] = useState(0);
+
+    const handleNewImage = e => {
+        setImage(e.target.files[0]);
+        setShowEditorModal(true); // Открыть модальное окно редактора
+    };
+
+    const setEditorRef = editor => setEditor(editor);
+
+    const handleAvatarUpload = async () => {
+        if (editor) {
+            const canvasScaled = editor.getImageScaledToCanvas();
+            canvasScaled.toBlob(async (blob) => {
+                const token = localStorage.getItem('authToken');
+                await updateAvatar(token, blob);
+                setShowEditorModal(false);
+                setImage(null); // Очистить выбранное изображение после загрузки
+            });
+        }
+    };
+
     useEffect(() => {
         if (user) {
             setLogin(user.login);
@@ -29,16 +55,7 @@ const Profile = ({user}) => {
 
     const fileInputRef = useRef();
 
-    const handleAvatarUpload = async () => {
-        const token = localStorage.getItem('authToken');
-        const file = fileInputRef.current.files[0];
-        
-        if (file) {
-            await updateAvatar(token, file);
-        } else {
-            console.log('Файл не выбран.');
-        }
-    };
+
 
     const handleAvatarDelete = async () => {
         const token = localStorage.getItem('authToken');
@@ -49,19 +66,18 @@ const Profile = ({user}) => {
         }
     };
 
-    const handleUpdateUserData = async () => {
+    const updateSingleUserData = async (key, value) => {
         const token = localStorage.getItem('authToken');
         const updatedUserData = {
-            login,
-            name,
-            surname,
-            email,
+            login: user.login,
+            name: user.name,
+            surname: user.surname,
+            email: user.email,
+            [key]: value,
         };
         
-        if (await updateUserData(token, updatedUserData)) {
-            // Можно обновить состояние пользователя или перезагрузить страницу
-            // чтобы отразить обновленные данные
-        }
+        await updateUserData(token, updatedUserData);
+        // Обновление состояния пользователя после запроса
     };
 
     const handleLoginChange = (event) => {
@@ -82,6 +98,33 @@ const Profile = ({user}) => {
 
     return(
         <div className={styles.component}>
+            {showEditorModal && (
+                <div className={styles.editorModal}>
+                    <AvatarEditor 
+                        ref={setEditorRef}
+                        image={image}
+                        width={250}
+                        height={250}
+                        border={50}
+                        borderRadius={borderRadius}
+                        color={[255, 255, 255, 0.6]} // RGBA
+                        scale={scale}
+                    />
+                    <div>
+                        <label>Масштаб: </label>
+                        <input type="range" min="1" max="2" step="0.01" value={scale} onChange={(e) => setScale(parseFloat(e.target.value))} />
+                    </div>
+                    <div style={{marginBottom: '15px'}}>
+                        <label>Скругление: </label>
+                        <input type="range" min="0" max="125" value={borderRadius} onChange={(e) => setBorderRadius(parseInt(e.target.value, 10))} />
+                    </div>
+                    <RegularButton 
+                        type='grey' 
+                        text='Сохранить' 
+                        event={handleAvatarUpload}
+                    />
+                </div>
+            )}
             {changePasswordModalVisible && <ChangePasswordModal changePasswordModalVisible={changePasswordModalVisible} setChangePasswordModalVisible={setChangePasswordModalVisible}/>}
             {deleteProfileModalVisible && <DeleteProfileModal deleteProfileModalVisible={deleteProfileModalVisible} setDeleteProfileModalVisible={setDeleteProfileModalVisible} />}
             <div className={styles.marginWrapper}>
@@ -91,52 +134,85 @@ const Profile = ({user}) => {
                 <div className={styles.logoBlock}>
                     <div className={styles.avatar}>
                         {user?.avatar ? 
-                            <img src={`${globals.productionServerDomain}/file/${user.avatar}`} />:
-                            <img src='./svg/user_master_avatar.svg' />
+                                <img src={`${globals.productionServerDomain}/file/${user.avatar}`} alt="Avatar" /> :
+                                <img src='./svg/user_master_avatar.svg' alt="Default Avatar" />
                         }
                     </div>
                     <div className={styles.buttons}>
-                        <input 
-                            ref={fileInputRef} 
-                            type="file" 
-                            style={{ display: 'none' }} 
-                            onChange={handleAvatarUpload}
-                        />
-                        <RegularButton 
-                            type='grey' 
-                            text='Загрузить' 
-                            event={() => fileInputRef.current && fileInputRef.current.click()}
-                        />
-                        <RegularButton type='grey' text='Удалить' event={handleAvatarDelete} />
+                    <input 
+                    type="file" 
+                    onChange={handleNewImage}
+                    style={{ display: 'none' }}
+                    ref={fileInputRef}
+                />
+                <RegularButton 
+                    type='grey' 
+                    text='Загрузить' 
+                    event={() => fileInputRef.current && fileInputRef.current.click()}
+                />
+                <RegularButton type='grey' text='Удалить' event={handleAvatarDelete} />
                     </div>
                 </div>
             </div>
             <div className={styles.marginWrapper}>
-                <div className={styles.spanLabel}>Логин</div>
-                <div className={styles.inputWrapper}>
-                    <RegularInput type="text" value={login} event={handleLoginChange} />
+                <div className={styles.table}>
+                    <div className={styles.row}>
+                        <div className={styles.cell}>
+                            <div className={styles.spanLabel}>Логин</div>
+                            <div className={styles.inputWrapper}>
+                                <RegularInput type="text" value={login} event={handleLoginChange} />
+                                {login !== user?.login && (
+                                    <img className={styles.mark} src='./svg/mark.svg' onClick={() => updateSingleUserData('login', login)} />
+                                )}
+                            </div>
+                        </div>
+                        <div className={styles.cell}>
+                            <div className={styles.spanLabel}>Почта</div>
+                            <div className={styles.inputWrapper}>
+                                <RegularInput type="email" value={email} event={handleEmailChange} />
+                                {email !== user?.email && (
+                                    <img className={styles.mark} src='./svg/mark.svg' onClick={() => updateSingleUserData('email', email)}/>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                    <div className={styles.row}>
+                        <div className={styles.cell}>
+                            <div className={styles.spanLabel}>Имя</div>
+                            <div className={styles.inputWrapper}>
+                                <RegularInput type="text" value={name} event={handleNameChange} />
+                                {name !== user?.name && (
+                                    <img className={styles.mark} src='./svg/mark.svg' onClick={() => updateSingleUserData('name', name)}/>
+                                )}
+                            </div>
+                        </div>
+                        <div className={styles.cell}>
+                            <div className={styles.spanLabel}>Фамилия</div>
+                            <div className={styles.inputWrapper}>
+                                <RegularInput type="text" value={surname} event={handleSurnameChange} />
+                                {surname !== user?.surname && (
+                                    <img className={styles.mark} src='./svg/mark.svg' onClick={() => updateSingleUserData('surname', surname)}/>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                    <div className={styles.row}>
+                    <div className={styles.cell}>
+                        <div className={styles.linkButtonContainer}>
+                            <span className={styles.linkButton} onClick={() => setChangePasswordModalVisible(true)}>
+                                Сменить пароль
+                            </span>
+                        </div>
+                    </div>
+                    <div className={styles.cell}>
+                        <div className={styles.linkButtonContainer}>
+                            <span className={styles.linkButton} onClick={() => setDeleteProfileModalVisible(true)}>
+                                Удалить профиль
+                            </span>
+                        </div>
+                    </div>
+                    </div>
                 </div>
-                <div className={styles.spanLabel}>Имя</div>
-                <div className={styles.inputWrapper}>
-                    <RegularInput type="text" value={name} event={handleNameChange} />
-                </div>
-                <div className={styles.spanLabel}>Фамилия</div>
-                <div className={styles.inputWrapper}>
-                    <RegularInput type="text" value={surname} event={handleSurnameChange} />
-                </div>
-                <div className={styles.spanLabel}>Почта</div>
-                <div className={styles.inputWrapper}>
-                    <RegularInput type="email" value={email} event={handleEmailChange} />
-                </div>
-                <RegularButton type='grey' text='Сохранить' event={handleUpdateUserData} />
-            </div>
-            <div className={styles.inputWrapper}>
-                <span className={styles.linkButton} onClick={() => setChangePasswordModalVisible(true)}>
-                    Сменить пароль
-                </span>
-                <span className={styles.linkButton} onClick={() => setDeleteProfileModalVisible(true)}>
-                    Удалить профиль
-                </span>
             </div>
         </div>
     )
