@@ -19,7 +19,7 @@ const Profile = ({user}) => {
 
     const [image, setImage] = useState(null);
     const [editor, setEditor] = useState(null);
-    const [showEditorModal, setShowEditorModal] = useState(true);
+    const [showEditorModal, setShowEditorModal] = useState(false);
     const [scale, setScale] = useState(1);
     const [borderRadius, setBorderRadius] = useState(0);
 
