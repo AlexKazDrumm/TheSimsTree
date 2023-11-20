@@ -4,6 +4,7 @@ import CloseButton from "../../UI/CloseButton/CloseButton";
 import FormPair from "../../FormPair/FormPair";
 import RegularButton from "../../UI/RegularButton/RegularButton";
 import { sendFeedback } from "../../../features/features";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const SupportModal = ({supportModalVisible, setSupportModalVisible, alerts, setAlerts}) => {
     const modalRef = useRef(null);
@@ -14,7 +15,13 @@ const SupportModal = ({supportModalVisible, setSupportModalVisible, alerts, setA
     const [imageFile, setImageFile] = useState(null);
     const [imageInfo, setImageInfo] = useState('');
 
+    const [captchaValue, setCaptchaValue] = useState(null);
+
     const fileInputRef = useRef()
+
+    const onCaptchaChange = (value) => {
+        setCaptchaValue(value);
+    };
 
     useEffect(() => {
         document.addEventListener("mousedown", handleClickOutside);
@@ -38,6 +45,12 @@ const SupportModal = ({supportModalVisible, setSupportModalVisible, alerts, setA
     };
 
     const handleSend = async () => {
+
+        if (!captchaValue) {
+            alert('Пожалуйста, подтвердите, что вы не робот.');
+            return;
+        }
+
         if (!name) {
 
             return
@@ -102,13 +115,15 @@ const SupportModal = ({supportModalVisible, setSupportModalVisible, alerts, setA
                     </div>
                 </div>
                 <div className={styles.greyBlock}>
+                    <ReCAPTCHA
+                        sitekey="6LcnDBYpAAAAAM6LNErbSqHbni4oJV63UfvP7837"
+                        onChange={onCaptchaChange}
+                    />
                     <div className={styles.buttonWrapper}>
                         <RegularButton 
                             text={'Отправить'}
                             type={'grey'}
-                            event={() => {
-                                handleSend()
-                            }}
+                            event={handleSend}
                         />  
                     </div>
                 </div>
