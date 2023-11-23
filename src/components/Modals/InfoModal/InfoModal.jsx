@@ -37,13 +37,13 @@ const InfoModal = ({img, title, text, infoModalVisible, setInfoModalVisible}) =>
                             event={() => {
                                 setInfoModalVisible(false)
                             }}
-                            img={'./svg/close.svg'}
+                            img={'./svg/x_blue.svg'}
                         />
                     </div>
                     <div className={styles.formBlock}>
-                        <div>
+                        {img && <div>
                             <img src={img} />
-                        </div>
+                        </div>}
                         <span className={styles.title}>
                             {title}
                         </span>

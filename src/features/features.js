@@ -56,11 +56,13 @@ export const updateUserData = async (token, userData) => {
         if (response.data && response.data.success) {
             console.log('Данные пользователя успешно обновлены:', response.data);
             User.setUserData(response.data.userData); // Обновляем данные пользователя в хранилище
-            return response.data.userData;
+            return true; // Возвращаем true при успешном обновлении
+        } else {
+            return false; // Возвращаем false, если обновление не удалось
         }
     } catch (error) {
         console.error('Ошибка при обновлении данных пользователя:', error);
-        // обработка ошибок
+        return false; // Возвращаем false в случае ошибки
     }
 };
 
@@ -125,6 +127,41 @@ export const sendFeedback = async (name, email, message, files) => {
         }
     } catch (error) {
         console.error('Error sending feedback:', error);
+        return false;
+    }
+};
+
+export const fetchRandomCaptcha = async () => {
+    try {
+        const response = await axios.get(`${globals.productionServerDomain}/getRandomCaptcha`);
+
+        if (response.data) {
+            console.log('Random CAPTCHA fetched successfully:', response.data);
+            return response.data.captchaImage; // Возвращает URL изображения капчи
+        }
+    } catch (error) {
+        console.error('Ошибка при получении случайной капчи:', error);
+        // Здесь можно добавить обработку ошибок, например, показать сообщение пользователю
+        return null;
+    }
+};
+
+export const verifyCaptcha = async (captchaText, captchaImage) => {
+    try {
+        const response = await axios.post(`${globals.productionServerDomain}/verifyCaptcha`, {
+            captchaText,
+            captchaImage
+        });
+
+        if (response.data && response.data.success) {
+            console.log('Captcha verified successfully:', response.data);
+            return true;
+        } else {
+            console.log('Captcha verification failed:', response.data);
+            return false;
+        }
+    } catch (error) {
+        console.error('Ошибка при верификации капчи:', error);
         return false;
     }
 };

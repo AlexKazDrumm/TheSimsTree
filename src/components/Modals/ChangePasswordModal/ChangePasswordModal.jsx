@@ -66,7 +66,7 @@ const ChangePasswordModal = ({changePasswordModalVisible, setChangePasswordModal
                             event={() => {
                                 setChangePasswordModalVisible(false)
                             }}
-                            img={'./svg/close.svg'}
+                            img={'./svg/x_blue.svg'}
                         />
                     </div>
                     <div className={styles.formBlock}>

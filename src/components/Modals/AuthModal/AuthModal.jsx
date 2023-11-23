@@ -6,6 +6,7 @@ import RegularButton from "../../UI/RegularButton/RegularButton";
 import globals from '../../../globals'
 import axios from 'axios'
 import User from "../../../entities/User";
+import BigInput from "../../UI/BigInput/BigInput";
 
 const AuthModal = ({authModalVisible, setAuthModalVisible, setIsAuth, setUser, setInfoModalVisible, setInfoImg, setInfoTitle, setInfoText}) => {
     
@@ -169,7 +170,7 @@ const AuthModal = ({authModalVisible, setAuthModalVisible, setIsAuth, setUser, s
                             event={() => {
                                 setAuthModalVisible(false)
                             }}
-                            img={'./svg/close.svg'}
+                            img={'./svg/x_blue.svg'}
                         />
                     </div>
                     {authSteps &&
@@ -205,7 +206,9 @@ const AuthModal = ({authModalVisible, setAuthModalVisible, setIsAuth, setUser, s
                                 <span className={styles.title}>
                                     Подтверждение почты
                                 </span>
-                                <FormPair label={'На Вашу почту было отправлено письмо с кодом, введите его здесь'} type={'text'} event={(e) => {setInlineCode(e.target.value)}} value={inlineCode} element={'input'}/>
+                                <div className={styles.span}>На Вашу почту было отправлено письмо с кодом, введите его здесь</div>
+                                <BigInput type={'text'} event={(e) => {setInlineCode(e.target.value)}} value={inlineCode}/>
+                                {/* <FormPair label={'На Вашу почту было отправлено письмо с кодом, введите его здесь'} type={'text'} event={(e) => {setInlineCode(e.target.value)}} value={inlineCode} element={'input'}/> */}
                             </div>
                         </>
                     }
@@ -222,7 +225,7 @@ const AuthModal = ({authModalVisible, setAuthModalVisible, setIsAuth, setUser, s
                                     }}
                                 />  
                             </div>
-                            <div className={styles.buttonWrapper2}>
+                            {/* <div className={styles.buttonWrapper2}>
                                 <RegularButton 
                                     text={'Войти через Google'}
                                     type={'grey'}
@@ -230,7 +233,7 @@ const AuthModal = ({authModalVisible, setAuthModalVisible, setIsAuth, setUser, s
                                         handleLogin()
                                     }}
                                 />  
-                            </div>
+                            </div> */}
                             <div className={styles.buttonWrapper}>
                                 <RegularButton 
                                     text={'Регистрация'}

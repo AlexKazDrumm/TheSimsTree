@@ -1,13 +1,14 @@
 import React, { useRef, useEffect, useState } from "react";
-import styles from './DeleteProfileModal.module.css';
+import styles from './ChangeEmailModal.module.css';
 import CloseButton from "../../UI/CloseButton/CloseButton";
+import FormPair from "../../FormPair/FormPair";
 import RegularButton from "../../UI/RegularButton/RegularButton";
-import { deleteUserAccount } from "../../../features/features";
-import { useRouter } from 'next/router';
+import { changeEmail } from "../../../features/features";
 
-const DeleteProfileModal = ({deleteProfileModalVisible, setDeleteProfileModalVisible}) => {
+const ChangeEmailModal = ({changeEmailModalVisible, setChangeEmailModalVisible}) => {
     const modalRef = useRef(null);
-    const router = useRouter();
+
+    const [newEmail, setNewEmail] = useState('')
 
     useEffect(() => {
         document.addEventListener("mousedown", handleClickOutside);
@@ -18,29 +19,26 @@ const DeleteProfileModal = ({deleteProfileModalVisible, setDeleteProfileModalVis
 
     const handleClickOutside = (event) => {
         if (modalRef.current && !modalRef.current.contains(event.target)) {
-            setDeleteProfileModalVisible(false);
+            setChangeEmailModalVisible(false);
         }
     };
 
-    const handleDelete = async () => {
+    const handleSend = async () => {
         const token = localStorage.getItem('authToken');
 
-        if (await deleteUserAccount(token)) {
-            localStorage.removeItem('authToken');
-            router.push('/')
-        }
+        
 
-        setDeleteProfileModalVisible(false);
+        setChangeEmailModalVisible(false);
     };
 
     return (
         <>
-            {deleteProfileModalVisible && <div className={styles.modalBackground}></div>}
+            {changeEmailModalVisible && <div className={styles.modalBackground}></div>}
             <div
                 className={styles.modalWrapper}
                 style={
                     {
-                    ...(deleteProfileModalVisible ? { display: "flex" } : { display: "none" }),
+                    ...(changeEmailModalVisible ? { display: "flex" } : { display: "none" }),
                     }
                 }
                 ref={modalRef}
@@ -49,27 +47,25 @@ const DeleteProfileModal = ({deleteProfileModalVisible, setDeleteProfileModalVis
                     <div className={styles.closeBtnRow}>
                         <CloseButton 
                             event={() => {
-                                setDeleteProfileModalVisible(false)
+                                setChangeEmailModalVisible(false)
                             }}
                             img={'./svg/x_blue.svg'}
                         />
                     </div>
                     <div className={styles.formBlock}>
                         <span className={styles.title}>
-                            Вы уверены?
+                            Смена почты
                         </span>
-                        <span>
-                            Нажав "Удалить профиль", вы потеряете доступ к древу и созданному контенту.
-                        </span>
+                        <FormPair label={'Введите новую почту'} type={'email'} event={(e) => {setNewEmail(e.target.value)}} value={newEmail} element={'input'}/>
                     </div>
                 </div>
                 <div className={styles.greyBlock}>
                     <div className={styles.buttonWrapper}>
                         <RegularButton 
-                            text={'Удалить профиль'}
+                            text={'Сменить почту'}
                             type={'grey'}
                             event={() => {
-                                handleDelete()
+                                handleSend()
                             }}
                         />  
                     </div>
@@ -79,4 +75,4 @@ const DeleteProfileModal = ({deleteProfileModalVisible, setDeleteProfileModalVis
     )
 }
 
-export default DeleteProfileModal
+export default ChangeEmailModal

@@ -1,0 +1,14 @@
+.input {
+    border-radius: 7px;
+    border: 1px solid #C4C4C4;
+    padding: 9px;
+    text-align: center; 
+    outline: none; 
+    box-shadow: none; 
+    font-size: 20px;
+  }
+  
+  .input:focus, .input:active {
+    border-color: #C4C4C4;
+    box-shadow: none;
+  }

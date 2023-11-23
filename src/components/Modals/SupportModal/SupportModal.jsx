@@ -3,7 +3,8 @@ import styles from './SupportModal.module.css';
 import CloseButton from "../../UI/CloseButton/CloseButton";
 import FormPair from "../../FormPair/FormPair";
 import RegularButton from "../../UI/RegularButton/RegularButton";
-import { sendFeedback } from "../../../features/features";
+import Captcha from "../../Captcha/Captcha";
+import { sendFeedback, fetchRandomCaptcha } from "../../../features/features";
 
 const SupportModal = ({supportModalVisible, setSupportModalVisible, alerts, setAlerts}) => {
     const modalRef = useRef(null);
@@ -11,10 +12,9 @@ const SupportModal = ({supportModalVisible, setSupportModalVisible, alerts, setA
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [message, setMessage] = useState('')
-    const [imageFile, setImageFile] = useState(null);
-    const [imageInfo, setImageInfo] = useState('');
 
     const [files, setFiles] = useState([]);
+    const [confirmCaptcha, setConfirmCaptcha] = useState(false)
 
     const fileInputRef = useRef()
 
@@ -65,6 +65,7 @@ const SupportModal = ({supportModalVisible, setSupportModalVisible, alerts, setA
         }
 
         setSupportModalVisible(false);
+        setConfirmCaptcha(false)
     }
 
     return (
@@ -78,36 +79,43 @@ const SupportModal = ({supportModalVisible, setSupportModalVisible, alerts, setA
                     }
                 }
                 ref={modalRef}
-            >
+            ><div className={styles.scrollableContainer}>
                 <div className={styles.whiteBlock}>
                     <div className={styles.closeBtnRow}>
                         <CloseButton 
                             event={() => {
                                 setSupportModalVisible(false)
                             }}
-                            img={'./svg/close.svg'}
+                            img={'./svg/x_blue.svg'}
                         />
                     </div>
-                    <div className={styles.formBlock}>
-                        <span className={styles.title}>
-                            Напиши нам
-                        </span>
-                        <FormPair label={'Имя'} type={'text'} event={(e) => {setName(e.target.value)}} value={name} element={'input'}/>
-                        <FormPair label={'E-mail'} type={'text'} event={(e) => {setEmail(e.target.value)}} value={email} element={'input'} />
-                        <FormPair label={'Сообщение'} type={'text'} event={(e) => {setMessage(e.target.value)}} value={message} element={'textarea'} />
-                        <div className={styles.sendImageBlock}>
-                            <input type="file" multiple onChange={handleImageChange} style={{ display: 'none' }} ref={fileInputRef} />
-                            <span className={styles.linkButton} onClick={() => fileInputRef.current && fileInputRef.current.click()}>
-                                Загрузить фото
+                    
+                        <div className={styles.formBlock}>
+                            <span className={styles.title}>
+                                Напиши нам
                             </span>
-                            <div style={{display: 'flex', flexDirection: 'column'}}>
-                            {files.map((file, index) => (
-                                <div key={index}>
-                                    <span>{file.name}</span>
-                                    <span onClick={() => handleRemoveFile(file.name)} style={{color: 'red'}}>X</span>
+                            <FormPair label={'Имя'} type={'text'} event={(e) => {setName(e.target.value)}} value={name} element={'input'}/>
+                            <FormPair label={'E-mail'} type={'text'} event={(e) => {setEmail(e.target.value)}} value={email} element={'input'} />
+                            <FormPair label={'Сообщение'} type={'text'} event={(e) => {setMessage(e.target.value)}} value={message} element={'textarea'} />
+                            <div className={styles.sendImageBlock}>
+                                <input type="file" multiple onChange={handleImageChange} style={{ display: 'none' }} ref={fileInputRef} />
+                                <span className={styles.linkButton} onClick={() => fileInputRef.current && fileInputRef.current.click()}>
+                                    Загрузить фото
+                                </span>
+                                <div style={{display: 'flex', flexDirection: 'column'}}>
+                                {files.map((file, index) => (
+                                    <div key={index}>
+                                        <span>{file.name}</span>
+                                        <span onClick={() => handleRemoveFile(file.name)} style={{color: 'red'}}>X</span>
+                                    </div>
+                                ))}
                                 </div>
-                            ))}
                             </div>
+                        </div>
+                        <div className={styles.captchaContainer}>
+                            {name && email && message &&
+                                <Captcha confirmCaptcha={confirmCaptcha} setConfirmCaptcha={setConfirmCaptcha}/>
+                            }
                         </div>
                     </div>
                 </div>
@@ -119,7 +127,8 @@ const SupportModal = ({supportModalVisible, setSupportModalVisible, alerts, setA
                             event={() => {
                                 handleSend()
                             }}
-                        />  
+                            disabled={!confirmCaptcha}
+                        /> 
                     </div>
                 </div>
             </div>

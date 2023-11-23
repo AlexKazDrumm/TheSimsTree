@@ -10,7 +10,10 @@ const LeftBar = ({ selectedComponent, setSelectedComponent, setLeftMenuClick, us
   const [supportModalVisible, setSupportModalVisible] = useState(false)
   
   const formStyle = {
-    width: `${slimMode ? 'auto' : '20%'}`
+    flex: slimMode ? "0 0 auto" : "0 0 20%",
+    height: '100vh', // Установка высоты в 100% видимой части экрана
+    position: 'sticky', // Зафиксировать позицию
+    top: 0 // Закрепить сверху
   }
 
   const router = useRouter();
@@ -29,7 +32,7 @@ const LeftBar = ({ selectedComponent, setSelectedComponent, setLeftMenuClick, us
             <div className={styles.ownerMData} style={slimMode?{justifyContent: 'center'}:{justifyContent: 'flex-start'}}> 
               <div className={styles.avatar} style={slimMode?{marginRight:'0px'}:{marginRight:'12px'}}>
                 {user?.avatar ? 
-                  <img src={`${globals.productionServerDomain}/file/${user.avatar}`} />:
+                  <img onError={(e)=>{ e.target.onerror = null; e.target.src='./svg/user_master_avatar.svg'; }}  src={`${globals.productionServerDomain}/file/${user.avatar}`} />:
                   <img src='./svg/user_master_avatar.svg' />
                 }
               </div>

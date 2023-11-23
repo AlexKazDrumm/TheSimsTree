@@ -2,8 +2,10 @@ import React, { useState, useRef, useEffect } from "react";
 import AvatarEditor from 'react-avatar-editor';
 import styles from './Profile.module.css'
 import RegularButton from '../../../components/UI/RegularButton/RegularButton'
+import CabinetInput from "../../../components/UI/CabinetInput/CabinetInput";
 import TitleBlock from '../../../components/UI/TitleBlock/TitleBlock'
-import RegularInput from "../../../components/UI/RegularInput/RegularInput";
+import InfoModal from "../../../components/Modals/InfoModal/InfoModal";
+import ChangeEmailModal from "../../../components/Modals/ChangeEmailModal/ChangeEmailModal";
 import { updateAvatar, deleteAvatar, updateUserData } from "../../../features/features";
 import globals from "../../../globals";
 import ChangePasswordModal from "../../../components/Modals/ChangePasswordModal/ChangePasswordModal";
@@ -16,6 +18,11 @@ const Profile = ({user}) => {
     const [email, setEmail] = useState(user?.email)
     const [changePasswordModalVisible, setChangePasswordModalVisible] = useState(false)
     const [deleteProfileModalVisible, setDeleteProfileModalVisible] = useState(false)
+    const [infoModalVisible, setInfoModalVisible] = useState(false)
+    const [changeEmailModalVisible, setChangeEmailModalVisible] = useState(false)
+
+    const [infoTitle, setInfoTitle] = useState('')
+    const [infoText, setInfoText] = useState('')
 
     const [image, setImage] = useState(null);
     const [editor, setEditor] = useState(null);
@@ -55,8 +62,6 @@ const Profile = ({user}) => {
 
     const fileInputRef = useRef();
 
-
-
     const handleAvatarDelete = async () => {
         const token = localStorage.getItem('authToken');
         
@@ -66,18 +71,24 @@ const Profile = ({user}) => {
         }
     };
 
-    const updateSingleUserData = async (key, value) => {
+    const handleUpdateUserData = async () => {
         const token = localStorage.getItem('authToken');
         const updatedUserData = {
-            login: user.login,
-            name: user.name,
-            surname: user.surname,
-            email: user.email,
-            [key]: value,
+            login,
+            name,
+            surname,
         };
         
-        await updateUserData(token, updatedUserData);
-        // Обновление состояния пользователя после запроса
+        const isUpdated = await updateUserData(token, updatedUserData);
+    
+        if (isUpdated) {
+            setInfoTitle('Поздравляем!');
+            setInfoText('Ваши изменения успешно сохранены.');
+            setInfoModalVisible(true);
+        } else {
+            // Обработка неудачного обновления данных
+            // Например, отображение сообщения об ошибке
+        }
     };
 
     const handleLoginChange = (event) => {
@@ -127,6 +138,8 @@ const Profile = ({user}) => {
             )}
             {changePasswordModalVisible && <ChangePasswordModal changePasswordModalVisible={changePasswordModalVisible} setChangePasswordModalVisible={setChangePasswordModalVisible}/>}
             {deleteProfileModalVisible && <DeleteProfileModal deleteProfileModalVisible={deleteProfileModalVisible} setDeleteProfileModalVisible={setDeleteProfileModalVisible} />}
+            {infoModalVisible && <InfoModal title={infoTitle} text={infoText} infoModalVisible={infoModalVisible} setInfoModalVisible={setInfoModalVisible} /> }
+            {changeEmailModalVisible && <ChangeEmailModal changeEmailModalVisible={changeEmailModalVisible} setChangeEmailModalVisible={setChangeEmailModalVisible}/>}
             <div className={styles.marginWrapper}>
                 <TitleBlock text='Личный кабинет' />
             </div>
@@ -134,7 +147,7 @@ const Profile = ({user}) => {
                 <div className={styles.logoBlock}>
                     <div className={styles.avatar}>
                         {user?.avatar ? 
-                                <img src={`${globals.productionServerDomain}/file/${user.avatar}`} alt="Avatar" /> :
+                                <img src={`${globals.productionServerDomain}/file/${user.avatar}`} alt="Avatar" onError={(e)=>{ e.target.onerror = null; e.target.src='./svg/user_master_avatar.svg'; }} /> :
                                 <img src='./svg/user_master_avatar.svg' alt="Default Avatar" />
                         }
                     </div>
@@ -155,65 +168,37 @@ const Profile = ({user}) => {
                 </div>
             </div>
             <div className={styles.marginWrapper}>
-                <div className={styles.table}>
-                    <div className={styles.row}>
-                        <div className={styles.cell}>
-                            <div className={styles.spanLabel}>Логин</div>
-                            <div className={styles.inputWrapper}>
-                                <RegularInput type="text" value={login} event={handleLoginChange} />
-                                {login !== user?.login && (
-                                    <img className={styles.mark} src='./svg/mark.svg' onClick={() => updateSingleUserData('login', login)} />
-                                )}
-                            </div>
-                        </div>
-                        <div className={styles.cell}>
-                            <div className={styles.spanLabel}>Почта</div>
-                            <div className={styles.inputWrapper}>
-                                <RegularInput type="email" value={email} event={handleEmailChange} />
-                                {email !== user?.email && (
-                                    <img className={styles.mark} src='./svg/mark.svg' onClick={() => updateSingleUserData('email', email)}/>
-                                )}
-                            </div>
-                        </div>
-                    </div>
-                    <div className={styles.row}>
-                        <div className={styles.cell}>
-                            <div className={styles.spanLabel}>Имя</div>
-                            <div className={styles.inputWrapper}>
-                                <RegularInput type="text" value={name} event={handleNameChange} />
-                                {name !== user?.name && (
-                                    <img className={styles.mark} src='./svg/mark.svg' onClick={() => updateSingleUserData('name', name)}/>
-                                )}
-                            </div>
-                        </div>
-                        <div className={styles.cell}>
-                            <div className={styles.spanLabel}>Фамилия</div>
-                            <div className={styles.inputWrapper}>
-                                <RegularInput type="text" value={surname} event={handleSurnameChange} />
-                                {surname !== user?.surname && (
-                                    <img className={styles.mark} src='./svg/mark.svg' onClick={() => updateSingleUserData('surname', surname)}/>
-                                )}
-                            </div>
-                        </div>
-                    </div>
-                    <div className={styles.row}>
-                    <div className={styles.cell}>
-                        <div className={styles.linkButtonContainer}>
-                            <span className={styles.linkButton} onClick={() => setChangePasswordModalVisible(true)}>
-                                Сменить пароль
-                            </span>
-                        </div>
-                    </div>
-                    <div className={styles.cell}>
-                        <div className={styles.linkButtonContainer}>
-                            <span className={styles.linkButton} onClick={() => setDeleteProfileModalVisible(true)}>
-                                Удалить профиль
-                            </span>
-                        </div>
-                    </div>
-                    </div>
+                <div className={styles.spanLabel}>Логин</div>
+                <div className={styles.inputWrapper}>
+                    <CabinetInput type="text" value={login} event={handleLoginChange} />
                 </div>
+                <div className={styles.spanLabel}>Имя</div>
+                <div className={styles.inputWrapper}>
+                    <CabinetInput type="text" value={name} event={handleNameChange} />
+                </div>
+                <div className={styles.spanLabel}>Фамилия</div>
+                <div className={styles.inputWrapper}>
+                    <CabinetInput type="text" value={surname} event={handleSurnameChange} />
+                </div>
+                <div className={styles.spanLabel}>Почта</div>
+                <div className={styles.inputWrapper}>
+                    <CabinetInput type="email" value={email} event={handleEmailChange} disabled={true}/>
+                </div>
+                <span className={styles.linkButton} onClick={() => setChangeEmailModalVisible(true)}>
+                    Сменить почту
+                </span>
             </div>
+            <div className={styles.bottomButtons}>
+                <div className={styles.leftBlock}>
+                    <span className={styles.linkButton} onClick={() => setChangePasswordModalVisible(true)}>
+                        Сменить пароль
+                    </span>
+                    <span className={styles.linkButton} onClick={() => setDeleteProfileModalVisible(true)}>
+                        Удалить профиль
+                    </span>
+                </div>
+                <RegularButton type='grey' text='Сохранить' event={handleUpdateUserData} />
+            </div>        
         </div>
     )
 }

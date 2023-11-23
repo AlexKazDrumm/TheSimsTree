@@ -47,3 +47,17 @@
 .button:active {
     transform: scale(0.98);
 }
+
+.button:disabled {
+    cursor: default; /* Изменение курсора, чтобы показать, что кнопка неактивна */
+    opacity: 0.5; /* Сделать кнопку полупрозрачной */
+    box-shadow: none; /* Убрать тень, чтобы кнопка выглядела "плоской" */
+}
+
+.button:disabled::before {
+    opacity: 0.5; /* Также сделать фон полупрозрачным */
+}
+
+.button:disabled:hover::after {
+    opacity: 0; /* Убрать эффект наведения */
+}

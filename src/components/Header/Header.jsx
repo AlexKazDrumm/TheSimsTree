@@ -36,6 +36,7 @@ const Header = ({isAuth, setIsAuth, setAuthModalVisible, user}) => {
                                 <img 
                                 className={styles.userIco}
                                 src={user?.avatar ? `${globals.productionServerDomain}/file/${user.avatar}` : './svg/user_master_avatar.svg'}
+                                onError={(e)=>{ e.target.onerror = null; e.target.src='./svg/user_master_avatar.svg'; }} 
                                 onClick={() => setIsDropdownVisible(!isDropdownVisible)} 
                             />
                             {/* <span style={{color: 'white'}}>{user?.login}</span> */}
@@ -46,7 +47,7 @@ const Header = ({isAuth, setIsAuth, setAuthModalVisible, user}) => {
                             
                             {isDropdownVisible && (
                                 <div ref={dropdownRef} className={styles.dropdownMenu}>
-                                    <div className={styles.arrow}></div>
+                                    {/* <div className={styles.arrow}></div> */}
                                     <div className={styles.list}>
                                         <div 
                                             className={styles.link}

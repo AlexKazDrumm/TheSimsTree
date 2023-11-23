@@ -88,3 +88,12 @@
 	color: #182d38;
 	cursor: pointer;
 }
+
+.span {
+	width: 100%;
+	font-size: 15px;
+    font-family: 'Gotham Medium';
+    color: #182d38;
+    margin-bottom: 10px;
+	text-align: start;
+}

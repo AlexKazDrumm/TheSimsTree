@@ -7,6 +7,7 @@ import MyTrees from '../../src/processes/CabinetPageWay/MyTrees/MyTrees';
 import CreateTree from '../../src/processes/CabinetPageWay/CreateTree/CreateTree';
 import Profile from '../../src/processes/CabinetPageWay/Profile/Profile';
 import Tools from '../../src/processes/CabinetPageWay/Tools/Tools';
+import PlumTrees from '../../src/processes/CabinetPageWay/PlumTrees/PlumTrees';
 
 const Cabinet = observer(({ User }) => {
     const [selectedComponent, setSelectedComponent] = useState(1);
@@ -45,6 +46,8 @@ const Cabinet = observer(({ User }) => {
                 return <Tools />;
             case 4:
                 return <CreateTree />;
+            case 5:
+                return <PlumTrees />
             case 6:
                 return <MyTrees />;
             case 7:
