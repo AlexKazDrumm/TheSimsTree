@@ -1,0 +1,29 @@
+.container {
+    position: absolute;
+    right: 0;
+    top: 30%
+}
+
+.group {
+    border-radius: 7.778px 0px 0px 7.778px;
+    background: #FFF;
+    box-shadow: 0px 3.11111px 4.66667px 0px rgba(0, 0, 0, 0.15);
+}
+
+.up, .down, .left, .space {
+    width: 48px;
+    height: 48px;
+}
+
+.up, .down, .left {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+}
+
+.up, .left {
+    border: 1px solid #F1F1F1;
+}
