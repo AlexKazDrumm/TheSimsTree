@@ -5,6 +5,7 @@ import FormPair from "../../FormPair/FormPair";
 import RegularButton from "../../UI/RegularButton/RegularButton";
 import { sendVerificationCode, changeEmail } from "../../../features/features";
 import BigInput from "../../UI/BigInput/BigInput";
+import CabinetInput from "../../UI/CabinetInput/CabinetInput";
 
 const ChangeEmailModal = ({email, changeEmailModalVisible, setChangeEmailModalVisible, setInfoModalVisible, setInfoTitle, setInfoText}) => {
     const modalRef = useRef(null);
@@ -103,7 +104,10 @@ const ChangeEmailModal = ({email, changeEmailModalVisible, setChangeEmailModalVi
                             <span className={styles.title}>
                                 Смена почты
                             </span>
-                            <FormPair label={'Введите новую почту'} type={'email'} event={(e) => setNewEmail(e.target.value)} value={newEmail} element={'input'}/>
+                            <span className={styles.emailMessage}>
+                                Введите новую почту
+                            </span>
+                            <CabinetInput type={'email'} event={(e) => setNewEmail(e.target.value)} value={newEmail} white={true} />
                         </div>
                     )}
                 </div>

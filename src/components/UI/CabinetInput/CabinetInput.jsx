@@ -1,10 +1,10 @@
 import React from "react";
 import styles from './CabinetInput.module.css'
 
-const CabinetInput = ({event, type, value, disabled}) => {
+const CabinetInput = ({event, type, value, disabled, white}) => {
 
     return (
-        <input type={type ? type : 'text'} className={styles.input} onChange={event} value={value} disabled={disabled}/>
+        <input style={white?{background: '#FFF'}:{background: '#EFEFEF'}} type={type ? type : 'text'} className={styles.input} onChange={event} value={value} disabled={disabled}/>
     )
 }
 

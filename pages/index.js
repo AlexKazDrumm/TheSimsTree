@@ -5,6 +5,7 @@ import Notifier from "../src/components/Notifier/Notifier";
 import NavbarTop from "../src/components/NavbarTop/NavbarTop";
 import AuthModal from "../src/components/Modals/AuthModal/AuthModal";
 import SupportModal from "../src/components/Modals/SupportModal/SupportModal";
+import RestorePasswordModal from "../src/components/Modals/RestorePasswordModal/RestorePasswordModal";
 import InfoModal from "../src/components/Modals/InfoModal/InfoModal";
 import Footer from "../src/components/Footer/Footer";
 import Lending from "../src/processes/MainPageWay/Lending/Lending"
@@ -20,6 +21,7 @@ function MainPage({ User }) {
     const [authModalVisible, setAuthModalVisible] = useState(false);
     const [supportModalVisible, setSupportModalVisible] = useState(false)
     const [infoModalVisible, setInfoModalVisible] = useState(false)
+    const [passwordRecoveryModalVisible, setPasswordRecoveryModalVisible] = useState(false)
     const [selectedBlock, setSelectedBlock] = useState(1)
     const [user, setUser] = useState()
 
@@ -69,6 +71,7 @@ function MainPage({ User }) {
                     setInfoImg={setInfoImg}
                     setInfoTitle={setInfoTitle}
                     setInfoText={setInfoText}
+                    setPasswordRecoveryModalVisible={setPasswordRecoveryModalVisible}
                 />
             }
             {supportModalVisible && 
@@ -86,6 +89,15 @@ function MainPage({ User }) {
                     img={infoImg}
                     title={infoTitle}
                     text={infoText}
+                />
+            }
+            {passwordRecoveryModalVisible && 
+                <RestorePasswordModal 
+                    passwordRecoveryModalVisible={passwordRecoveryModalVisible}
+                    setPasswordRecoveryModalVisible={setPasswordRecoveryModalVisible}
+                    setInfoModalVisible={setInfoModalVisible}
+                    setInfoTitle={setInfoTitle}
+                    setInfoText={setInfoText}
                 />
             }
             <Notifier alerts={alerts} />

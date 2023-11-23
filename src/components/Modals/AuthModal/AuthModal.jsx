@@ -8,7 +8,7 @@ import axios from 'axios'
 import User from "../../../entities/User";
 import BigInput from "../../UI/BigInput/BigInput";
 
-const AuthModal = ({authModalVisible, setAuthModalVisible, setIsAuth, setUser, setInfoModalVisible, setInfoImg, setInfoTitle, setInfoText}) => {
+const AuthModal = ({authModalVisible, setAuthModalVisible, setIsAuth, setUser, setInfoModalVisible, setInfoImg, setInfoTitle, setInfoText, setPasswordRecoveryModalVisible}) => {
     
     const [authSteps, setAuthSteps] = useState(true)
     const [regSteps, setRegSteps] = useState(false)
@@ -181,7 +181,10 @@ const AuthModal = ({authModalVisible, setAuthModalVisible, setIsAuth, setUser, s
                                 </span>
                                 <FormPair label={'Логин или E-mail'} type={'text'} event={(e) => {setLogin(e.target.value)}} value={login} element={'input'} error={errors && !login && !email?'Введите логин или E-mail':null}/>
                                 <FormPair label={'Пароль'} type={'password'} event={(e) => {setPassword(e.target.value)}} value={password} element={'input'} error={errors && !password?'Введите пароль!':null} />
-                                <span className={styles.rememberPassword}>Забыли пароль?</span>
+                                <span className={styles.rememberPassword} onClick={() => {
+                                    setAuthModalVisible(false)
+                                    setPasswordRecoveryModalVisible(true)
+                                }}>Забыли пароль?</span>
                             </div>
                         </>
                     }

@@ -210,3 +210,63 @@ export const changeEmail = async (token, newEmail, code) => {
         return false;
     }
 };
+
+export const sendRecoveryCode = async (email) => {
+    try {
+        const response = await axios.post(`${globals.productionServerDomain}/sendRecoveryCode`, {
+            email
+        });
+
+        if (response.data && response.data.success) {
+            console.log('Recovery code sent successfully:', response.data);
+            return true;
+        } else {
+            console.error('Failed to send recovery code:', response.data.message);
+            return false;
+        }
+    } catch (error) {
+        console.error('Error sending recovery code:', error);
+        return false;
+    }
+};
+
+export const verifyRecoveryCode = async (email, code) => {
+    try {
+        const response = await axios.post(`${globals.productionServerDomain}/verifyRecoveryCode`, {
+            email,
+            code
+        });
+
+        if (response.data && response.data.success) {
+            console.log('Recovery code verified successfully:', response.data);
+            return true;
+        } else {
+            console.error('Failed to verify recovery code:', response.data.message);
+            return false;
+        }
+    } catch (error) {
+        console.error('Error verifying recovery code:', error);
+        return false;
+    }
+};
+
+export const resetPassword = async (email, newPassword, code) => {
+    try {
+        const response = await axios.post(`${globals.productionServerDomain}/resetPassword`, {
+            email,
+            newPassword,
+            code
+        });
+
+        if (response.data && response.data.success) {
+            console.log('Password reset successfully:', response.data);
+            return true;
+        } else {
+            console.error('Failed to reset password:', response.data.message);
+            return false;
+        }
+    } catch (error) {
+        console.error('Error resetting password:', error);
+        return false;
+    }
+};

@@ -3,6 +3,7 @@ import styles from './ChangePasswordModal.module.css';
 import CloseButton from "../../UI/CloseButton/CloseButton";
 import FormPair from "../../FormPair/FormPair";
 import RegularButton from "../../UI/RegularButton/RegularButton";
+import CabinetInput from "../../UI/CabinetInput/CabinetInput";
 import BigInput from "../../UI/BigInput/BigInput";
 import { sendVerificationCode, changePassword } from "../../../features/features";
 
@@ -101,9 +102,18 @@ const ChangePasswordModal = ({email, changePasswordModalVisible, setChangePasswo
                             <span className={styles.title}>
                                 Смена пароля
                             </span>
-                            <FormPair label={'Старый пароль'} type={'password'} event={(e) => {setOldPassword(e.target.value)}} value={oldPassword} element={'input'}/>
-                            <FormPair label={'Новый пароль'} type={'password'} event={(e) => {setNewPassword(e.target.value)}} value={newPassword} element={'input'} />
-                            <FormPair label={'Подтвердите новый пароль'} type={'password'} event={(e) => {setRepeatPassword(e.target.value)}} value={repeatPassword} element={'input'} />
+                            <span className={styles.emailMessage}>
+                                Старый пароль
+                            </span>
+                            <CabinetInput type={'password'} event={(e) => {setOldPassword(e.target.value)}} value={oldPassword} white={true} />
+                            <span className={styles.emailMessage}>
+                                Новый пароль
+                            </span>
+                            <CabinetInput type={'password'} event={(e) => {setNewPassword(e.target.value)}} value={newPassword} white={true} />
+                            <span className={styles.emailMessage}>
+                                Подтвердите новый пароль
+                            </span>
+                            <CabinetInput type={'password'} event={(e) => {setRepeatPassword(e.target.value)}} value={repeatPassword} white={true} />
                         </div>
                     )}
                 </div>
