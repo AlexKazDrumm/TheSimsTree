@@ -260,7 +260,7 @@ const AuthModal = ({authModalVisible, setAuthModalVisible, setIsAuth, setUser, s
                                     }}
                                 />  
                             </div>
-                            <div className={styles.buttonWrapper2}>
+                            {/* <div className={styles.buttonWrapper2}>
                                 <RegularButton 
                                     text={'Войти через Google'}
                                     type={'grey'}
@@ -268,7 +268,7 @@ const AuthModal = ({authModalVisible, setAuthModalVisible, setIsAuth, setUser, s
                                         handleLogin()
                                     }}
                                 />  
-                            </div>
+                            </div> */}
                             <div className={styles.buttonWrapper}>
                                 <RegularButton 
                                     text={'Вход'}
