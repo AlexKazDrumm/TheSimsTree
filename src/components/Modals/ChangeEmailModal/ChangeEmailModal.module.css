@@ -98,6 +98,9 @@
 
 .emailMessage {
     margin: 15px 0px 15px 0px; /* Отступ сверху */
-    text-align: justify; /* Выравнивание текста по ширине */
-    /* Другие стили, если нужно */
+    text-align: justify; 
+	font-size: 15px;
+	font-family: 'Gotham Medium';
+	color: #182d38;
+	width: 100%;
 }
