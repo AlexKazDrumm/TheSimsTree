@@ -1,11 +1,22 @@
 import React from "react";
 import styles from './BigInput.module.css'
 
-const BigInput = ({event, type, value, disabled}) => {
+const BigInput = ({ event, type, value, disabled, error }) => {
+    const inputStyles = error ? `${styles.input} ${styles.error}` : styles.input;
 
     return (
-        <input type={type ? type : 'text'} className={styles.input} onChange={event} value={value} disabled={disabled}/>
+        <div style={{display: 'flex', flexDirection: 'column'}}>
+            <input 
+                type={type ? type : 'text'}
+                className={inputStyles}
+                onChange={event}
+                value={value}
+                disabled={disabled}
+                style={error ? { borderColor: '#FF7070' } : {}}
+            />
+            {error && <span style={{ color: '#FF7070' }}>{error}</span>}
+        </div>
     )
 }
 
-export default BigInput
+export default BigInput;

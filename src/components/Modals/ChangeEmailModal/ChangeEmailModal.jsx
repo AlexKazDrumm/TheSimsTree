@@ -3,12 +3,16 @@ import styles from './ChangeEmailModal.module.css';
 import CloseButton from "../../UI/CloseButton/CloseButton";
 import FormPair from "../../FormPair/FormPair";
 import RegularButton from "../../UI/RegularButton/RegularButton";
-import { changeEmail } from "../../../features/features";
+import { sendVerificationCode, changeEmail } from "../../../features/features";
+import BigInput from "../../UI/BigInput/BigInput";
 
-const ChangeEmailModal = ({changeEmailModalVisible, setChangeEmailModalVisible}) => {
+const ChangeEmailModal = ({email, changeEmailModalVisible, setChangeEmailModalVisible, setInfoModalVisible, setInfoTitle, setInfoText}) => {
     const modalRef = useRef(null);
 
     const [newEmail, setNewEmail] = useState('')
+    const [verificationCode, setVerificationCode] = useState('');
+    const [isVerificationSent, setIsVerificationSent] = useState(false);
+    const [verificationError, setVerificationError] = useState('');
 
     useEffect(() => {
         document.addEventListener("mousedown", handleClickOutside);
@@ -23,51 +27,101 @@ const ChangeEmailModal = ({changeEmailModalVisible, setChangeEmailModalVisible})
         }
     };
 
-    const handleSend = async () => {
+    const handleSendVerificationCode = async () => {
         const token = localStorage.getItem('authToken');
-
-        
-
-        setChangeEmailModalVisible(false);
+        if (newEmail) {
+            const sent = await sendVerificationCode(token, 'Подтверждение смены почты');
+            if (sent) {
+                setIsVerificationSent(true);
+            }
+        }
     };
+
+    const handleChangeEmail = async () => {
+        const token = localStorage.getItem('authToken');
+        if (verificationCode && newEmail) {
+            const emailChanged = await changeEmail(token, newEmail, verificationCode);
+            if (emailChanged) {
+                setChangeEmailModalVisible(false);
+                setInfoTitle('Поздравляем!');
+                setInfoText('Ваша почта успешно обновлена.');
+                setInfoModalVisible(true);
+            } else {
+                setVerificationError('Введён неверный код');
+            }
+        } else {
+            // Обработка случая, когда код или новая почта не введены
+            // Здесь также можно установить сообщение об ошибке
+        }
+    };
+
+    const formatEmail = (email) => {
+        const [localPart, domain] = email.split('@');
+        const hiddenPart = localPart.slice(1, -2).replace(/./g, '*');
+        return `${localPart[0]}${hiddenPart}${localPart.slice(-2)}@${domain}`;
+    };
+
+    const handleChangeVerificationCode = (e) => {
+        setVerificationCode(e.target.value);
+        if (verificationError) {
+            setVerificationError('');
+        }
+    }
 
     return (
         <>
             {changeEmailModalVisible && <div className={styles.modalBackground}></div>}
             <div
                 className={styles.modalWrapper}
-                style={
-                    {
-                    ...(changeEmailModalVisible ? { display: "flex" } : { display: "none" }),
-                    }
-                }
+                style={{...(changeEmailModalVisible ? { display: "flex" } : { display: "none" })}}
                 ref={modalRef}
             >
                 <div className={styles.whiteBlock}>
                     <div className={styles.closeBtnRow}>
                         <CloseButton 
-                            event={() => {
-                                setChangeEmailModalVisible(false)
-                            }}
+                            event={() => setChangeEmailModalVisible(false)}
                             img={'./svg/x_blue.svg'}
                         />
                     </div>
-                    <div className={styles.formBlock}>
-                        <span className={styles.title}>
-                            Смена почты
-                        </span>
-                        <FormPair label={'Введите новую почту'} type={'email'} event={(e) => {setNewEmail(e.target.value)}} value={newEmail} element={'input'}/>
-                    </div>
+                    {isVerificationSent ? (
+                        <div className={styles.formBlock}>
+                            <span className={styles.title}>
+                                Введите код
+                            </span>
+                            <span className={styles.emailMessage}>
+                                Пожалуйста, введите код, который был отправлен на вашу предыдущую почту <b>{formatEmail(email)}</b>
+                            </span>
+                            <BigInput 
+                                type={'text'} 
+                                event={handleChangeVerificationCode} 
+                                value={verificationCode} 
+                                error={verificationError} 
+                            />
+                        </div>
+                    ) : (
+                        <div className={styles.formBlock}>
+                            <span className={styles.title}>
+                                Смена почты
+                            </span>
+                            <FormPair label={'Введите новую почту'} type={'email'} event={(e) => setNewEmail(e.target.value)} value={newEmail} element={'input'}/>
+                        </div>
+                    )}
                 </div>
                 <div className={styles.greyBlock}>
                     <div className={styles.buttonWrapper}>
-                        <RegularButton 
-                            text={'Сменить почту'}
-                            type={'grey'}
-                            event={() => {
-                                handleSend()
-                            }}
-                        />  
+                        {isVerificationSent ? (
+                            <RegularButton 
+                                text={'Готово'}
+                                type={'grey'}
+                                event={handleChangeEmail}
+                            />
+                        ) : (
+                            <RegularButton 
+                                text={'Сменить почту'}
+                                type={'grey'}
+                                event={handleSendVerificationCode}
+                            />
+                        )}
                     </div>
                 </div>
             </div>
@@ -75,4 +129,4 @@ const ChangeEmailModal = ({changeEmailModalVisible, setChangeEmailModalVisible})
     )
 }
 
-export default ChangeEmailModal
+export default ChangeEmailModal;

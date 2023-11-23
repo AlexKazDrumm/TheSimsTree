@@ -66,11 +66,12 @@ export const updateUserData = async (token, userData) => {
     }
 };
 
-export const changePassword = async (token, oldPassword, newPassword) => {
+export const changePassword = async (token, oldPassword, newPassword, code) => {
     try {
         const response = await axios.post(`${globals.productionServerDomain}/changePassword`, {
             oldPassword,
-            newPassword
+            newPassword,
+            code
         }, {
             headers: {
                 Authorization: `Bearer ${token}`
@@ -162,6 +163,50 @@ export const verifyCaptcha = async (captchaText, captchaImage) => {
         }
     } catch (error) {
         console.error('Ошибка при верификации капчи:', error);
+        return false;
+    }
+};
+
+export const sendVerificationCode = async (token, messageTitle) => {
+    try {
+        const response = await axios.post(`${globals.productionServerDomain}/sendVerificationCode`, { messageTitle }, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if (response.data && response.status === 200) {
+            console.log('Верификационный код отправлен:', response.data);
+            return true; 
+        } else {
+            return false;
+        }
+    } catch (error) {
+        console.error('Ошибка при отправке верификационного кода:', error);
+        return false; 
+    }
+};
+
+export const changeEmail = async (token, newEmail, code) => {
+    try {
+        const response = await axios.post(`${globals.productionServerDomain}/changeUserEmail`, { newEmail, code }, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if (response.status === 200) {
+            console.log('Email успешно обновлен');
+            User.setUserData(response.data.userData);
+            return true;
+        } else {
+            console.error('Ошибка при смене email');
+            return false;
+        }
+    } catch (error) {
+        console.error('Ошибка при смене email:', error);
         return false;
     }
 };

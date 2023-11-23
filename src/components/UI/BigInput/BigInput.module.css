@@ -12,3 +12,8 @@
     border-color: #C4C4C4;
     box-shadow: none;
   }
+
+  .input.error {
+    color: #FF7070;
+    border-color: #FF7070;
+}

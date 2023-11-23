@@ -10,7 +10,7 @@ function App({ Component, pageProps }) {
     <Provider {...entities}>
         <Helmet>
           <title>SimsDynastyTree</title>
-          <link rel="icon" type="image/ico" href="/favicon/favicon_32x32.ico" />
+          <link rel="icon" type="image/ico" href="/favicon/favicon_120x120_2.ico" />
         </Helmet>
         <CookiesProvider>
           <Component {...pageProps} />

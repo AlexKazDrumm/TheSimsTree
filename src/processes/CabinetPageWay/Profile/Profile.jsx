@@ -23,7 +23,7 @@ const Profile = ({user}) => {
 
     const [infoTitle, setInfoTitle] = useState('')
     const [infoText, setInfoText] = useState('')
-
+    
     const [image, setImage] = useState(null);
     const [editor, setEditor] = useState(null);
     const [showEditorModal, setShowEditorModal] = useState(false);
@@ -136,10 +136,10 @@ const Profile = ({user}) => {
                     />
                 </div>
             )}
-            {changePasswordModalVisible && <ChangePasswordModal changePasswordModalVisible={changePasswordModalVisible} setChangePasswordModalVisible={setChangePasswordModalVisible}/>}
+            {changePasswordModalVisible && <ChangePasswordModal setInfoModalVisible={setInfoModalVisible} setInfoTitle={setInfoTitle} setInfoText={setInfoText} email={email} changePasswordModalVisible={changePasswordModalVisible} setChangePasswordModalVisible={setChangePasswordModalVisible}/>}
             {deleteProfileModalVisible && <DeleteProfileModal deleteProfileModalVisible={deleteProfileModalVisible} setDeleteProfileModalVisible={setDeleteProfileModalVisible} />}
             {infoModalVisible && <InfoModal title={infoTitle} text={infoText} infoModalVisible={infoModalVisible} setInfoModalVisible={setInfoModalVisible} /> }
-            {changeEmailModalVisible && <ChangeEmailModal changeEmailModalVisible={changeEmailModalVisible} setChangeEmailModalVisible={setChangeEmailModalVisible}/>}
+            {changeEmailModalVisible && <ChangeEmailModal setInfoModalVisible={setInfoModalVisible} setInfoTitle={setInfoTitle} setInfoText={setInfoText} email={email} changeEmailModalVisible={changeEmailModalVisible} setChangeEmailModalVisible={setChangeEmailModalVisible}/>}
             <div className={styles.marginWrapper}>
                 <TitleBlock text='Личный кабинет' />
             </div>
