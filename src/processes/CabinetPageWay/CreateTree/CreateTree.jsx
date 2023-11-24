@@ -7,6 +7,8 @@ import RightBar from "../../../components/RightBar/RightBar";
 const CreateTree = () => {
 
     return(
+        <>
+        <div className={styles.backgroundContainer}></div>
         <div className={styles.container}>
             <div className={styles.marginWrapper}>
                 <TitleBlock text='Название династии' />
@@ -28,6 +30,7 @@ const CreateTree = () => {
                 </div>
             </div>
         </div>
+        </>
     )
 }
 
