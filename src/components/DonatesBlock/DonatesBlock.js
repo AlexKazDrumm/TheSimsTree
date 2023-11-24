@@ -24,7 +24,7 @@ const DonatesBlock = () => {
                     </div>
                 </div>
                 <div className={styles.buttonBlock}>
-                    <RegularButton type={'grey'} text={'Помочь проекту'}/>
+                    <RegularButton type={'grey'} text={'Помочь проекту'} width={'250px'} height={'38px'}/>
                 </div>
             </div>
         </div>

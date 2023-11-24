@@ -30,6 +30,26 @@ const Profile = ({user}) => {
     const [scale, setScale] = useState(1);
     const [borderRadius, setBorderRadius] = useState(0);
 
+    const [isModified, setIsModified] = useState(false);
+
+    useEffect(() => {
+        if (user) {
+            setLogin(user.login);
+            setName(user.name);
+            setSurname(user.surname);
+            setEmail(user.email);
+        }
+    }, [user]);
+
+    useEffect(() => {
+        // Проверяем, изменились ли значения
+        setIsModified(
+            login !== user?.login || 
+            name !== user?.name || 
+            surname !== user?.surname
+        );
+    }, [login, name, surname, user]);
+
     const handleNewImage = e => {
         setImage(e.target.files[0]);
         setShowEditorModal(true); // Открыть модальное окно редактора
@@ -133,6 +153,8 @@ const Profile = ({user}) => {
                         type='grey' 
                         text='Сохранить' 
                         event={handleAvatarUpload}
+                        width={'166px'}
+                        height={'28px'}
                     />
                 </div>
             )}
@@ -140,7 +162,7 @@ const Profile = ({user}) => {
             {deleteProfileModalVisible && <DeleteProfileModal deleteProfileModalVisible={deleteProfileModalVisible} setDeleteProfileModalVisible={setDeleteProfileModalVisible} />}
             {infoModalVisible && <InfoModal title={infoTitle} text={infoText} infoModalVisible={infoModalVisible} setInfoModalVisible={setInfoModalVisible} /> }
             {changeEmailModalVisible && <ChangeEmailModal setInfoModalVisible={setInfoModalVisible} setInfoTitle={setInfoTitle} setInfoText={setInfoText} email={email} changeEmailModalVisible={changeEmailModalVisible} setChangeEmailModalVisible={setChangeEmailModalVisible}/>}
-            <div className={styles.marginWrapper}>
+            <div className={styles.marginWrapperTop}>
                 <TitleBlock text='Личный кабинет' />
             </div>
             <div className={styles.marginWrapper}>
@@ -162,42 +184,56 @@ const Profile = ({user}) => {
                     type='grey' 
                     text='Загрузить' 
                     event={() => fileInputRef.current && fileInputRef.current.click()}
+                    width={'166px'}
+                    height={'28px'}
                 />
-                <RegularButton type='grey' text='Удалить' event={handleAvatarDelete} />
+                <div style={{marginBottom: '28px'}}></div>
+                <RegularButton 
+                    type='grey' 
+                    text='Удалить' 
+                    event={handleAvatarDelete} 
+                    width={'166px'}
+                    height={'28px'}
+                />
                     </div>
                 </div>
             </div>
             <div className={styles.marginWrapper}>
                 <div className={styles.spanLabel}>Логин</div>
                 <div className={styles.inputWrapper}>
-                    <CabinetInput type="text" value={login} event={handleLoginChange} />
+                    <CabinetInput type="text" value={login} event={handleLoginChange} width={'300px'} height={'36px'}/>
                 </div>
+                <div style={{marginBottom: '24px'}}></div>
                 <div className={styles.spanLabel}>Имя</div>
                 <div className={styles.inputWrapper}>
-                    <CabinetInput type="text" value={name} event={handleNameChange} />
+                    <CabinetInput type="text" value={name} event={handleNameChange} width={'300px'} height={'36px'} />
                 </div>
+                <div style={{marginBottom: '24px'}}></div>
                 <div className={styles.spanLabel}>Фамилия</div>
                 <div className={styles.inputWrapper}>
-                    <CabinetInput type="text" value={surname} event={handleSurnameChange} />
+                    <CabinetInput type="text" value={surname} event={handleSurnameChange} width={'300px'} height={'36px'} />
                 </div>
+                <div style={{marginBottom: '24px'}}></div>
                 <div className={styles.spanLabel}>Почта</div>
                 <div className={styles.inputWrapper}>
-                    <CabinetInput type="email" value={email} event={handleEmailChange} disabled={true}/>
+                    <CabinetInput type="email" value={email} event={handleEmailChange} disabled={true} width={'300px'} height={'36px'}/>
                 </div>
-                <span className={styles.linkButton} onClick={() => setChangeEmailModalVisible(true)}>
-                    Сменить почту
-                </span>
+                <div style={{marginBottom: '8px'}}></div>
+                <div className={styles.inputWrapper}>
+                    <span className={styles.linkButton} onClick={() => setChangeEmailModalVisible(true)}>
+                        Сменить почту
+                    </span>
+                </div>
             </div>
+            <div style={{marginBottom: '55px'}}></div>
             <div className={styles.bottomButtons}>
                 <div className={styles.leftBlock}>
-                    <span className={styles.linkButton} onClick={() => setChangePasswordModalVisible(true)}>
-                        Сменить пароль
-                    </span>
-                    <span className={styles.linkButton} onClick={() => setDeleteProfileModalVisible(true)}>
+                    <span style={{marginRight: '22px'}} className={styles.linkButton} onClick={() => setDeleteProfileModalVisible(true)}>
                         Удалить профиль
                     </span>
+                    <RegularButton type='grey' text='Сменить пароль' event={() => setChangePasswordModalVisible(true)} width={'166px'} height={'28px'}/>
                 </div>
-                <RegularButton type='grey' text='Сохранить' event={handleUpdateUserData} />
+                <RegularButton type='grey' text='Сохранить' event={handleUpdateUserData} width={'225px'} height={'38px'} disabled={!isModified}/>
             </div>        
         </div>
     )

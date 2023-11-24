@@ -82,7 +82,7 @@ const RestorePasswordModal = ({ passwordRecoveryModalVisible, setPasswordRecover
                         <div className={styles.formBlock}>
                             <span className={styles.title}>Восстановление пароля</span>
                             <FormPair label={'Введите вашу почту'} type={'email'} event={(e) => setEmail(e.target.value)} value={email} element={'input'} />
-                            <RegularButton text={'Отправить код'} type={'grey'} event={handleSendRecoveryCode} />
+                            <RegularButton text={'Отправить код'} type={'grey'} event={handleSendRecoveryCode} width={'250px'} height={'38px'} />
                         </div>
                     )}
                     {currentStep === 2 && (
@@ -91,7 +91,7 @@ const RestorePasswordModal = ({ passwordRecoveryModalVisible, setPasswordRecover
                             <span className={styles.subtitle}>На указанную Вами почту отправлен код подтверждения. Введите его в поле ниже</span>
                             <BigInput type={'text'} event={(e) => setVerificationCode(e.target.value)} value={verificationCode} error={verificationError} />
                             <div style={{marginBottom: '10px'}}></div>
-                            <RegularButton text={'Подтвердить код'} type={'grey'} event={handleVerifyRecoveryCode} />
+                            <RegularButton text={'Подтвердить код'} type={'grey'} event={handleVerifyRecoveryCode} width={'250px'} height={'38px'} />
                         </div>
                     )}
                     {currentStep === 3 && (
@@ -99,7 +99,7 @@ const RestorePasswordModal = ({ passwordRecoveryModalVisible, setPasswordRecover
                             <span className={styles.title}>Смена пароля</span>
                             <FormPair label={'Новый пароль'} type={'password'} event={(e) => setNewPassword(e.target.value)} value={newPassword} element={'input'} />
                             <FormPair label={'Подтвердите новый пароль'} type={'password'} event={(e) => setConfirmNewPassword(e.target.value)} value={confirmNewPassword} element={'input'} />
-                            <RegularButton text={'Сменить пароль'} type={'grey'} event={handleResetPassword} />
+                            <RegularButton text={'Сменить пароль'} type={'grey'} event={handleResetPassword} width={'250px'} height={'38px'} />
                         </div>
                     )}
                 </div>

@@ -24,7 +24,7 @@ const IntroduceBlock = ({setSupportModalVisible}) => {
                     </span>
                 </div>
                 <div className={styles.buttonBlock}>
-                    <RegularButton type={'grey'} text={'Обратная связь'} event={() => {setSupportModalVisible(true)}}/>
+                    <RegularButton type={'grey'} text={'Обратная связь'} event={() => {setSupportModalVisible(true)}} width={'250px'} height={'38px'}/>
                 </div>
             </div>
         </div>

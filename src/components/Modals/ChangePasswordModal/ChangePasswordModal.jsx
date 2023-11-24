@@ -1,7 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
 import styles from './ChangePasswordModal.module.css';
 import CloseButton from "../../UI/CloseButton/CloseButton";
-import FormPair from "../../FormPair/FormPair";
 import RegularButton from "../../UI/RegularButton/RegularButton";
 import CabinetInput from "../../UI/CabinetInput/CabinetInput";
 import BigInput from "../../UI/BigInput/BigInput";
@@ -16,6 +15,12 @@ const ChangePasswordModal = ({email, changePasswordModalVisible, setChangePasswo
     const [verificationCode, setVerificationCode] = useState('');
     const [isVerificationSent, setIsVerificationSent] = useState(false);
     const [verificationError, setVerificationError] = useState('');
+
+    const modalStyles = {
+        ...(changePasswordModalVisible ? { display: "flex" } : { display: "none" }),
+        '--width': !isVerificationSent ? '334px' : '424px',
+        '--contentWidth': !isVerificationSent ? '286px' : '378px', 
+    };
 
     useEffect(() => {
         document.addEventListener("mousedown", handleClickOutside);
@@ -72,7 +77,7 @@ const ChangePasswordModal = ({email, changePasswordModalVisible, setChangePasswo
             {changePasswordModalVisible && <div className={styles.modalBackground}></div>}
             <div
                 className={styles.modalWrapper}
-                style={{...(changePasswordModalVisible ? { display: "flex" } : { display: "none" })}}
+                style={modalStyles}
                 ref={modalRef}
             >
                 <div className={styles.whiteBlock}>
@@ -95,6 +100,8 @@ const ChangePasswordModal = ({email, changePasswordModalVisible, setChangePasswo
                                 event={(e) => setVerificationCode(e.target.value)} 
                                 value={verificationCode} 
                                 error={verificationError} 
+                                width={'378px'}
+                                height={'30px'}
                             />
                         </div>
                     ) : (
@@ -105,15 +112,18 @@ const ChangePasswordModal = ({email, changePasswordModalVisible, setChangePasswo
                             <span className={styles.emailMessage}>
                                 Старый пароль
                             </span>
-                            <CabinetInput type={'password'} event={(e) => {setOldPassword(e.target.value)}} value={oldPassword} white={true} />
+                            <CabinetInput type={'password'} event={(e) => {setOldPassword(e.target.value)}} value={oldPassword} white={true} width={'286px'} height={'30px'}/>
+                            <div style={{marginBottom: '24px'}}></div>
                             <span className={styles.emailMessage}>
                                 Новый пароль
                             </span>
-                            <CabinetInput type={'password'} event={(e) => {setNewPassword(e.target.value)}} value={newPassword} white={true} />
+                            <CabinetInput type={'password'} event={(e) => {setNewPassword(e.target.value)}} value={newPassword} white={true} width={'286px'} height={'30px'} />
+                            <div style={{marginBottom: '24px'}}></div>
                             <span className={styles.emailMessage}>
                                 Подтвердите новый пароль
                             </span>
-                            <CabinetInput type={'password'} event={(e) => {setRepeatPassword(e.target.value)}} value={repeatPassword} white={true} />
+                            <CabinetInput type={'password'} event={(e) => {setRepeatPassword(e.target.value)}} value={repeatPassword} white={true} width={'286px'} height={'30px'} />
+                            <div style={{marginBottom: '24px'}}></div>
                         </div>
                     )}
                 </div>
@@ -124,12 +134,16 @@ const ChangePasswordModal = ({email, changePasswordModalVisible, setChangePasswo
                                 text={'Готово'}
                                 type={'grey'}
                                 event={handleChangePassword}
+                                width={'166px'}
+                                height={'28px'}
                             />
                         ) : (
                             <RegularButton 
                                 text={'Сменить пароль'}
                                 type={'grey'}
                                 event={handleSendVerificationCode}
+                                width={'166px'}
+                                height={'28px'}
                             />
                         )}
                     </div>

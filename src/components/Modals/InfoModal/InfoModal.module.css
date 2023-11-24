@@ -56,10 +56,16 @@
 }
 
 .title {
-	font-family: 'Gotham Medium';
-	font-size: 30px;
+	font-family: 'Gotham Bold';
+	font-size: 22px;
 	color: #285471;
-	margin-bottom: 20px;
+	margin-bottom: 32px;
+}
+
+.subtitle {
+	font-family: 'Gotham Regular';
+	font-size: 14px;
+	color: #141414;
 }
 
 .sendImageBlock {
@@ -88,8 +94,8 @@
 	align-items: center;
 	text-align: center;
 	width: 100%;
-	background-color: #d8d5ce;
-	padding: 15px 0px 0px 0px;
+	background-color: #D9D9D9;
+	padding: 20px 0px 10px 0px;
 }
 
 .buttonWrapper {

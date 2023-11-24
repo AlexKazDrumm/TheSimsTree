@@ -128,6 +128,8 @@ const SupportModal = ({supportModalVisible, setSupportModalVisible, alerts, setA
                                 handleSend()
                             }}
                             disabled={!confirmCaptcha}
+                            width={'166px'}
+                            height={'28px'}
                         /> 
                     </div>
                 </div>

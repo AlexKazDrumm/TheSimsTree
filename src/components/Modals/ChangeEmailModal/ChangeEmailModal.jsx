@@ -1,7 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
 import styles from './ChangeEmailModal.module.css';
 import CloseButton from "../../UI/CloseButton/CloseButton";
-import FormPair from "../../FormPair/FormPair";
 import RegularButton from "../../UI/RegularButton/RegularButton";
 import { sendVerificationCode, changeEmail } from "../../../features/features";
 import BigInput from "../../UI/BigInput/BigInput";
@@ -14,6 +13,12 @@ const ChangeEmailModal = ({email, changeEmailModalVisible, setChangeEmailModalVi
     const [verificationCode, setVerificationCode] = useState('');
     const [isVerificationSent, setIsVerificationSent] = useState(false);
     const [verificationError, setVerificationError] = useState('');
+
+    const modalStyles = {
+        ...(changeEmailModalVisible ? { display: "flex" } : { display: "none" }),
+        '--width': !isVerificationSent ? '334px' : '424px',
+        '--contentWidth': !isVerificationSent ? '286px' : '378px', 
+    };
 
     useEffect(() => {
         document.addEventListener("mousedown", handleClickOutside);
@@ -74,7 +79,7 @@ const ChangeEmailModal = ({email, changeEmailModalVisible, setChangeEmailModalVi
             {changeEmailModalVisible && <div className={styles.modalBackground}></div>}
             <div
                 className={styles.modalWrapper}
-                style={{...(changeEmailModalVisible ? { display: "flex" } : { display: "none" })}}
+                style={modalStyles}
                 ref={modalRef}
             >
                 <div className={styles.whiteBlock}>
@@ -97,6 +102,8 @@ const ChangeEmailModal = ({email, changeEmailModalVisible, setChangeEmailModalVi
                                 event={handleChangeVerificationCode} 
                                 value={verificationCode} 
                                 error={verificationError} 
+                                width={'378px'}
+                                height={'30px'}
                             />
                         </div>
                     ) : (
@@ -107,7 +114,7 @@ const ChangeEmailModal = ({email, changeEmailModalVisible, setChangeEmailModalVi
                             <span className={styles.emailMessage}>
                                 Введите новую почту
                             </span>
-                            <CabinetInput type={'email'} event={(e) => setNewEmail(e.target.value)} value={newEmail} white={true} />
+                            <CabinetInput type={'email'} event={(e) => setNewEmail(e.target.value)} value={newEmail} white={true} width={'286px'} height={'30px'}/>
                         </div>
                     )}
                 </div>
@@ -118,12 +125,16 @@ const ChangeEmailModal = ({email, changeEmailModalVisible, setChangeEmailModalVi
                                 text={'Готово'}
                                 type={'grey'}
                                 event={handleChangeEmail}
+                                width={'166px'}
+                                height={'28px'}
                             />
                         ) : (
                             <RegularButton 
                                 text={'Сменить почту'}
                                 type={'grey'}
                                 event={handleSendVerificationCode}
+                                width={'166px'}
+                                height={'28px'}
                             />
                         )}
                     </div>

@@ -14,7 +14,7 @@
   	overflow-y: auto;
   	font-family: 'Gotham Regular';
     border: 2px solid #BDC0B6;
-	width: 30%;
+	width: 339px;
 	background-color: white;
 	overflow-x: hidden;
 }
@@ -56,10 +56,16 @@
 }
 
 .title {
-	font-family: 'Gotham Medium';
-	font-size: 30px;
+	font-family: 'Gotham Bold';
+	font-size: 22px;
 	color: #285471;
-	margin-bottom: 20px;
+	margin-bottom: 32px;
+}
+
+.subtitle {
+	color: #141414;
+	font-family: 'Gotham Regular';
+	font-size: 10px;
 }
 
 .sendImageBlock {
@@ -88,8 +94,8 @@
 	align-items: center;
 	text-align: center;
 	width: 100%;
-	background-color: #d8d5ce;
-	padding: 15px 0px 0px 0px;
+	background-color: #D9D9D9;
+	padding: 20px 0px 10px 0px;
 }
 
 .buttonWrapper {

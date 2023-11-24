@@ -226,6 +226,8 @@ const AuthModal = ({authModalVisible, setAuthModalVisible, setIsAuth, setUser, s
                                     event={() => {
                                         handleLogin()
                                     }}
+                                    width={'250px'} 
+                                    height={'38px'}
                                 />  
                             </div>
                             {/* <div className={styles.buttonWrapper2}>
@@ -245,6 +247,8 @@ const AuthModal = ({authModalVisible, setAuthModalVisible, setIsAuth, setUser, s
                                         setAuthSteps(false)
                                         setRegSteps(true)
                                     }}
+                                    width={'250px'} 
+                                    height={'38px'}
                                 />
                             </div>
                         </>
@@ -258,6 +262,8 @@ const AuthModal = ({authModalVisible, setAuthModalVisible, setIsAuth, setUser, s
                                     event={() => {
                                         handleRegister()
                                     }}
+                                    width={'250px'} 
+                                    height={'38px'}
                                 />  
                             </div>
                             {/* <div className={styles.buttonWrapper2}>
@@ -277,6 +283,8 @@ const AuthModal = ({authModalVisible, setAuthModalVisible, setIsAuth, setUser, s
                                         setAuthSteps(true)
                                         setRegSteps(false)
                                     }}
+                                    width={'250px'} 
+                                    height={'38px'}
                                 />
                             </div>
                         </>
@@ -290,6 +298,8 @@ const AuthModal = ({authModalVisible, setAuthModalVisible, setIsAuth, setUser, s
                                     event={() => {
                                         handleCheckCode(inlineCode)
                                     }}
+                                    width={'250px'} 
+                                    height={'38px'}
                                 />  
                             </div>
                         </>

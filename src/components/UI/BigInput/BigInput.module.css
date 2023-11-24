@@ -6,7 +6,8 @@
     outline: none; 
     box-shadow: none; 
     font-size: 20px;
-    width: 400px;
+    width: var(--width); 
+    height: var(--height);
   }
   
   .input:focus, .input:active {

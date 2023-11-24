@@ -47,7 +47,7 @@ const InfoModal = ({img, title, text, infoModalVisible, setInfoModalVisible}) =>
                         <span className={styles.title}>
                             {title}
                         </span>
-                        <span>
+                        <span className={styles.subtitle}>
                             {text}
                         </span>
                     </div>
@@ -60,6 +60,8 @@ const InfoModal = ({img, title, text, infoModalVisible, setInfoModalVisible}) =>
                             event={() => {
                                 setInfoModalVisible(false)
                             }}
+                            width={'166px'}
+                            height={'28px'}
                         />  
                     </div>
                 </div>

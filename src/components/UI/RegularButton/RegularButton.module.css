@@ -1,63 +1,23 @@
 .button {
-    position: relative;
     font-family: 'Gotham Bold';
     font-size: 16px;
-    padding: 10px 30px 10px 30px;
+    /* padding: 10px 30px; */
     border-radius: 50px;
-    color: var(--text-color);
+    color: #285471;
+    background: linear-gradient(180deg, #FAFAFA 35.64%, #C1C1C1 100%);
     cursor: pointer;
-    overflow: hidden;
-    background-color: transparent;
-    z-index: 1;
     border: none;
-    min-width: 225px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
-}
-
-.button::before, .button::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border-radius: 50px;
-    z-index: -1;
-    transition: opacity 2s;
-}
-
-.button::before {
-    background-image: linear-gradient(to bottom, var(--main-color), var(--second-color));
-    opacity: 1;
-}
-
-.button::after {
-    background-image: linear-gradient(to bottom, var(--second-color), var(--main-color));
-    opacity: 0;
-}
-
-.button:hover::before {
-    opacity: 0;
-}
-
-.button:hover::after {
-    opacity: 1;
+    box-shadow: 0px 4.02004px 6.03006px 0px rgba(0, 0, 0, 0.32);
+    width: var(--width); 
+    height: var(--height); 
 }
 
 .button:active {
-    transform: scale(0.98);
+    transform: scale(0.98); 
 }
 
 .button:disabled {
-    cursor: default; /* Изменение курсора, чтобы показать, что кнопка неактивна */
-    opacity: 0.5; /* Сделать кнопку полупрозрачной */
-    box-shadow: none; /* Убрать тень, чтобы кнопка выглядела "плоской" */
-}
-
-.button:disabled::before {
-    opacity: 0.5; /* Также сделать фон полупрозрачным */
-}
-
-.button:disabled:hover::after {
-    opacity: 0; /* Убрать эффект наведения */
+    cursor: default;
+    opacity: 0.5;
+    box-shadow: none;
 }

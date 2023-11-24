@@ -58,7 +58,7 @@ const DeleteProfileModal = ({deleteProfileModalVisible, setDeleteProfileModalVis
                         <span className={styles.title}>
                             Вы уверены?
                         </span>
-                        <span>
+                        <span className={styles.subtitle}>
                             Нажав "Удалить профиль", вы потеряете доступ к древу и созданному контенту.
                         </span>
                     </div>
@@ -71,6 +71,8 @@ const DeleteProfileModal = ({deleteProfileModalVisible, setDeleteProfileModalVis
                             event={() => {
                                 handleDelete()
                             }}
+                            width={'166px'}
+                            height={'28px'}
                         />  
                     </div>
                 </div>

@@ -61,7 +61,7 @@ const Captcha = ({ confirmCaptcha, setConfirmCaptcha }) => {
                     <div style={{marginBottom: '10px'}}>
                         <BigInput value={captchaText} event={(e) => setCaptchaText(e.target.value)} disabled={validated}/>
                     </div>
-                    <RegularButton text='Проверить' event={handleVerifyCaptcha} disabled={validated} type='grey'/>
+                    <RegularButton text='Проверить' event={handleVerifyCaptcha} disabled={validated} type='grey' width={'166px'} height={'28px'}/>
                     {error && <div className={styles.error}>{error}</div>}
                 </>
             )}

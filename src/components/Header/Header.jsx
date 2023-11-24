@@ -40,9 +40,15 @@ const Header = ({isAuth, setIsAuth, setAuthModalVisible, user}) => {
                                 onClick={() => setIsDropdownVisible(!isDropdownVisible)} 
                             />
                             {/* <span style={{color: 'white'}}>{user?.login}</span> */}
-                            <RegularButton text='Редактор древа' type='grey' event={() => {
+                            <RegularButton 
+                                text='Редактор древа' 
+                                type='grey' 
+                                event={() => {
                                     router.push('/cabinet?option=4')
-                            }}/>
+                                }}
+                                width={'250px'}
+                                height={'38px'}
+                                />
                             </div>
                             
                             {isDropdownVisible && (
@@ -56,19 +62,22 @@ const Header = ({isAuth, setIsAuth, setAuthModalVisible, user}) => {
                                             }}
                                         >
                                             <img 
-                                                src='./svg/gem.svg'
+                                                src='./svg/little_user.svg'
+                                                style={{marginRight: '16px'}}
                                             />
                                             <span>
                                                 Профиль
                                             </span>
                                         </div>
+                                        <div style={{marginBottom: '16px'}}></div>
                                         <div className={styles.link} onClick={() => 
                                             {
                                                 setIsAuth(false)
                                                 localStorage.removeItem('authToken'); 
                                             }}>
                                             <img 
-                                                src='./svg/door.svg'
+                                                src='./svg/little_door.svg'
+                                                style={{marginRight: '16px'}}
                                             />
                                             <span>
                                                 Выйти
@@ -87,6 +96,8 @@ const Header = ({isAuth, setIsAuth, setAuthModalVisible, user}) => {
                                 }}
                                 text={'Вход / Регистрация'}
                                 type={'grey'}
+                                width={'250px'} 
+                                height={'38px'}
                             />
                         </>
                 }
