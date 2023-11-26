@@ -1,12 +1,13 @@
 import React from "react";
 import styles from './BigInput.module.css'
 
-const BigInput = ({ event, type, value, disabled, error, width, height }) => {
+const BigInput = ({ event, type, value, disabled, error, width, height, textSize }) => {
     const inputStyles = error ? `${styles.input} ${styles.error}` : styles.input;
 
     const inputStyle = {
         '--width': `${width}`,
         '--height': `${height}`,
+        '--text': `${textSize ? textSize : '16px'}`,
         ...(error ? { borderColor: '#FF7070' } : {})
     };
 

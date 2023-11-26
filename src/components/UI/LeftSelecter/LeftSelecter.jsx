@@ -3,8 +3,8 @@ import styles from './LeftSelecter.module.css'
 const LeftSelecter = ({ selectedComponent, event, icon, alt, text, order, slimMode }) => {
     const dynamicStyles = {
         justifyContent: slimMode ? 'center' : 'flex-start',
-        padding: slimMode ? '16px' : '16px 24px 16px 16px',
-        marginRight: slimMode ? '0px' : '12px'
+        padding: slimMode ? '13px 15px 15px 15px' : '8px 0px 10px 20px',
+        marginRight: slimMode ? '0px' : '0px'
     };
 
     return (
@@ -14,9 +14,13 @@ const LeftSelecter = ({ selectedComponent, event, icon, alt, text, order, slimMo
             style={dynamicStyles}
         >
             <img src={icon} alt={alt} style={{ marginRight: dynamicStyles.marginRight }}/>
+            
             {
                 !slimMode &&
-                <span>{text}</span>
+                <>
+                    <div style={{width: '17px'}}></div>
+                    <span>{text}</span>
+                </>
             }
         </div>
     );

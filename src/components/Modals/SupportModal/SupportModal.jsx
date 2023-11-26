@@ -130,6 +130,7 @@ const SupportModal = ({supportModalVisible, setSupportModalVisible, alerts, setA
                             disabled={!confirmCaptcha}
                             width={'166px'}
                             height={'28px'}
+                            textSize={'16px'}
                         /> 
                     </div>
                 </div>

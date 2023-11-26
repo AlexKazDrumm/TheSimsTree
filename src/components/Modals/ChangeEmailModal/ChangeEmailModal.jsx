@@ -104,6 +104,7 @@ const ChangeEmailModal = ({email, changeEmailModalVisible, setChangeEmailModalVi
                                 error={verificationError} 
                                 width={'378px'}
                                 height={'30px'}
+                                textSize={'20px'}
                             />
                         </div>
                     ) : (
@@ -114,7 +115,7 @@ const ChangeEmailModal = ({email, changeEmailModalVisible, setChangeEmailModalVi
                             <span className={styles.emailMessage}>
                                 Введите новую почту
                             </span>
-                            <CabinetInput type={'email'} event={(e) => setNewEmail(e.target.value)} value={newEmail} white={true} width={'286px'} height={'30px'}/>
+                            <CabinetInput type={'email'} event={(e) => setNewEmail(e.target.value)} value={newEmail} white={true} width={'286px'} height={'30px'} textSize={'16px'}/>
                         </div>
                     )}
                 </div>

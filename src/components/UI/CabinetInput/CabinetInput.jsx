@@ -1,11 +1,12 @@
 import React from "react";
 import styles from './CabinetInput.module.css'
 
-const CabinetInput = ({event, type, value, disabled, white, width, height}) => {
+const CabinetInput = ({event, type, value, disabled, white, width, height, textSize}) => {
 
     const inputStyles = {
         '--width': `${width}`,
         '--height': `${height}`,
+        '--text': `${textSize ? textSize : '16px'}`,
         '--bgcolor': `${white}?#FFF:#EFEFEF`
     };
 

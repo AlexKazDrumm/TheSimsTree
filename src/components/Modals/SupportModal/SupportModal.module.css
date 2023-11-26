@@ -130,5 +130,5 @@
   
 .scrollableContainer::-webkit-scrollbar-thumb {
 	border-radius: 25px;
-	background: var(--accent-color, #404BDE);
+	background: var(--accent-color, #D9D9D9);
 }

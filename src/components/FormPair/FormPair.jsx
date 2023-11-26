@@ -9,9 +9,11 @@ const FormPair = ({label, event, type, value, element, error}) => {
             <span className={styles.label}>{label}</span>
             {element == 'input' && <RegularInput type={type} event={event} value={value}/>}
             {element == 'textarea' && <RegularTextarea type={type} event={event} value={value}/>}
-            <div className={styles.errorBlock}>
-                <span className={styles.error}>{error?error:null}</span>
-            </div>
+            {error &&
+                <div className={styles.errorBlock}>
+                    <span className={styles.error}>{error?error:null}</span>
+                </div>
+            }
         </div>
     );
 }

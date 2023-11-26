@@ -1,17 +1,17 @@
 .component {
-	padding: 35px 40px 40px 8px;
+	padding: 25px 25px 40px 0px;
 	flex-grow: 1;
 	display: flex;
 	flex-direction: column;
 }
 
 .marginWrapperTop {
-	margin-bottom: 32px;
+	margin-bottom: 33px;
 }
 
 .marginWrapper {
-	margin-bottom: 32px;
-	padding-left: 63px;
+	margin-bottom: 30px;
+	padding-left: 57px;
 }
 
 .logoBlock {
@@ -70,6 +70,7 @@
 	font-family: 'Gotham Medium';
 	text-decoration: underline;
 	cursor: pointer;
+	font-size: 12px;
 }
 
 .linkButton:hover {
@@ -130,7 +131,7 @@
 	align-items: flex-end;
 	text-align: end;
 	width: 80%;
-	padding-left: 74px;
+	padding-left: 68px;
 }
 
 .leftBlock {
@@ -139,4 +140,66 @@
 	justify-content: space-between;
 	align-items: center;
 	margin-right: 200px;
+}
+
+.modalWrapper{
+	display: flex;
+	flex-direction: column;
+	position: fixed;
+	background-color: white;
+	border-radius: 20px;
+	top: 50%;
+	left: 50%;
+	padding: 0px;
+	transform: translate(-50%, -50%);
+	align-items: center;
+	z-index: 100;
+	max-height: 80vh;
+  	overflow-y: auto;
+  	font-family: 'Gotham Regular';
+    border: 2px solid #BDC0B6;
+	width: var(--width);
+	background-color: white;
+	overflow-x: hidden;
+}
+
+.whiteBlock {
+	display: flex;
+	flex-direction: column;
+	width: 93%;
+	padding: 20px;
+	background-color: white;
+	border: none;
+	border-radius: 20px 20px 0px 0px;
+}
+
+.closeBtnRow{
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+	justify-content: end;
+}
+
+.formBlock {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	text-align: center;
+}
+
+.greyBlock {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	text-align: center;
+	width: 100%;
+	background-color: #D9D9D9;
+	padding: 20px 0px 10px 0px;
+}
+
+.buttonWrapper {
+	margin-bottom: 10px;
 }

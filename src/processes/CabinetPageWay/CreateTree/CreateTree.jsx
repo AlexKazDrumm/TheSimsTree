@@ -18,10 +18,10 @@ const CreateTree = () => {
                 <div className={styles.topRow}>
                     <div className={styles.buttons}>
                         <div className={styles.button}>
-                            <RegularButton text='О династии' type='grey' width={'166px'} height={'28px'}/>
+                            <RegularButton text='О династии' type='grey' width={'166px'} height={'28px'} textSize={'12px'}/>
                         </div>
                         <div className={styles.button}>
-                            <RegularButton text='Об авторе' type='grey' width={'166px'} height={'28px'} />
+                            <RegularButton text='Об авторе' type='grey' width={'166px'} height={'28px'} textSize={'12px'} />
                         </div>
                     </div>
                     <div className={styles.selecterBlock}>

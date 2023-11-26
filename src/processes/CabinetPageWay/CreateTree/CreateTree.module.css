@@ -1,16 +1,16 @@
 .marginWrapper {
-	margin-bottom: 40px;
+	margin-bottom: 24px;
 }
 
 .container {
-	padding: 35px 40px 0px 20px;
+	padding: 25px 25px 40px 0px;
 	flex-grow: 1;
 	display: flex;
 	flex-direction: column;
 }
 
 .backgroundContainer {
-    position: fixed; /* или absolute, в зависимости от нужного поведения */
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -18,7 +18,7 @@
     background: url('/images/wallpaper2_1.png'), lightgray -0.031px -1550px / 100.004% 338.75% no-repeat;
     background-size: cover;
     opacity: 0.5;
-    z-index: -1; /* Это поместит фон под другие элементы */
+    z-index: -1; 
 }
 
 .topRow {

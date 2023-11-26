@@ -76,19 +76,15 @@ const AuthModal = ({authModalVisible, setAuthModalVisible, setIsAuth, setUser, s
 
     const handleLogin = async () => {
         if (!login && !email) {
-          showAlert('Введите логин или E-mail!', 'error')
-          return
-        } else {
-          setErrors(false)
+          setErrors({password: 'Введите логин или E-mail!'});
+          return;
         }
+    
         if (!password) {
-          showAlert('Введите пароль!', 'error')
-          return
-        } else {
-          setErrors(false)
+          setErrors({password: 'Введите пароль!'});
+          return;
         }
-      
-        // Проверка логина и пароля на сервере
+    
         try {
             const response = await axios.post(`${globals.productionServerDomain}/login`, {
                 login,
@@ -96,7 +92,6 @@ const AuthModal = ({authModalVisible, setAuthModalVisible, setIsAuth, setUser, s
             });
     
             if (response.data) {
-                // Успешный вход
                 setIsAuth(true);
                 setAuthModalVisible(false);
                 const token = response.data.token;
@@ -104,14 +99,11 @@ const AuthModal = ({authModalVisible, setAuthModalVisible, setIsAuth, setUser, s
                 await User.fetchUserData(token);
                 setUser(User.userData); // обновляем пользователя в состоянии компонента
             } else {
-                // Неуспешный вход
-                showAlert(response.data.message || 'Неверный логин или пароль!', 'error');
+                setErrors({password: 'Неверный логин или пароль!'});
             }
         } catch (error) {
-          if (error.response && error.response.status === 401) {
-            showAlert('Неверный логин или пароль!', 'error');
-          } else if (error.response && error.response.status === 404) {
-            showAlert('Пользователь не найден!', 'error');
+          if (error.response && (error.response.status === 401 || error.response.status === 404)) {
+            setErrors({password: 'Неверный логин или пароль!'});
           } else {
             throw error;
           }
@@ -180,7 +172,14 @@ const AuthModal = ({authModalVisible, setAuthModalVisible, setIsAuth, setUser, s
                                     Авторизация
                                 </span>
                                 <FormPair label={'Логин или E-mail'} type={'text'} event={(e) => {setLogin(e.target.value)}} value={login} element={'input'} error={errors && !login && !email?'Введите логин или E-mail':null}/>
-                                <FormPair label={'Пароль'} type={'password'} event={(e) => {setPassword(e.target.value)}} value={password} element={'input'} error={errors && !password?'Введите пароль!':null} />
+                                <FormPair 
+                                    label={'Пароль'} 
+                                    type={'password'} 
+                                    event={(e) => setPassword(e.target.value)} 
+                                    value={password} 
+                                    element={'input'} 
+                                    error={errors.password}
+                                />
                                 <span className={styles.rememberPassword} onClick={() => {
                                     setAuthModalVisible(false)
                                     setPasswordRecoveryModalVisible(true)
@@ -210,7 +209,7 @@ const AuthModal = ({authModalVisible, setAuthModalVisible, setIsAuth, setUser, s
                                     Подтверждение почты
                                 </span>
                                 <div className={styles.span}>На Вашу почту было отправлено письмо с кодом, введите его здесь</div>
-                                <BigInput type={'text'} event={(e) => {setInlineCode(e.target.value)}} value={inlineCode}/>
+                                <BigInput type={'text'} event={(e) => {setInlineCode(e.target.value)}} value={inlineCode} textSize={'20px'}/>
                                 {/* <FormPair label={'На Вашу почту было отправлено письмо с кодом, введите его здесь'} type={'text'} event={(e) => {setInlineCode(e.target.value)}} value={inlineCode} element={'input'}/> */}
                             </div>
                         </>
@@ -228,6 +227,7 @@ const AuthModal = ({authModalVisible, setAuthModalVisible, setIsAuth, setUser, s
                                     }}
                                     width={'250px'} 
                                     height={'38px'}
+                                    textSize={'16px'}
                                 />  
                             </div>
                             {/* <div className={styles.buttonWrapper2}>
@@ -249,6 +249,7 @@ const AuthModal = ({authModalVisible, setAuthModalVisible, setIsAuth, setUser, s
                                     }}
                                     width={'250px'} 
                                     height={'38px'}
+                                    textSize={'16px'}
                                 />
                             </div>
                         </>
@@ -264,6 +265,7 @@ const AuthModal = ({authModalVisible, setAuthModalVisible, setIsAuth, setUser, s
                                     }}
                                     width={'250px'} 
                                     height={'38px'}
+                                    textSize={'16px'}
                                 />  
                             </div>
                             {/* <div className={styles.buttonWrapper2}>
@@ -285,6 +287,7 @@ const AuthModal = ({authModalVisible, setAuthModalVisible, setIsAuth, setUser, s
                                     }}
                                     width={'250px'} 
                                     height={'38px'}
+                                    textSize={'16px'}
                                 />
                             </div>
                         </>
@@ -300,6 +303,7 @@ const AuthModal = ({authModalVisible, setAuthModalVisible, setIsAuth, setUser, s
                                     }}
                                     width={'250px'} 
                                     height={'38px'}
+                                    textSize={'16px'}
                                 />  
                             </div>
                         </>

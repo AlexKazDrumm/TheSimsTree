@@ -10,6 +10,7 @@ import { updateAvatar, deleteAvatar, updateUserData } from "../../../features/fe
 import globals from "../../../globals";
 import ChangePasswordModal from "../../../components/Modals/ChangePasswordModal/ChangePasswordModal";
 import DeleteProfileModal from "../../../components/Modals/DeleteProfileModal/DeleteProfileModal"
+import CloseButton from "../../../components/UI/CloseButton/CloseButton";
 
 const Profile = ({user}) => {
     const [login, setLogin] = useState(user?.login)
@@ -32,6 +33,8 @@ const Profile = ({user}) => {
 
     const [isModified, setIsModified] = useState(false);
 
+    const modalRef = useRef(null);
+
     useEffect(() => {
         if (user) {
             setLogin(user.login);
@@ -53,6 +56,7 @@ const Profile = ({user}) => {
     const handleNewImage = e => {
         setImage(e.target.files[0]);
         setShowEditorModal(true); // Открыть модальное окно редактора
+        e.target.value = null; // Сбросить значение input
     };
 
     const setEditorRef = editor => setEditor(editor);
@@ -127,35 +131,63 @@ const Profile = ({user}) => {
         setEmail(event.target.value);
     };
 
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (modalRef.current && !modalRef.current.contains(event.target)) {
+                setShowEditorModal(false);
+            }
+        };
+    
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => document.removeEventListener("mousedown", handleClickOutside);
+    }, [modalRef, setShowEditorModal]);
+
     return(
         <div className={styles.component}>
             {showEditorModal && (
-                <div className={styles.editorModal}>
-                    <AvatarEditor 
-                        ref={setEditorRef}
-                        image={image}
-                        width={250}
-                        height={250}
-                        border={50}
-                        borderRadius={borderRadius}
-                        color={[255, 255, 255, 0.6]} // RGBA
-                        scale={scale}
-                    />
-                    <div>
-                        <label>Масштаб: </label>
-                        <input type="range" min="1" max="2" step="0.01" value={scale} onChange={(e) => setScale(parseFloat(e.target.value))} />
+                <div
+                    className={styles.modalWrapper}
+                    ref={modalRef}
+                >
+                    <div className={styles.whiteBlock}>
+                        <div className={styles.closeBtnRow}>
+                            <CloseButton 
+                                event={() => setShowEditorModal(false)}
+                                img={'./svg/x_blue.svg'}
+                            />
+                        </div>
+                        <div className={styles.formBlock}>
+                            <AvatarEditor 
+                                ref={setEditorRef}
+                                image={image}
+                                width={250}
+                                height={250}
+                                border={50}
+                                borderRadius={borderRadius}
+                                color={[255, 255, 255, 0.6]} // RGBA
+                                scale={scale}
+                            />
+                            <div>
+                                <label>Масштаб: </label>
+                                <input type="range" min="1" max="2" step="0.01" value={scale} onChange={(e) => setScale(parseFloat(e.target.value))} />
+                            </div>
+                            <div style={{marginBottom: '15px'}}>
+                                <label>Скругление: </label>
+                                <input type="range" min="0" max="125" value={borderRadius} onChange={(e) => setBorderRadius(parseInt(e.target.value, 10))} />
+                            </div>
+                        </div>
                     </div>
-                    <div style={{marginBottom: '15px'}}>
-                        <label>Скругление: </label>
-                        <input type="range" min="0" max="125" value={borderRadius} onChange={(e) => setBorderRadius(parseInt(e.target.value, 10))} />
+                    <div className={styles.greyBlock}>
+                        <div className={styles.buttonWrapper}>
+                            <RegularButton 
+                                type='grey' 
+                                text='Сохранить' 
+                                event={handleAvatarUpload}
+                                width={'166px'}
+                                height={'28px'}
+                            />
+                        </div>
                     </div>
-                    <RegularButton 
-                        type='grey' 
-                        text='Сохранить' 
-                        event={handleAvatarUpload}
-                        width={'166px'}
-                        height={'28px'}
-                    />
                 </div>
             )}
             {changePasswordModalVisible && <ChangePasswordModal setInfoModalVisible={setInfoModalVisible} setInfoTitle={setInfoTitle} setInfoText={setInfoText} email={email} changePasswordModalVisible={changePasswordModalVisible} setChangePasswordModalVisible={setChangePasswordModalVisible}/>}
@@ -187,7 +219,7 @@ const Profile = ({user}) => {
                     width={'166px'}
                     height={'28px'}
                 />
-                <div style={{marginBottom: '28px'}}></div>
+                <div style={{marginBottom: '19px'}}></div>
                 <RegularButton 
                     type='grey' 
                     text='Удалить' 
@@ -201,31 +233,31 @@ const Profile = ({user}) => {
             <div className={styles.marginWrapper}>
                 <div className={styles.spanLabel}>Логин</div>
                 <div className={styles.inputWrapper}>
-                    <CabinetInput type="text" value={login} event={handleLoginChange} width={'300px'} height={'36px'}/>
+                    <CabinetInput type="text" value={login} event={handleLoginChange} width={'290px'} height={'36px'} textSize={'16px'}/>
                 </div>
-                <div style={{marginBottom: '24px'}}></div>
+                <div style={{marginBottom: '19px'}}></div>
                 <div className={styles.spanLabel}>Имя</div>
                 <div className={styles.inputWrapper}>
-                    <CabinetInput type="text" value={name} event={handleNameChange} width={'300px'} height={'36px'} />
+                    <CabinetInput type="text" value={name} event={handleNameChange} width={'290px'} height={'36px'} textSize={'16px'} />
                 </div>
-                <div style={{marginBottom: '24px'}}></div>
+                <div style={{marginBottom: '19px'}}></div>
                 <div className={styles.spanLabel}>Фамилия</div>
                 <div className={styles.inputWrapper}>
-                    <CabinetInput type="text" value={surname} event={handleSurnameChange} width={'300px'} height={'36px'} />
+                    <CabinetInput type="text" value={surname} event={handleSurnameChange} width={'290px'} height={'36px'} textSize={'16px'} />
                 </div>
-                <div style={{marginBottom: '24px'}}></div>
+                <div style={{marginBottom: '19px'}}></div>
                 <div className={styles.spanLabel}>Почта</div>
                 <div className={styles.inputWrapper}>
-                    <CabinetInput type="email" value={email} event={handleEmailChange} disabled={true} width={'300px'} height={'36px'}/>
+                    <CabinetInput type="email" value={email} event={handleEmailChange} disabled={true} width={'290px'} height={'36px'} textSize={'16px'}/>
                 </div>
-                <div style={{marginBottom: '8px'}}></div>
+                <div style={{marginBottom: '5px'}}></div>
                 <div className={styles.inputWrapper}>
                     <span className={styles.linkButton} onClick={() => setChangeEmailModalVisible(true)}>
                         Сменить почту
                     </span>
                 </div>
             </div>
-            <div style={{marginBottom: '55px'}}></div>
+            <div style={{marginBottom: '50px'}}></div>
             <div className={styles.bottomButtons}>
                 <div className={styles.leftBlock}>
                     <span style={{marginRight: '22px'}} className={styles.linkButton} onClick={() => setDeleteProfileModalVisible(true)}>
@@ -233,7 +265,7 @@ const Profile = ({user}) => {
                     </span>
                     <RegularButton type='grey' text='Сменить пароль' event={() => setChangePasswordModalVisible(true)} width={'166px'} height={'28px'}/>
                 </div>
-                <RegularButton type='grey' text='Сохранить' event={handleUpdateUserData} width={'225px'} height={'38px'} disabled={!isModified}/>
+                <RegularButton type='grey' text='Сохранить' event={handleUpdateUserData} width={'225px'} height={'38px'} disabled={!isModified} textSize={'16px'}/>
             </div>        
         </div>
     )

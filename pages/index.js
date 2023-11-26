@@ -38,6 +38,9 @@ function MainPage({ User }) {
             setIsAuth(false);
             setUser(null);
         }
+        if (!localStorage.getItem('authToken')) {
+            setIsAuth(false);
+        }
     };
 
     useEffect(() => {

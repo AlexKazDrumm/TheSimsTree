@@ -102,6 +102,7 @@ const ChangePasswordModal = ({email, changePasswordModalVisible, setChangePasswo
                                 error={verificationError} 
                                 width={'378px'}
                                 height={'30px'}
+                                textSize={'20px'}
                             />
                         </div>
                     ) : (
@@ -112,17 +113,17 @@ const ChangePasswordModal = ({email, changePasswordModalVisible, setChangePasswo
                             <span className={styles.emailMessage}>
                                 Старый пароль
                             </span>
-                            <CabinetInput type={'password'} event={(e) => {setOldPassword(e.target.value)}} value={oldPassword} white={true} width={'286px'} height={'30px'}/>
+                            <CabinetInput type={'password'} event={(e) => {setOldPassword(e.target.value)}} value={oldPassword} white={true} width={'286px'} height={'30px'} textSize={'16px'}/>
                             <div style={{marginBottom: '24px'}}></div>
                             <span className={styles.emailMessage}>
                                 Новый пароль
                             </span>
-                            <CabinetInput type={'password'} event={(e) => {setNewPassword(e.target.value)}} value={newPassword} white={true} width={'286px'} height={'30px'} />
+                            <CabinetInput type={'password'} event={(e) => {setNewPassword(e.target.value)}} value={newPassword} white={true} width={'286px'} height={'30px'} textSize={'16px'} />
                             <div style={{marginBottom: '24px'}}></div>
                             <span className={styles.emailMessage}>
                                 Подтвердите новый пароль
                             </span>
-                            <CabinetInput type={'password'} event={(e) => {setRepeatPassword(e.target.value)}} value={repeatPassword} white={true} width={'286px'} height={'30px'} />
+                            <CabinetInput type={'password'} event={(e) => {setRepeatPassword(e.target.value)}} value={repeatPassword} white={true} width={'286px'} height={'30px'} textSize={'16px'} />
                             <div style={{marginBottom: '24px'}}></div>
                         </div>
                     )}

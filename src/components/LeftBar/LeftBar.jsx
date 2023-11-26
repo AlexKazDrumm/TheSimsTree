@@ -10,7 +10,7 @@ const LeftBar = ({ selectedComponent, setSelectedComponent, setLeftMenuClick, us
   const [supportModalVisible, setSupportModalVisible] = useState(false)
   
   const formStyle = {
-    flex: slimMode ? "0 0 auto" : "0 0 20%",
+    flex: slimMode ? "0 0 5%" : "0 0 24.2%",
     height: '100vh', // Установка высоты в 100% видимой части экрана
     position: 'sticky', // Зафиксировать позицию
     top: 0 // Закрепить сверху
@@ -26,14 +26,21 @@ const LeftBar = ({ selectedComponent, setSelectedComponent, setLeftMenuClick, us
           setSupportModalVisible={setSupportModalVisible} 
         />
       }
-      <div className={styles.container} style={slimMode ? {padding: '32px 12px 16px 12px'} : {padding: '32px 32px 16px 32px'}}>
+      <div className={styles.container} style={slimMode ? {padding: '32px 6px 16px 6px'} : {padding: '30px 28px 16px 39px'}}>
         <div className={styles.wrapper}>
           <div className={styles.topBlock}>
-            <div className={styles.ownerMData} style={slimMode?{justifyContent: 'center'}:{justifyContent: 'flex-start'}}> 
-              <div className={styles.avatar} style={slimMode?{marginRight:'0px'}:{marginRight:'12px'}}>
+            <div className={styles.ownerMData} style={slimMode?{justifyContent: 'center', marginBottom: '25px'}:{justifyContent: 'flex-start', marginBottom: '31px'}}> 
+              <div className={styles.avatar} style={slimMode?{marginRight:'0px'}:{marginRight:'14px'}}>
                 {user?.avatar ? 
-                  <img onError={(e)=>{ e.target.onerror = null; e.target.src='./svg/user_master_avatar.svg'; }}  src={`${globals.productionServerDomain}/file/${user.avatar}`} />:
-                  <img src='./svg/user_master_avatar.svg' />
+                  <img 
+                    onError={(e)=>{ e.target.onerror = null; e.target.src='./svg/user_master_avatar.svg'; }}  
+                    src={`${globals.productionServerDomain}/file/${user.avatar}`} 
+                    style={slimMode?{width: '50px'}:{height: '70px'}}
+                  />:
+                  <img 
+                    src='./svg/user_master_avatar.svg' 
+                    style={slimMode?{width: '50px'}:{height: '70px'}}
+                  />
                 }
               </div>
               {
@@ -47,18 +54,6 @@ const LeftBar = ({ selectedComponent, setSelectedComponent, setLeftMenuClick, us
             <LeftSelecter 
               selectedComponent={selectedComponent} 
               event={()=>{
-                setSelectedComponent(1)
-                router.push('/cabinet?option=1')           
-              }} 
-              icon={'/svg/user.svg'} 
-              alt={'Profile'} 
-              text={'Профиль'}  
-              order={1}
-              slimMode={slimMode}
-            />
-            <LeftSelecter 
-              selectedComponent={selectedComponent} 
-              event={()=>{
                 setSelectedComponent(2)
                 router.push('/cabinet?option=2')
                 setLeftMenuClick(true)
@@ -69,6 +64,20 @@ const LeftBar = ({ selectedComponent, setSelectedComponent, setLeftMenuClick, us
               order={2}
               slimMode={slimMode}
             />
+            <div style={slimMode?{marginBottom: '0px'}:{marginBottom: '6px'}}></div>
+            <LeftSelecter 
+              selectedComponent={selectedComponent} 
+              event={()=>{
+                setSelectedComponent(1)
+                router.push('/cabinet?option=1')           
+              }} 
+              icon={'/svg/user.svg'} 
+              alt={'Profile'} 
+              text={'Профиль'}  
+              order={1}
+              slimMode={slimMode}
+            />
+            <div style={slimMode?{marginBottom: '0px'}:{marginBottom: '6px'}}></div>
             <LeftSelecter 
               selectedComponent={selectedComponent} 
               event={()=>{
@@ -81,6 +90,7 @@ const LeftBar = ({ selectedComponent, setSelectedComponent, setLeftMenuClick, us
               order={3}
               slimMode={slimMode}
             />
+            <div style={slimMode?{marginBottom: '0px'}:{marginBottom: '6px'}}></div>
             <LeftSelecter 
               selectedComponent={selectedComponent} 
               event={()=>{
@@ -94,6 +104,7 @@ const LeftBar = ({ selectedComponent, setSelectedComponent, setLeftMenuClick, us
               order={4}
               slimMode={slimMode}
             />
+            <div style={slimMode?{marginBottom: '0px'}:{marginBottom: '6px'}}></div>
             <LeftSelecter 
               selectedComponent={selectedComponent} 
               event={()=>{
@@ -107,6 +118,7 @@ const LeftBar = ({ selectedComponent, setSelectedComponent, setLeftMenuClick, us
               order={5}
               slimMode={slimMode}
             />
+            <div style={slimMode?{marginBottom: '0px'}:{marginBottom: '6px'}}></div>
             <LeftSelecter 
               selectedComponent={selectedComponent} 
               event={()=>{
@@ -120,6 +132,7 @@ const LeftBar = ({ selectedComponent, setSelectedComponent, setLeftMenuClick, us
               order={6}
               slimMode={slimMode}
             />
+            <div style={slimMode?{marginBottom: '0px'}:{marginBottom: '6px'}}></div>
             <LeftSelecter 
               selectedComponent={selectedComponent} 
               event={()=>{
@@ -135,7 +148,7 @@ const LeftBar = ({ selectedComponent, setSelectedComponent, setLeftMenuClick, us
             />
           </div>
         </div>
-        <div className={styles.wrapper} style={slimMode ? {padding: '0px 12px 0px 12px'} : {padding: '0px 32px 0px 32px'}}>
+        <div className={styles.wrapper} style={slimMode ? {padding: '0px 12px 0px 12px'} : {padding: '0px 32px 23px 32px'}}>
           <div className={styles.equipmentBlock}>
             {/* {!slimMode &&
               <div className={styles.title}>Поддержка</div>
@@ -143,13 +156,13 @@ const LeftBar = ({ selectedComponent, setSelectedComponent, setLeftMenuClick, us
             
                 <div className={styles.images}  style={slimMode ? {flexDirection: 'column'} : {flexDirection: 'row'}}>
                   <a style={{cursor: 'pointer'}} onClick={() => {setSupportModalVisible(true)}}>
-                    <img src='./svg/help_blue.svg'/>
+                    <img src='./svg/help_blue.svg' style={slimMode ? {marginRight: '0px'} : {marginRight: '32px'} }/>
                   </a>
                   <a href="https://vk.com/thedynastytree" target="_blank" rel="noopener noreferrer">
-                    <img src='./svg/vk_blue.svg'/>
+                    <img src='./svg/vk_blue.svg' style={slimMode ? {marginRight: '0px'} : {marginRight: '32px'} }/>
                   </a>
                   <a href="https://t.me/dynastytree" target="_blank" rel="noopener noreferrer">
-                    <img src='./svg/telegram_blue.svg' alt="Telegram Icon"/>
+                    <img src='./svg/telegram_blue.svg' alt="Telegram Icon" style={slimMode ? {marginRight: '0px'} : {marginRight: '32px'} }/>
                   </a>
                 </div>
           </div>

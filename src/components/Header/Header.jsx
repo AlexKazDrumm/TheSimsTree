@@ -48,6 +48,7 @@ const Header = ({isAuth, setIsAuth, setAuthModalVisible, user}) => {
                                 }}
                                 width={'250px'}
                                 height={'38px'}
+                                textSize={'16px'}
                                 />
                             </div>
                             
@@ -97,6 +98,7 @@ const Header = ({isAuth, setIsAuth, setAuthModalVisible, user}) => {
                                 text={'Вход / Регистрация'}
                                 type={'grey'}
                                 width={'250px'} 
+                                textSize={'16px'}
                                 height={'38px'}
                             />
                         </>
