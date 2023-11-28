@@ -13,7 +13,8 @@ const LeftBar = ({ selectedComponent, setSelectedComponent, setLeftMenuClick, us
     flex: slimMode ? "0 0 5%" : "0 0 24.2%",
     height: '100vh', // Установка высоты в 100% видимой части экрана
     position: 'sticky', // Зафиксировать позицию
-    top: 0 // Закрепить сверху
+    top: 0, // Закрепить сверху
+    zIndex: 1,
   }
 
   const router = useRouter();
