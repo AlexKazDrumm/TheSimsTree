@@ -113,7 +113,7 @@ const AuthModal = ({authModalVisible, setAuthModalVisible, setIsAuth, setUser, s
     const handleRegister = async () => {
         if (!login || !email || !password || !checkPassword || password !== checkPassword) {
             showAlert('Заполнены не все обязательные поля', 'error')
-            console.log('error?', {login, email, password, checkPassword})
+            // console.log('error?', {login, email, password, checkPassword})
             return;
         }
         try {

@@ -15,7 +15,7 @@ export const updateAvatar = async (token, file) => {
         });
 
         if (response.data && response.data.success) {
-            console.log('Аватар успешно обновлен:', response.data);
+            // console.log('Аватар успешно обновлен:', response.data);
             User.setUserData(response.data.userData); // Обновляем данные пользователя в хранилище
             return response.data.userData;
         }
@@ -34,7 +34,7 @@ export const deleteAvatar = async (token) => {
         });
 
         if (response.data && response.data.success) {
-            console.log('Аватар успешно удален:', response.data);
+            // console.log('Аватар успешно удален:', response.data);
             User.setUserData(response.data.userData); // Обновляем данные пользователя в хранилище
             return true;
         }
@@ -54,7 +54,7 @@ export const updateUserData = async (token, userData) => {
         });
 
         if (response.data && response.data.success) {
-            console.log('Данные пользователя успешно обновлены:', response.data);
+            // console.log('Данные пользователя успешно обновлены:', response.data);
             User.setUserData(response.data.userData); // Обновляем данные пользователя в хранилище
             return true; // Возвращаем true при успешном обновлении
         } else {
@@ -79,7 +79,7 @@ export const changePassword = async (token, oldPassword, newPassword, code) => {
         });
 
         if (response.data && response.data.success) {
-            console.log('Password changed successfully:', response.data);
+            // console.log('Password changed successfully:', response.data);
             return true;
         }
     } catch (error) {
@@ -97,7 +97,7 @@ export const deleteUserAccount = async (token) => {
         });
 
         if (response.data && response.data.success) {
-            console.log('User account deleted successfully:', response.data);
+            // console.log('User account deleted successfully:', response.data);
             return true;
         }
     } catch (error) {
@@ -123,7 +123,7 @@ export const sendFeedback = async (name, email, message, files) => {
         });
 
         if (response.data && response.data.success) {
-            console.log('Feedback sent successfully:', response.data);
+            // console.log('Feedback sent successfully:', response.data);
             return true;
         }
     } catch (error) {
@@ -137,7 +137,7 @@ export const fetchRandomCaptcha = async () => {
         const response = await axios.get(`${globals.productionServerDomain}/getRandomCaptcha`);
 
         if (response.data) {
-            console.log('Random CAPTCHA fetched successfully:', response.data);
+            // console.log('Random CAPTCHA fetched successfully:', response.data);
             return response.data.captchaImage; // Возвращает URL изображения капчи
         }
     } catch (error) {
@@ -155,10 +155,10 @@ export const verifyCaptcha = async (captchaText, captchaImage) => {
         });
 
         if (response.data && response.data.success) {
-            console.log('Captcha verified successfully:', response.data);
+            // console.log('Captcha verified successfully:', response.data);
             return true;
         } else {
-            console.log('Captcha verification failed:', response.data);
+            // console.log('Captcha verification failed:', response.data);
             return false;
         }
     } catch (error) {
@@ -177,7 +177,7 @@ export const sendVerificationCode = async (token, messageTitle) => {
         });
 
         if (response.data && response.status === 200) {
-            console.log('Верификационный код отправлен:', response.data);
+            // console.log('Верификационный код отправлен:', response.data);
             return true; 
         } else {
             return false;
@@ -198,7 +198,7 @@ export const changeEmail = async (token, newEmail, code) => {
         });
 
         if (response.status === 200) {
-            console.log('Email успешно обновлен');
+            // console.log('Email успешно обновлен');
             User.setUserData(response.data.userData);
             return true;
         } else {
@@ -218,7 +218,7 @@ export const sendRecoveryCode = async (email) => {
         });
 
         if (response.data && response.data.success) {
-            console.log('Recovery code sent successfully:', response.data);
+            // console.log('Recovery code sent successfully:', response.data);
             return true;
         } else {
             console.error('Failed to send recovery code:', response.data.message);
@@ -238,7 +238,7 @@ export const verifyRecoveryCode = async (email, code) => {
         });
 
         if (response.data && response.data.success) {
-            console.log('Recovery code verified successfully:', response.data);
+            // console.log('Recovery code verified successfully:', response.data);
             return true;
         } else {
             console.error('Failed to verify recovery code:', response.data.message);
@@ -259,7 +259,7 @@ export const resetPassword = async (email, newPassword, code) => {
         });
 
         if (response.data && response.data.success) {
-            console.log('Password reset successfully:', response.data);
+            // console.log('Password reset successfully:', response.data);
             return true;
         } else {
             console.error('Failed to reset password:', response.data.message);

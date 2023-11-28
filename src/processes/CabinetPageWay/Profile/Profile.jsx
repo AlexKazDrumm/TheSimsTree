@@ -82,7 +82,7 @@ const Profile = ({user}) => {
         }
     }, [user]);
 
-    console.log({user, login, name, surname, email})
+    // console.log({user, login, name, surname, email})
 
     const fileInputRef = useRef();
 

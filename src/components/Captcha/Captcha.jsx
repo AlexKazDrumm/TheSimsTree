@@ -17,7 +17,7 @@ const Captcha = ({ confirmCaptcha, setConfirmCaptcha }) => {
             const captchaIn = await fetchRandomCaptcha();
             if (captchaIn) {
                 setCaptchaImg(captchaIn);
-                console.log('Captcha fetched:', captchaIn);
+                // console.log('Captcha fetched:', captchaIn);
             }
         } catch (error) {
             console.error('Ошибка при получении капчи:', error);

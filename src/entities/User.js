@@ -17,7 +17,7 @@ class User {
           Authorization: `Bearer ${token}`
         }
       });
-      console.log({ response });
+      // console.log({ response });
 
       if (response.data && response.data.userData) {
         this.userData = response.data.userData;

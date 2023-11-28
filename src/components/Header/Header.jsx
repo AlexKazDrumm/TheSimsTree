@@ -6,7 +6,7 @@ import globals from '../../globals';
 
 const Header = ({isAuth, setIsAuth, setAuthModalVisible, user}) => {
 
-    console.log({isAuth, user})
+    // console.log({isAuth, user})
 
     const router = useRouter();
     

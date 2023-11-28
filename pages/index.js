@@ -45,7 +45,7 @@ function MainPage({ User }) {
 
     useEffect(() => {
         fetchData();
-        console.log({User})
+        // console.log({User})
     }, [User]);
 
     const renderSelectedBlock = () => {
