@@ -1,7 +1,8 @@
 .container {
     position: absolute;
     right: 0;
-    top: 29%
+    top: 29%;
+    filter: blur(2px);
 }
 
 .group {

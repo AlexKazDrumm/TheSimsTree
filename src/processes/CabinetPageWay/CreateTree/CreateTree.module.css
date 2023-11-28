@@ -89,15 +89,11 @@
 }
 
 .zSubtitle2 {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: flex-start;
-	text-align: start;
-	color: #285471;
-	font-family: 'Gotham Regular';
-	font-size: 14px;
-	margin-bottom: 32px;
+    text-align: justify; 
+    color: #285471;
+    font-family: 'Gotham Regular';
+    font-size: 14px;
+    margin-bottom: 32px;
 }
 
 .zSubtitle3 {
@@ -109,4 +105,19 @@
 	color: #285471;
 	font-family: 'Gotham Regular';
 	font-size: 14px;
+}
+
+.blurContainer {
+    filter: blur(2px);
+    background-color: rgba(158, 158, 158, 0);
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
+}
+
+.tglink {
+	color: #285471;
+	font-family: 'Gotham Medium';
+	font-size: 14px;
+	text-decoration-line: underline;
 }
