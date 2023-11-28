@@ -10,6 +10,12 @@ const CreateTree = () => {
         <>
         <div className={styles.backgroundContainer}></div>
         <div className={styles.container}>
+            <div className={styles.zaglushka}>
+                <div className={styles.zTitle}>Сул-Сул!</div>
+                <div className={styles.zSubtitle1}>Сейчас тут пустовато. Не пугайтесь!</div>
+                <div className={styles.zSubtitle2}>Основной функционал работы с древом сейчас  в разработке. Мы обязательно уведомим Вас по почте или в нашем телеграм-канале, когда все будет готово ;)</div>
+                <div className={styles.zSubtitle3}>Спасибо, что ждете и остаетесь с нами!</div>
+            </div>
             <div className={styles.marginWrapper}>
                 <TitleBlock text='Название династии' />
             </div>

@@ -7,6 +7,7 @@
 	flex-grow: 1;
 	display: flex;
 	flex-direction: column;
+	position: relative;
 }
 
 .backgroundContainer {
@@ -46,6 +47,65 @@
 }
 
 .selecterBlock span {
+	color: #285471;
+	font-family: 'Gotham Regular';
+	font-size: 14px;
+}
+
+.zaglushka {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 372px;
+	border-radius: 15px;
+	border: 1px solid #C4C4C4;
+	background: #FFF;
+	padding: 44px 26px;
+}
+
+.zTitle {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	color: #285471;
+	font-family: 'Gotham Bold';
+	font-size: 27px;
+	margin-bottom: 32px;
+}
+
+.zSubtitle1 {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+	text-align: start;
+	color: #285471;
+	font-family: 'Gotham Regular';
+	font-size: 14px;
+	margin-bottom: 14px;
+}
+
+.zSubtitle2 {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+	text-align: start;
+	color: #285471;
+	font-family: 'Gotham Regular';
+	font-size: 14px;
+	margin-bottom: 32px;
+}
+
+.zSubtitle3 {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+	text-align: start;
 	color: #285471;
 	font-family: 'Gotham Regular';
 	font-size: 14px;
