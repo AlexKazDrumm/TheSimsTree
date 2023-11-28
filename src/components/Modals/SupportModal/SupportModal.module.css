@@ -3,7 +3,7 @@
 	flex-direction: column;
 	position: fixed;
 	background-color: white;
-	border-radius: 20px;
+	border-radius: 15px;
 	top: 50%;
 	left: 50%;
 	padding: 0px;
@@ -13,7 +13,7 @@
 	max-height: 80vh;
   	overflow-y: auto;
   	font-family: 'Gotham Regular';
-    border: 2px solid #BDC0B6;
+	border: 1px solid #C4C4C4;
 	width: 30%;
 	background-color: white;
 	overflow-x: hidden;

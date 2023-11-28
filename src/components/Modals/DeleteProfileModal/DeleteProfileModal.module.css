@@ -3,7 +3,7 @@
 	flex-direction: column;
 	position: fixed;
 	background-color: white;
-	border-radius: 20px;
+	border-radius: 15px;
 	top: 50%;
 	left: 50%;
 	padding: 0px;
@@ -13,9 +13,8 @@
 	max-height: 80vh;
   	overflow-y: auto;
   	font-family: 'Gotham Regular';
-    border: 2px solid #BDC0B6;
-	width: 339px;
-	background-color: white;
+	  border: 1px solid #C4C4C4;
+	width: 428px;
 	overflow-x: hidden;
 }
 
@@ -57,7 +56,7 @@
 
 .title {
 	font-family: 'Gotham Bold';
-	font-size: 22px;
+	font-size: 27px;
 	color: #285471;
 	margin-bottom: 32px;
 }
@@ -65,7 +64,7 @@
 .subtitle {
 	color: #141414;
 	font-family: 'Gotham Regular';
-	font-size: 10px;
+	font-size: 16px;
 }
 
 .sendImageBlock {

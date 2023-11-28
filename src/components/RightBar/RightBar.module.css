@@ -32,3 +32,7 @@
 .up, .left {
     border: 1px solid #F1F1F1;
 }
+
+.up {
+    border-radius: 7.778px 0px 0px 0px;
+}
