@@ -52,7 +52,7 @@ const Captcha = ({ confirmCaptcha, setConfirmCaptcha }) => {
                     <span className={styles.title}>Введите код с изображения</span>
                     <div className={styles.captchaBlock}>
                         <div className={styles.captchaImg}>
-                            <img src={`${globals.productionServerDomain}/file/${captchaImg}`} alt="Captcha" style={{border: '1px solid black', width: '200px', height: '60px'}}/>
+                            <img src={`${globals.ftpDomain}/file/${captchaImg}`} alt="Captcha" style={{border: '1px solid black', width: '200px', height: '60px'}}/>
                         </div>
                         <div className={styles.reloadBlock}>
                             <img src='./svg/reload.svg' onClick={fetchCaptcha} className={styles.reloadButton} />
