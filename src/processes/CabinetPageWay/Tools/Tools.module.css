@@ -171,3 +171,8 @@
 	color: #182d38;
 	cursor: pointer;
 }
+
+.disabled {
+	cursor: default !important;
+	color: grey !important;
+}

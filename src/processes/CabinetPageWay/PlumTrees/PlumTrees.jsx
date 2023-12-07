@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from './PlumTrees.module.css'
 import TitleBlock from "../../../components/UI/TitleBlock/TitleBlock";
 import BigInput from "../../../components/UI/BigInput/BigInput";
 import RegularButton from "../../../components/UI/RegularButton/RegularButton";
-import { updateUserData } from "../../../features/features";
+import { updateUserData, verificateEmail } from "../../../features/features";
 import axios from "axios";
 import globals from "../../../globals";
 
@@ -15,9 +15,24 @@ const PlumTrees = ({user, setInfoModalVisible, setInfoImg, setInfoTitle, setInfo
     const [errors, setErrors] = useState(false)
     const [error, serError] = useState('')
 
+    const [timer, setTimer] = useState(0);
+    const [canResend, setCanResend] = useState(true);
+
     const showAlert = (message, type) => {
         setErrors(true)
     }
+
+    useEffect(() => {
+        let interval;
+        if (timer > 0) {
+            interval = setInterval(() => {
+                setTimer(t => t - 1);
+            }, 1000);
+        } else {
+            setCanResend(true); // Включаем кнопку, когда таймер достигает 0
+        }
+        return () => clearInterval(interval);
+    }, [timer]);
 
     const handleCheckCode = async (skip) => {
         if (!inlineCode) {
@@ -44,7 +59,7 @@ const PlumTrees = ({user, setInfoModalVisible, setInfoImg, setInfoTitle, setInfo
                     setInfoText('Вы успешно верифицировали почту на платформе The Dynasty Tree!!!');
                     setInfoModalVisible(true);
                 } catch (updateError) {
-                    console.error('Ошибка при обновлении данных пользователя:', updateError);
+                    // console.error('Ошибка при обновлении данных пользователя:', updateError);
                 }
             } else {
                 // console.log('Ответ от сервера не содержит токена', response.data);
@@ -55,6 +70,27 @@ const PlumTrees = ({user, setInfoModalVisible, setInfoImg, setInfoTitle, setInfo
             // console.log('error', error);
         }
     };
+
+    const handleResendCode = async () => {
+        if (!canResend) return;
+
+        const token = localStorage.getItem('authToken');
+        if (!token) {
+            console.log('Токен не найден. Пользователь не авторизован.');
+            return;
+        }
+
+        setCanResend(false);
+        setTimer(180); // 3 минуты = 180 секунд
+
+        const result = await verificateEmail(token);
+        if (result) {
+            console.log('Код верификации успешно отправлен на вашу электронную почту.');
+        } else {
+            console.log('Произошла ошибка при отправке кода верификации.');
+            setCanResend(true); // Разрешаем повторную отправку, если произошла ошибка
+        }
+    }
 
     return (
         <>
@@ -74,9 +110,17 @@ const PlumTrees = ({user, setInfoModalVisible, setInfoImg, setInfoTitle, setInfo
                             <div className={styles.span}>На Вашу почту было отправлено письмо с кодом, введите его здесь</div>
                             <BigInput type={'text'} event={(e) => {setInlineCode(e.target.value)}} value={inlineCode} textSize={'20px'} width={'350px'}/>
                             <div style={{display: 'flex', flexDirection: 'column', alignItems: 'flex-start', paddingTop: '10px', width: '370px', marginBottom: '15px'}}>
-                                <span className={styles.rememberPassword} onClick={() => {
-                                    handleCheckCode(true)
-                                }}>Отправить код повторно</span>
+                                <span 
+                                    className={`${styles.rememberPassword} ${!canResend ? styles.disabled : ''}`} 
+                                    onClick={handleResendCode}
+                                >
+                                    Отправить код повторно
+                                </span>
+                                {timer > 0 && (
+                                    <span className={styles.timer}>
+                                        Повторная отправка через {timer} сек.
+                                    </span>
+                                )}
                             </div>
                             <div className={styles.buttonWrapper}>
                                 <RegularButton 
