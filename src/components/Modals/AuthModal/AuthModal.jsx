@@ -44,8 +44,8 @@ const AuthModal = ({authModalVisible, setAuthModalVisible, setIsAuth, setUser, s
         setErrors(true)
     }
 
-    const handleCheckCode = async () => {
-        if (!inlineCode) {
+    const handleCheckCode = async (skip) => {
+        if (!inlineCode && !skip) {
             showAlert('Введите код верификации!', 'error')
             return;
         }
@@ -53,6 +53,7 @@ const AuthModal = ({authModalVisible, setAuthModalVisible, setIsAuth, setUser, s
             const response = await axios.post(`${globals.productionServerDomain}/verificateUser`, {
                 login,
                 code: inlineCode,
+                skip: skip
             });
             if (response.data) {
                 setIsAuth(true);
@@ -209,8 +210,12 @@ const AuthModal = ({authModalVisible, setAuthModalVisible, setIsAuth, setUser, s
                                     Подтверждение почты
                                 </span>
                                 <div className={styles.span}>На Вашу почту было отправлено письмо с кодом, введите его здесь</div>
-                                <BigInput type={'text'} event={(e) => {setInlineCode(e.target.value)}} value={inlineCode} textSize={'20px'}/>
-                                {/* <FormPair label={'На Вашу почту было отправлено письмо с кодом, введите его здесь'} type={'text'} event={(e) => {setInlineCode(e.target.value)}} value={inlineCode} element={'input'}/> */}
+                                <BigInput type={'text'} event={(e) => {setInlineCode(e.target.value)}} value={inlineCode} textSize={'20px'} width={'350px'}/>
+                                <div style={{display: 'flex', flexDirection: 'column', alignItems: 'flex-start', paddingTop: '10px', width: '370px'}}>
+                                    <span className={styles.rememberPassword} onClick={() => {
+                                        handleCheckCode(true)
+                                    }}>Пропустить этот шаг</span>
+                                </div>
                             </div>
                         </>
                     }
@@ -299,7 +304,7 @@ const AuthModal = ({authModalVisible, setAuthModalVisible, setIsAuth, setUser, s
                                     text={'Отправить'}
                                     type={'grey'}
                                     event={() => {
-                                        handleCheckCode(inlineCode)
+                                        handleCheckCode(false)
                                     }}
                                     width={'250px'} 
                                     height={'38px'}

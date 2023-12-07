@@ -45,6 +45,7 @@ export const deleteAvatar = async (token) => {
 };
 
 export const updateUserData = async (token, userData) => {
+    // console.log({userData})
     try {
         const response = await axios.put(`${globals.productionServerDomain}/updateUserData`, userData, {
             headers: {
@@ -61,7 +62,7 @@ export const updateUserData = async (token, userData) => {
             return false; // Возвращаем false, если обновление не удалось
         }
     } catch (error) {
-        console.error('Ошибка при обновлении данных пользователя:', error);
+        // console.error('Ошибка при обновлении данных пользователя:', error);
         return false; // Возвращаем false в случае ошибки
     }
 };
@@ -268,5 +269,25 @@ export const resetPassword = async (email, newPassword, code) => {
     } catch (error) {
         console.error('Error resetting password:', error);
         return false;
+    }
+};
+
+export const verificateEmail = async (token) => {
+    try {
+        const response = await axios.post(`${globals.productionServerDomain}/verificateEmail`, {}, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+
+        if (response.data && response.status === 200) {
+            // console.log('Новый код верификации отправлен:', response.data);
+            return true; // Возвращаем true при успешной отправке
+        } else {
+            return false; // Возвращаем false, если отправка не удалась
+        }
+    } catch (error) {
+        console.error('Ошибка при отправке нового кода верификации:', error);
+        return false; // Возвращаем false в случае ошибки
     }
 };

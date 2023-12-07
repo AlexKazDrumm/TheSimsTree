@@ -4,6 +4,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
   }
 
 .titleRow {
@@ -105,4 +106,68 @@
 .marginWrapper {
 	margin-bottom: 50px;
     width: 100%;
+}
+
+.backgroundContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('/images/wallpaper2_1.png'), lightgray -0.031px -1550px / 100.004% 338.75% no-repeat;
+    background-size: cover;
+    opacity: 0.5;
+    z-index: -1; 
+}
+
+.blurContainer {
+    filter: blur(2px);
+    background-color: rgba(158, 158, 158, 0);
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
+}
+
+.zaglushka {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 372px;
+	border-radius: 15px;
+	border: 1px solid #C4C4C4;
+	background: #FFF;
+	padding: 44px 26px;
+}
+
+.formBlock {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	text-align: center;
+}
+
+.zTitle {
+	font-family: 'Gotham Medium';
+	font-size: 30px;
+	color: #285471;
+	margin-bottom: 20px;
+}
+
+.span {
+	width: 100%;
+	font-size: 15px;
+    font-family: 'Gotham Medium';
+    color: #182d38;
+    margin-bottom: 10px;
+	text-align: start;
+}
+
+.rememberPassword {
+	font-size: 15px;
+	font-family: 'Gotham Medium';
+	color: #182d38;
+	cursor: pointer;
 }
