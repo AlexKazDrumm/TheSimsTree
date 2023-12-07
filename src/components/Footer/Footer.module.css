@@ -1,11 +1,11 @@
 .container {
-    height: 50px;
+    height: 154px;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #eff6fc;
-    color: #1500b5;
+    background-color: #FFF;
+    color: #285471;
     font-family: 'Gotham Medium';
     padding: 20px 0px 20px 0px;
 }
@@ -20,16 +20,16 @@
     justify-content: space-between;
     align-items: center;
     text-align: center;
-    width: 80%;
+    width: 85%;
+    margin-bottom: 50px;
 }
 
 .contact { 
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
-    align-items: center;
+    /* align-items: center; */
     text-align: center;
-    margin-bottom: 5px;
     cursor: pointer;
 }
 
@@ -64,15 +64,19 @@
 }
 
 .privacy {
-    border-bottom: 1px dashed #1500b5;
+    border-bottom: 1px dashed #285471;
     cursor: pointer;
 }
 
 .privacy a {
     text-decoration: none;
-    color: #1500b5;
+    color: #285471;
 }
 
 .privacy a:hover {
     color: #059fdc;
+}
+
+.svgs {
+    width: 100%;
 }

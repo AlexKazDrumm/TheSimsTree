@@ -17,7 +17,7 @@ const Footer = ({selectedBlock, setSelectedBlock}) => {
                     </div> */}
                     <div className={styles.contact}>
                         <img 
-                            src='./svg/mail.svg'
+                            src='./svg/foot_envelope.svg'
                         />
                         <span>
                             info@simsdynastytree.com
@@ -29,27 +29,33 @@ const Footer = ({selectedBlock, setSelectedBlock}) => {
                     <span>SimsDynastyTree 2023 ©</span>
                 </div>
                 <div className={styles.messengers}>
-                    <div className={styles.images}>
-                        <a href="mailto:info@simsdynastytree.com" target="_blank" rel="noopener noreferrer">
-                            <img src='./svg/greenvelope.svg'/>
-                        </a>
-                        <a href="https://vk.com/thedynastytree" target="_blank" rel="noopener noreferrer">
-                            <img src='./svg/vk.svg'/>
-                        </a>
-                        <a href="https://t.me/dynastytree" target="_blank" rel="noopener noreferrer">
-                            <img src='./svg/telegram.svg' alt="Telegram Icon"/>
-                        </a>
-                        <a href="https://www.youtube.com/@SLASTIgames" target="_blank" rel="noopener noreferrer">
-                            <img src='./svg/youtube.svg'/>
-                        </a>
-                        {/* <img src='./svg/facebook.svg'/>
-                        <img src='./svg/inst.svg'/> */}
-                    </div>
-                    <div className={styles.privacy}>
-                        <span>
+                    
+                   
+                        <span className={styles.privacy}>
                             <a onClick={() => setSelectedBlock(6)} >Политика конфиденциальности</a>
                         </span>
-                    </div>
+                    
+                </div>
+            </div>
+
+            <div className={styles.svgs}>
+                <div className={styles.images}>
+                    <img src='./svg/foot_row.svg' />
+                    <a href="mailto:info@simsdynastytree.com" target="_blank" rel="noopener noreferrer">
+                        <img src='./svg/foot_mail.svg'/>
+                    </a>
+                    <a href="https://vk.com/thedynastytree" target="_blank" rel="noopener noreferrer">
+                        <img src='./svg/foot_vk.svg'/>
+                    </a>
+                    <a href="https://t.me/dynastytree" target="_blank" rel="noopener noreferrer">
+                        <img src='./svg/foot_tg.svg' alt="Telegram Icon"/>
+                    </a>
+                    <a href="https://www.youtube.com/@SLASTIgames" target="_blank" rel="noopener noreferrer">
+                        <img src='./svg/foot_yout.svg'/>
+                    </a>
+                    {/* <img src='./svg/facebook.svg'/>
+                        <img src='./svg/inst.svg'/> */}
+                    <img src='./svg/foot_row.svg' />
                 </div>
             </div>
             
