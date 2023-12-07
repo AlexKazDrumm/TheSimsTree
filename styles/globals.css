@@ -29,3 +29,48 @@ body {
 button {
     cursor: pointer;
 }
+
+/* Стилизация всего ползунка */
+input[type='range'] {
+    -webkit-appearance: none;
+    width: 125px;
+    background: transparent;
+}
+
+/* Стилизация шкалы */
+input[type='range']::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 8px;
+    background: #D9D9D9;
+    border: none;
+    border-radius: 5px;
+}
+
+input[type='range']::-moz-range-track {
+    width: 100%;
+    height: 8px;
+    background: #D9D9D9;
+    border: none;
+    border-radius: 5px;
+}
+
+/* Стилизация бегунка */
+input[type='range']::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border: none;
+    height: 12px;
+    width: 12px;
+    border-radius: 50%;
+    background: #285471;
+    margin-top: -2px; /* Обновленный отступ для центрирования */
+    cursor: pointer;
+}
+
+input[type='range']::-moz-range-thumb {
+    border: none;
+    height: 12px;
+    width: 12px;
+    border-radius: 50%;
+    background: #285471;
+    cursor: pointer;
+}

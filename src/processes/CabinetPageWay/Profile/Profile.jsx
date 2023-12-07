@@ -157,23 +157,28 @@ const Profile = ({user}) => {
                             />
                         </div>
                         <div className={styles.formBlock}>
-                            <AvatarEditor 
-                                ref={setEditorRef}
-                                image={image}
-                                width={250}
-                                height={250}
-                                border={50}
-                                borderRadius={borderRadius}
-                                color={[255, 255, 255, 0.6]} // RGBA
-                                scale={scale}
-                            />
-                            <div>
-                                <label>Масштаб: </label>
-                                <input type="range" min="1" max="2" step="0.01" value={scale} onChange={(e) => setScale(parseFloat(e.target.value))} />
+                            <div className={styles.title}>Выберите область</div>
+                            <div style={{backgroundColor: '#ececec', borderRadius: '10px', width: '347px', marginBottom: '24px'}}>
+                                <AvatarEditor 
+                                    ref={setEditorRef}
+                                    image={image}
+                                    width={213}
+                                    height={213}
+                                    border={0}
+                                    borderRadius={borderRadius}
+                                    color={[255, 255, 255, 0.6]} // RGBA
+                                    scale={scale}
+                                />
                             </div>
-                            <div style={{marginBottom: '15px'}}>
-                                <label>Скругление: </label>
-                                <input type="range" min="0" max="125" value={borderRadius} onChange={(e) => setBorderRadius(parseInt(e.target.value, 10))} />
+                            <div style={{display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: '60%'}}>
+                                <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '100%'}}>
+                                    <label className={styles.label}>Масштаб: </label>
+                                    <input type="range" min="1" max="2" step="0.01" value={scale} onChange={(e) => setScale(parseFloat(e.target.value))} />
+                                </div>
+                                <div style={{marginBottom: '5px', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '100%'}}>
+                                    <label className={styles.label}>Скругление: </label>
+                                    <input type="range" min="0" max="125" value={borderRadius} onChange={(e) => setBorderRadius(parseInt(e.target.value, 10))} />
+                                </div>
                             </div>
                         </div>
                     </div>
