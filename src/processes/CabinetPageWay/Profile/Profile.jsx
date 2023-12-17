@@ -206,7 +206,7 @@ const Profile = ({user}) => {
                 <div className={styles.logoBlock}>
                     <div className={styles.avatar}>
                         {user?.avatar ? 
-                                <img src={`${globals.productionServerDomain}/file/${user.avatar}`} alt="Avatar" onError={(e)=>{ e.target.onerror = null; e.target.src='./svg/user_master_avatar.svg'; }} /> :
+                                <img src={`https://simsdynastytree.online/file/${user.avatar}`} alt="Avatar" onError={(e)=>{ e.target.onerror = null; e.target.src='./svg/user_master_avatar.svg'; }} /> :
                                 <img src='./svg/user_master_avatar.svg' alt="Default Avatar" />
                         }
                     </div>

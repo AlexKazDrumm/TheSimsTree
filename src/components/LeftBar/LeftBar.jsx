@@ -35,7 +35,7 @@ const LeftBar = ({ selectedComponent, setSelectedComponent, setLeftMenuClick, us
                 {user?.avatar ? 
                   <img 
                     onError={(e)=>{ e.target.onerror = null; e.target.src='./svg/user_master_avatar.svg'; }}  
-                    src={`${globals.productionServerDomain}/file/${user.avatar}`} 
+                    src={`https://simsdynastytree.online/file/${user.avatar}`} 
                     style={slimMode?{width: '50px', height: '50px'}:{width: '70px', height: '70px'}}
                   />:
                   <img 

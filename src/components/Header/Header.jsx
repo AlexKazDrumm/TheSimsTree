@@ -35,7 +35,7 @@ const Header = ({isAuth, setIsAuth, setAuthModalVisible, user}) => {
                             <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
                                 <img 
                                 className={styles.userIco}
-                                src={user?.avatar ? `${globals.productionServerDomain}/file/${user.avatar}` : './svg/user_master_avatar.svg'}
+                                src={user?.avatar ? `https://simsdynastytree.online/file/${user.avatar}` : './svg/user_master_avatar.svg'}
                                 onError={(e)=>{ e.target.onerror = null; e.target.src='./svg/user_master_avatar.svg'; }} 
                                 onClick={() => setIsDropdownVisible(!isDropdownVisible)} 
                             />

@@ -9,7 +9,8 @@ function App({ Component, pageProps }) {
   return (
     <Provider {...entities}>
         <Helmet>
-          <title>SimsDynastyTree</title>
+          <title>Sims Dynasty Tree | Создание древа династии в Симс | Аналог PlumTreeApp</title>
+          <meta name="description" content="Удобный сайт для создания династийного древа Симс. Загрузи древо с PlumTree и кастомизируй. Сохрани фото любимых симов на память. У нас уютно и есть печеньки"/>
           <link rel="icon" type="image/ico" href="/favicon/favicon_120x120_2.ico" />
         </Helmet>
 
