@@ -1,6 +1,7 @@
 import axios from "axios";
 import globals from "../globals";
 import User from "../entities/User";
+import UserTrees from "../entities/lists/UserTrees";
 
 export const updateAvatar = async (token, file) => {
     const formData = new FormData();
@@ -289,5 +290,87 @@ export const verificateEmail = async (token) => {
     } catch (error) {
         console.error('Ошибка при отправке нового кода верификации:', error);
         return false; // Возвращаем false в случае ошибки
+    }
+};
+
+export const createNewTree = async (token) => {
+    try {
+        const response = await axios.post(`${globals.productionServerDomain}/createNewTree`, {}, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if (response.data && response.data.success) {
+            console.log('Дерево и персонаж успешно созданы:', response.data);
+            await UserTrees.fetchUserTrees(token); // Обновляем список деревьев после создания нового
+            return true;
+        } else {
+            console.error('Не удалось создать дерево и персонажа:', response.data);
+            return false;
+        }
+    } catch (error) {
+        console.error('Ошибка при создании дерева и персонажа:', error);
+        return false;
+    }
+};
+
+export const fetchTreeCharacters = async (token, treeId) => {
+    try {
+        const response = await axios.get(`${globals.productionServerDomain}/getTreeCharacters/${treeId}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+
+        if (response.data && response.data.success) {
+            console.log('Список персонажей древа получен успешно:', response.data.characters);
+            return response.data.characters; // Возвращаем список персонажей древа
+        } else {
+            console.error('Не удалось получить список персонажей древа:', response.data.message);
+            return null; // Возвращаем null, если запрос не удался
+        }
+    } catch (error) {
+        console.error('Ошибка при получении списка персонажей древа:', error);
+        return null; // Возвращаем null в случае ошибки
+    }
+};
+
+export const updateCharacterAvatar = async (token, file, characterId) => {
+    const formData = new FormData();
+    formData.append('avatar', file);
+    formData.append('characterId', characterId);  // Добавляем characterId к данным формы
+
+    try {
+        const response = await axios.put(`${globals.productionServerDomain}/updateCharacterAvatar`, formData, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'multipart/form-data',
+            },
+        });
+
+        return response.data
+    } catch (error) {
+        console.error('Ошибка при обновлении аватара персонажа:', error);
+        // обработка ошибок
+    }
+};
+
+export const deleteCharacterAvatar = async (token, characterId) => {
+    try {
+        const response = await axios.delete(`${globals.productionServerDomain}/deleteCharacterAvatar`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            },
+            data: {
+                characterId: characterId  // Отправляем characterId в теле запроса
+            }
+        });
+
+        // ... (остальной код)
+    } catch (error) {
+        console.error('Ошибка при удалении аватара персонажа:', error);
+        return false;
     }
 };

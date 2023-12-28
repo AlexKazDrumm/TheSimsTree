@@ -78,3 +78,45 @@
 	cursor: default !important;
 	color: grey !important;
 }
+
+.treesList {
+	margin-bottom: 56px;
+}
+
+.tree {
+	border-radius: 10px;
+	background: linear-gradient(180deg, #FAFAFA 35.64%, #F4F3F0 100%), #FFF;
+	box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.15);
+	margin-bottom: 16px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.treeCover {
+	width: 190px;
+	height: 120px;
+	border-radius: 6.667px 0px 0px 6.667px;
+	background: #285471;
+}
+
+.treeTitle {
+
+}
+
+.treeControlButtons {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	padding-right: 26px;
+}
+
+.addTreeButton {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+}

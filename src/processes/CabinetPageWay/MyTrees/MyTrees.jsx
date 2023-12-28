@@ -3,11 +3,13 @@ import styles from './MyTrees.module.css'
 import TitleBlock from "../../../components/UI/TitleBlock/TitleBlock";
 import BigInput from "../../../components/UI/BigInput/BigInput";
 import RegularButton from "../../../components/UI/RegularButton/RegularButton";
-import { updateUserData, verificateEmail } from "../../../features/features";
+import EditTree from "../../../components/EditTree/EditTree";
+import RightBar from "../../../components/RightBar/RightBar";
+import { updateUserData, verificateEmail, createNewTree } from "../../../features/features";
 import axios from "axios";
 import globals from "../../../globals";
 
-const MyTrees = ({user, setInfoModalVisible, setInfoImg, setInfoTitle, setInfoText}) => {
+const MyTrees = ({user, userTrees, lifeForms, setInfoModalVisible, setInfoImg, setInfoTitle, setInfoText}) => {
 
     const [inlineCode, setInlineCode] = useState('')
     const [approvedAccount, setApprovedAccount] = useState(user.is_verificated)
@@ -17,6 +19,8 @@ const MyTrees = ({user, setInfoModalVisible, setInfoImg, setInfoTitle, setInfoTe
 
     const [timer, setTimer] = useState(0);
     const [canResend, setCanResend] = useState(true);
+
+    const [selectedTree, setSelectedTree] = useState(null)
 
     const showAlert = (message, type) => {
         setErrors(true)
@@ -92,15 +96,71 @@ const MyTrees = ({user, setInfoModalVisible, setInfoImg, setInfoTitle, setInfoTe
         }
     }
 
+    const handleCreateNewTree = async () => {
+        const token = localStorage.getItem('authToken');
+
+        if (token) {
+            const success = await createNewTree(token);
+            if (success) {
+                console.log('Дерево и персонаж успешно созданы.');
+                // Дополнительные действия при успешном создании
+            } else {
+                console.error('Не удалось создать дерево и персонажа.');
+                // Обработка ситуации неудачи
+            }
+        } else {
+            console.error('Токен пользователя не найден.');
+            // Обработка ситуации, когда токен отсутствует
+        }
+    };
+
     return(
         <>
             <div className={styles.backgroundContainer}></div>
             <div className={styles.container}>
-                <div className={!user.is_verificated ? styles.blurContainer : styles.notBlur}>
-                    <div className={styles.marginWrapper}>
-                        <TitleBlock text='Мои древа' />
+                {user.role_id == 2 &&
+                    <div className={styles.zaglushka}>
+                        <div className={styles.zTitle}>Сул-Сул!</div>
+                        <div className={styles.zSubtitle1}>Сейчас тут пустовато. Не пугайтесь!</div>
+                        <div className={styles.zSubtitle2}>Основной функционал работы с древом сейчас  в разработке. Мы обязательно уведомим Вас по почте или в нашем <a className={styles.tglink} href="https://t.me/dynastytree" target="_blank" rel="noopener noreferrer">телеграм-канале</a>, когда все будет готово ;)</div>
+                        <div className={styles.zSubtitle3}>Спасибо, что ждете и остаетесь с нами!</div>
                     </div>
-                </div>
+                }
+                {user.role_id == 1 &&
+                    <>
+                        {selectedTree && <RightBar />}
+                        <div className={!user.is_verificated ? styles.blurContainer : styles.notBlur}>
+                            {!selectedTree &&
+                                <>
+                                    <div className={styles.marginWrapper}>
+                                        <TitleBlock text='Мои древа' />
+                                    </div>
+                                    <div className={styles.treesList}>
+                                        {userTrees && userTrees.map(tree => 
+                                            <div className={styles.tree}>
+                                                <div className={styles.treeCover}></div>
+                                                <div className={styles.treeTitle}>{tree.title}</div>
+                                                <div className={styles.treeControlButtons}>
+                                                    <RegularButton type={'grey'} text={'Редактировать'} width={'166px'} height={'28px'} textSize={'14px'} event={() => setSelectedTree(tree)}/>
+                                                    <div style={{height: '15px'}}></div>
+                                                    <RegularButton type={'grey'} text={'Удалить'} width={'166px'} height={'28px'} textSize={'14px'} />
+                                                </div>
+                                                
+                                            </div>    
+                                        )}
+                                    </div>
+                                    <div className={styles.addTreeButton}>
+                                        <RegularButton type={'grey'} text={'Добавить древо'} width={'166px'} height={'28px'} textSize={'14px'} event={() => {handleCreateNewTree()}}/>
+                                    </div>
+                                </>
+                            }
+                            {selectedTree &&
+                                <EditTree tree={selectedTree} lifeForms={lifeForms} setSelectedTree={setSelectedTree}/>
+                            }
+                        </div>
+                    </>
+                }
+                
                 {!approvedAccount &&
                     <div className={styles.zaglushka}>
                         <div className={styles.formBlock}>

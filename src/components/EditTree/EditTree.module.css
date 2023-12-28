@@ -1,0 +1,123 @@
+.marginWrapper {
+	margin-bottom: 24px;
+}
+
+.container {
+	padding: 25px 25px 40px 0px;
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
+	position: relative;
+}
+
+.backgroundContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('/images/wallpaper2_1.png'), lightgray -0.031px -1550px / 100.004% 338.75% no-repeat;
+    background-size: cover;
+    opacity: 0.5;
+    z-index: -1; 
+}
+
+.topRow {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.buttons {
+	display: flex;
+	flex-direction: column;
+}
+
+.button {
+	margin-bottom: 12px;
+}
+
+.selecterBlock {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	text-align: center;
+	height: 30px;
+}
+
+.selecterBlock span {
+	color: #285471;
+	font-family: 'Gotham Regular';
+	font-size: 14px;
+}
+
+.zaglushka {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 372px;
+	border-radius: 15px;
+	border: 1px solid #C4C4C4;
+	background: #FFF;
+	padding: 44px 26px;
+}
+
+.zTitle {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	color: #285471;
+	font-family: 'Gotham Bold';
+	font-size: 27px;
+	margin-bottom: 32px;
+}
+
+.zSubtitle1 {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+	text-align: start;
+	color: #285471;
+	font-family: 'Gotham Regular';
+	font-size: 14px;
+	margin-bottom: 14px;
+}
+
+.zSubtitle2 {
+    text-align: justify; 
+    color: #285471;
+    font-family: 'Gotham Regular';
+    font-size: 14px;
+    margin-bottom: 32px;
+}
+
+.zSubtitle3 {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+	text-align: start;
+	color: #285471;
+	font-family: 'Gotham Regular';
+	font-size: 14px;
+}
+
+.blurContainer {
+    filter: blur(2px);
+    background-color: rgba(158, 158, 158, 0);
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
+}
+
+.tglink {
+	color: #285471;
+	font-family: 'Gotham Medium';
+	font-size: 14px;
+	text-decoration-line: underline;
+}

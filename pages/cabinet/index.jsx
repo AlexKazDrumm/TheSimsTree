@@ -10,7 +10,7 @@ import Tools from '../../src/processes/CabinetPageWay/Tools/Tools';
 import PlumTrees from '../../src/processes/CabinetPageWay/PlumTrees/PlumTrees';
 import InfoModal from '../../src/components/Modals/InfoModal/InfoModal';
 
-const Cabinet = observer(({ User }) => {
+const Cabinet = observer(({ User, UserTrees, UserLifeForms }) => {
     const [selectedComponent, setSelectedComponent] = useState(1);
     const [leftMenuClick, setLeftMenuClick] = useState(false)
     const [isAuth, setIsAuth] = useState(false)
@@ -23,6 +23,9 @@ const Cabinet = observer(({ User }) => {
 
     const fetchUserData = async () => {
         await User.fetchUserData(localStorage.getItem('authToken'));
+        await UserTrees.fetchUserTrees(localStorage.getItem('authToken'));
+        await UserLifeForms.fetchUserLifeForms(localStorage.getItem('authToken'));
+        console.log({UserTrees})
         if (User.isUserDataLoaded) {
           setIsAuth(true);
         } else {
@@ -55,7 +58,7 @@ const Cabinet = observer(({ User }) => {
             case 5:
                 return <PlumTrees user={User.userData} setInfoModalVisible={setInfoModalVisible} setInfoImg={setInfoImg} setInfoText={setInfoText} setInfoTitle={setInfoTitle} />
             case 6:
-                return <MyTrees user={User.userData} setInfoModalVisible={setInfoModalVisible} setInfoImg={setInfoImg} setInfoText={setInfoText} setInfoTitle={setInfoTitle} />;
+                return <MyTrees user={User.userData} userTrees={UserTrees?.treesData} lifeForms={UserLifeForms?.lifeFormsData} setInfoModalVisible={setInfoModalVisible} setInfoImg={setInfoImg} setInfoText={setInfoText} setInfoTitle={setInfoTitle} />;
             case 7:
                 router.push('/');
                 break;
@@ -88,6 +91,6 @@ const Cabinet = observer(({ User }) => {
     );
 });
 
-const CabinetLK = inject('User')(Cabinet);
+const CabinetLK = inject('User', 'UserTrees', 'UserLifeForms')(Cabinet);
 
 export default CabinetLK;
